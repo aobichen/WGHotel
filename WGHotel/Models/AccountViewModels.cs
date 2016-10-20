@@ -64,7 +64,10 @@ namespace WGHotel.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        
+        [Display(Name = "Account")]
+        public string UserName { get; set; }
+        //[Required]
         [EmailAddress]
         [Display(Name = "電子郵件")]
         public string Email { get; set; }

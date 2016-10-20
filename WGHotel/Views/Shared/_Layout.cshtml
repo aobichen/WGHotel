@@ -12,7 +12,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")  
-
+   
     <link rel="stylesheet" href="~/Content/theme-turqoise.css" id="template-color" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Roboto+Slab:400,700&subset=latin,latin-ext,greek-ext,greek,cyrillic,vietnamese,cyrillic-ext">
@@ -303,11 +303,12 @@
             $('.lang-nav').delegate('li', 'click', function (e) {
                 let $self = $(this);
                 let mylang = $self.attr('id');
-               
+                $.cookie("lang", mylang);
                 if (mylang != lang) {
                    
                     $("[data-localize]").localize("Content/lang/language", { language: mylang });
                     lang = mylang;
+                    location.reload();
                 }
                 e.preventDefault();
             });
@@ -317,7 +318,7 @@
             //    $("[data-localize]").localize("Content/lang/language", { language: lang });
             //});
             
-            $.cookie("example","foo");
+            //$.cookie("lang","foo");
         });
     </script>
     

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WGHotel.Models;
+using WGHotel.Areas.Backend.Models;
 
 namespace WGHotel.Controllers
 {
@@ -49,6 +50,19 @@ namespace WGHotel.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
             }
         }
 
@@ -151,7 +165,8 @@ namespace WGHotel.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                //var user = new ApplicationUser { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -172,12 +187,69 @@ namespace WGHotel.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterAndCreateHotel(AccountHotelViewModel model)
+        {
+            var Facility = string.Empty;
+            if (Request["HotelFacility"] != null)
+            {
+                Facility = Request["HotelFacility"].ToString();
+            }
+
+            model.Facilies = Facility;
+            
+                var user = new ApplicationUser { UserName = model.Account };
+                //var user = new ApplicationUser { UserName = model.UserName };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {                    
+                    model.Create(user.Id);
+                    return RedirectToAction("Index", "Admin", new { area = "Beckend"});
+                }
+                else
+                {
+                    return RedirectToAction("Create", "Admin", new { area = "Beckend", model=model });
+                }
+                //AddErrors(result);
+            
+
+            // 如果執行到這裡，發生某項失敗，則重新顯示表單
+           // return View();
+        }
+
+        public void AccountRegister(RegisterViewModel model)
+        {
+            AddRoles();
+            var Role = "Hotel";
+            var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+            //var user = new ApplicationUser { UserName = model.UserName };
+            var result = UserManager.CreateAsync(user, model.Password);
+            if (result.Result.Succeeded)
+            {
+                UserManager.AddToRole(user.Id, Role);
+            }
+        }
+
+        private void AddRoles()
+        {
+            var SystemRoles = new string[] { "User", "Hotel", "Admin" };
+            foreach (var r in SystemRoles)
+            {
+                if (!RoleManager.RoleExists(r))
+                {
+                    var role = new Role(r);
+                    RoleManager.Create(role);
+                }
+            }
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        public async Task<ActionResult> ConfirmEmail(int userId, string code)
         {
-            if (userId == null || code == null)
+            if (userId == 0 || code == null)
             {
                 return View("Error");
             }

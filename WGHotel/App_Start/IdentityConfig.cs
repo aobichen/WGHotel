@@ -1,24 +1,132 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Helpers;
+using System.Configuration;
+using System.Net.Mail;
+using System.Net;
 using WGHotel.Models;
 
-namespace WGHotel
+namespace WGHotel.Models
 {
+    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+
+
+    public class ApplicationUserManager : UserManager<ApplicationUser, int>
+    {
+        public interface IIdentityValidator<in T>
+        {
+            /// <summary>
+            /// Validate the item
+            /// 
+            /// </summary>
+            /// <param name="item"/>
+            /// <returns/>
+            Task<IdentityResult> ValidateAsync(T item);
+        }
+        public ApplicationUserManager(IUserStore<ApplicationUser, int> store)
+            : base(store)
+        {
+        }
+
+
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
+            IOwinContext context)
+        {
+            var manager = new ApplicationUserManager(new UserStore(context.Get<ApplicationDbContext>()));
+            // Configure validation logic for usernames
+            manager.UserValidator = new UserValidator<ApplicationUser, int>(manager)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = false
+            };
+            // Configure validation logic for passwords
+            manager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                //RequireNonLetterOrDigit = true,
+                //RequireDigit = true,
+                //RequireLowercase = true,
+                //RequireUppercase = true,
+            };
+            // Configure user lockout defaults
+            manager.UserLockoutEnabledByDefault = true;
+            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+            // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
+            // You can write your own provider and plug in here.
+            manager.RegisterTwoFactorProvider("PhoneCode", new PhoneNumberTokenProvider<ApplicationUser, int>
+            {
+                MessageFormat = "Your security code is: {0}"
+            });
+            manager.RegisterTwoFactorProvider("EmailCode", new EmailTokenProvider<ApplicationUser, int>
+            {
+                Subject = "SecurityCode",
+                BodyFormat = "Your security code is {0}"
+            });
+            manager.EmailService = new EmailService();
+            manager.SmsService = new SmsService();
+            var dataProtectionProvider = options.DataProtectionProvider;
+            if (dataProtectionProvider != null)
+            {
+                manager.UserTokenProvider =
+                    new DataProtectorTokenProvider<ApplicationUser, int>(dataProtectionProvider.Create("ASP.NET Identity"));
+            }
+            return manager;
+        }
+    }
+
+    // Configure the RoleManager used in the application. RoleManager is defined in the ASP.NET Identity core assembly
+    public class ApplicationRoleManager : RoleManager<Role, int>
+    {
+        public ApplicationRoleManager(IRoleStore<Role, int> roleStore)
+            : base(roleStore)
+        {
+
+        }
+
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            return new ApplicationRoleManager(new RoleStore<Role, int, UserRole>(context.Get<ApplicationDbContext>()));
+        }
+    }
+
     public class EmailService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // 將您的電子郵件服務外掛到這裡以傳送電子郵件。
+
+            var SendMailFromWebsite = ConfigurationManager.AppSettings["SendMailFromWebsite"].ToString();
+            if (SendMailFromWebsite == "true")
+            {
+
+                SmtpClient smtpClient = new SmtpClient(ConfigurationManager.AppSettings["SmtpServer"], int.Parse(ConfigurationManager.AppSettings["SmtpPort"]));
+                smtpClient.Host = ConfigurationManager.AppSettings["Host"];
+                smtpClient.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["From"], ConfigurationManager.AppSettings["From"]);
+                smtpClient.UseDefaultCredentials = true;
+                smtpClient.EnableSsl = true;
+                MailMessage mail = new MailMessage();
+                mail.Body = message.Body;
+                mail.Subject = message.Subject;
+                mail.SubjectEncoding = System.Text.Encoding.UTF8;
+
+                mail.From = new MailAddress(ConfigurationManager.AppSettings["From"], ConfigurationManager.AppSettings["SmtpUserName"]);
+                mail.To.Add(new MailAddress(message.Destination));
+
+                smtpClient.Send(mail);
+
+
+            }
+
             return Task.FromResult(0);
         }
     }
@@ -27,69 +135,59 @@ namespace WGHotel
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // 將您的 SMS 服務外掛到這裡以傳送簡訊。
+            // Plug in your sms service here to send a text message.
             return Task.FromResult(0);
         }
     }
 
-    // 設定此應用程式中使用的應用程式使用者管理員。UserManager 在 ASP.NET Identity 中定義且由應用程式中使用。
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+    // This is useful if you do not want to tear down the database each time you run the application.
+    // public class ApplicationDbInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    // This example shows you how to create a new database if the Model changes
+    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
-            : base(store)
+        protected override void Seed(ApplicationDbContext context)
         {
+            InitializeIdentityForEF(context);
+            base.Seed(context);
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        //Create User=Admin@Admin.com with password=Admin@123456 in the Admin role        
+        public static void InitializeIdentityForEF(ApplicationDbContext db)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
-            // 設定使用者名稱的驗證邏輯
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
-            {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
-            };
+            db.Configuration.LazyLoadingEnabled = true;
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
+            const string name = "admin@example.com";
+            const string password = "Aa@123456";
+            const string roleName = "Admin";
 
-            // 設定密碼的驗證邏輯
-            manager.PasswordValidator = new PasswordValidator
+            //Create Role Admin if it does not exist
+            var role = roleManager.FindByName(roleName);
+            //var role = new Role(roleName);
+            if (role == null)
             {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
-            };
 
-            // 設定使用者鎖定詳細資料
-            manager.UserLockoutEnabledByDefault = true;
-            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
-
-            // 註冊雙因素驗證提供者。此應用程式使用手機和電子郵件接收驗證碼以驗證使用者
-            // 您可以撰寫專屬提供者，並將它外掛到這裡。
-            manager.RegisterTwoFactorProvider("電話代碼", new PhoneNumberTokenProvider<ApplicationUser>
-            {
-                MessageFormat = "您的安全碼為 {0}"
-            });
-            manager.RegisterTwoFactorProvider("電子郵件代碼", new EmailTokenProvider<ApplicationUser>
-            {
-                Subject = "安全碼",
-                BodyFormat = "您的安全碼為 {0}"
-            });
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
-            var dataProtectionProvider = options.DataProtectionProvider;
-            if (dataProtectionProvider != null)
-            {
-                manager.UserTokenProvider = 
-                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                var roleresult = roleManager.Create(role);
             }
-            return manager;
+
+            var user = userManager.FindByName(name);
+            if (user == null)
+            {
+                user = new ApplicationUser { UserName = name, Email = name };
+                var result = userManager.Create(user, password);
+                result = userManager.SetLockoutEnabled(user.Id, false);
+            }
+
+            // Add user admin to Role Admin if not already added
+            var rolesForUser = userManager.GetRoles(user.Id);
+            if (!rolesForUser.Contains(role.Name))
+            {
+                var result = userManager.AddToRole(user.Id, role.Name);
+            }
         }
     }
 
-    // 設定在此應用程式中使用的應用程式登入管理員。
-    public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
+    public class ApplicationSignInManager : SignInManager<ApplicationUser, int>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)

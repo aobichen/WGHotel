@@ -39,10 +39,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Anything\Anything\bin\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Anything\Anything\bin\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Anything\Anything\bin\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -121,15 +135,6 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Owin">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -176,16 +181,89 @@
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\BundleConfig.cs" />
     <Compile Include="Areas\Backend\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Backend\Models\AccountHotelViewModel.cs" />
+    <Compile Include="Areas\Backend\Models\CodeFiles.cs" />
     <Compile Include="Areas\Backend\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CodeFile.cs">
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Facility.cs">
+      <DependentUpon>WGHotelZH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hotel.cs">
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImageStore.cs">
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Room.cs">
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RoomPrice.cs">
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SysSetting.cs">
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WGHotelBase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WGHotelBase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WGHotelBase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WGHotelBase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WGHotelBase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WGHotelUS.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WGHotelUS.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WGHotelUS.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WGHotelUS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WGHotelUS.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WGHotelZH.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WGHotelZH.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WGHotelZH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WGHotelZH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WGHotelZH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WGHotelZH.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_GlobalResources\Resource-zh.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -193,6 +271,7 @@
       <DependentUpon>Resource-zh.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="WepApi\ImageUploadController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="404.html" />
@@ -755,6 +834,36 @@
     <Content Include="images\uploads\get_inspired.jpg" />
     <Content Include="images\uploads\img.jpg" />
     <Content Include="images\uploads\slider.jpg" />
+    <Content Include="Models\WGHotelBase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WGHotelBase.edmx</DependentUpon>
+      <LastGenOutput>WGHotelBase.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WGHotelBase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WGHotelBase.edmx</DependentUpon>
+      <LastGenOutput>WGHotelBase.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WGHotelUS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WGHotelUS.edmx</DependentUpon>
+      <LastGenOutput>WGHotelUS.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WGHotelUS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WGHotelUS.edmx</DependentUpon>
+      <LastGenOutput>WGHotelUS.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WGHotelZH.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WGHotelZH.edmx</DependentUpon>
+      <LastGenOutput>WGHotelZH.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WGHotelZH.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WGHotelZH.edmx</DependentUpon>
+      <LastGenOutput>WGHotelZH.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="example-fr.json" />
@@ -868,6 +977,31 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <EntityDeploy Include="Models\WGHotelZH.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WGHotelZH.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WGHotelZH.edmx.diagram">
+      <DependentUpon>WGHotelZH.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\WGHotelUS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WGHotelUS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WGHotelUS.edmx.diagram">
+      <DependentUpon>WGHotelUS.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Backend\Views\Shared\_HotelFacility.cshtml" />
+    <Content Include="Areas\Backend\Views\Shared\_ImageUpload.cshtml" />
+    <Content Include="Areas\Backend\Views\Admin\_Create.cshtml" />
+    <EntityDeploy Include="Models\WGHotelBase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WGHotelBase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WGHotelBase.edmx.diagram">
+      <DependentUpon>WGHotelBase.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Backend\Views\Admin\_Table.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />
@@ -935,8 +1069,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Backend\Models\" />
     <Folder Include="Content\Admin\assets\jquery-file-upload\server\php\files\thumbnail\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\ImageUpload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -951,6 +1086,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource-zh.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

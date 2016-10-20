@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.SessionState;
 
 namespace WGHotel
 {
@@ -21,11 +22,24 @@ namespace WGHotel
             
         }
 
+        public override void Init()
+        {
+            this.PostAuthenticateRequest += MvcApplication_PostAuthenticateRequest;
+            base.Init();
+        }
+
+
+        void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
+        {
+          
+            System.Web.HttpContext.Current.SetSessionStateBehavior(
+                SessionStateBehavior.Required);
+        }
+
         protected void Application_AcquireRequestState()
         {
-            HttpCookie langCookie = Request.Cookies["example"];
-
-            
+            HttpCookie langCookie = Request.Cookies["lang"];
+           
         }
     }
 }

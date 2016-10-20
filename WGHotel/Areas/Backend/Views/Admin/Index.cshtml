@@ -1,4 +1,5 @@
-﻿
+﻿@model PagedList.IPagedList<WGHotel.Areas.Backend.Models.HotelListViewModel>
+
 @{
     ViewBag.Title = "Account";
     
@@ -6,105 +7,10 @@
 
 
     <section class="wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h3 class="page-header"><i class="icon_id-2"></i>Account</h3>
-                <ol class="breadcrumb">
-                    <li><i class="fa fa-home"></i><a href="@Url.Action("/", "Admin")">Home</a></li>
-                    <li><i class="icon_id"></i>Account</li>
-                   
-                </ol>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <header class="panel-heading">
-                        帳號
-                    </header>
-                    <div class="panel-body">
-                        <form class="form-horizontal " method="get">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">帳號</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">密碼</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                    
-                                </div>
-                            </div>
-                          
-                        </form>
-                    </div>
-                </div>               
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <section class="panel panel-success">
-                    <header class="panel-heading">
-                        飯店
-                    </header>
-                    <div class="panel-body">
-                        <form class="form-horizontal " method="get">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">店名</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">場次</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">縣市</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">地區</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">地址</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">特色介紹</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" id="content"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">飯店設施</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" id="content"></textarea>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                </section>
-            </div>
-        </div>
-     
+        @*@Html.Partial("_Create",Model)*@
+        @Html.Partial("_Table",Model)
+        @*@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))*@
+        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
     </section>
 
 
