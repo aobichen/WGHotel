@@ -28,10 +28,12 @@ namespace WGHotel.Areas.Backend.Models
         public string Facilies { get; set; }
         public List<CodeFile> HotelFacility { get { return new CodeFiles().GetHotelFacility(); } }
 
+        public string ImgKey { get; set; }
+
         public void Create(int userId)
         {
             var ZHdb = new WGHotelZHEntities();
-            ZHdb.Hotel.Add(new Hotel
+            var HotelZh = new Hotel
             {
                 Name = Namezh,
                 Address = Addresszh,
@@ -43,12 +45,14 @@ namespace WGHotel.Areas.Backend.Models
                 Facilities = Facilies,
                 Game = Game,
                 UserId = userId
-            });
-
+            };
+             
+            ZHdb.Hotel.Add(HotelZh);           
             ZHdb.SaveChanges();
+            var ReferIdZH = HotelZh.ID;
 
             var USdb = new WGHotelUSEntities();
-            USdb.Hotel.Add(new Hotel
+            var HotelUs = new Hotel
             {
                 Name = Nameus,
                 Address = Addressus,
@@ -60,12 +64,35 @@ namespace WGHotel.Areas.Backend.Models
                 LinkUrl = LinkUrl,
                 Game = Game,
                 UserId = userId
-            });
+            };
+            USdb.Hotel.Add(HotelUs);
 
             USdb.SaveChanges();
+             var ReferIdUS = HotelUs.ID;
+            var Session = HttpContext.Current.Session;
 
-           // HttpContext.Current.Response.Redirect("~/Backend/Admin/Index",true);
-          //  return;
+            if (Session[ImgKey] != null)
+            {
+                var Basedb = new WGHotelBaseEntities();
+                var Now = DateTime.Now;
+                var images = (List<ImageViewModel>)Session[ImgKey];
+                foreach(var img in images)
+                {
+                    Basedb.ImageStore.Add(new ImageStore
+                    { 
+                         Created = Now,
+                         Extension = img.Extension,
+                         Deleted = false,
+                         ReferIdUS = ReferIdUS,
+                         ReferIdZH = ReferIdZH,
+                         Type = "Hotel",
+                         Name = img.Name,
+                        Image = img.Image
+                    });
+                }
+                Basedb.SaveChanges();
+            }
+           
         }
     }
 

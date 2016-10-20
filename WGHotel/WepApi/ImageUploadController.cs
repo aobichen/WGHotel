@@ -43,7 +43,7 @@ namespace WGHotel.WepApi
                 //var path = Path.Combine(HttpContext.Current.Server.MapPath(FolderPath), fileName + ".jpg");
                 //file.SaveAs(path);
                 var image = ImgDao.FileToByte(file);
-                Images.Add(new ImageViewModel { Image = image, Name = fileName});
+                Images.Add(new ImageViewModel { Image = image, Name = fileName, Extension = subName });
             }
 
             var Message = "完成上傳";

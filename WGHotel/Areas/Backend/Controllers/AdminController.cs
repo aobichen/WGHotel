@@ -1,12 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WGHotel.Areas.Backend.Models;
-using WGHotel.Controllers;
-using WGHotel.Models;
 using PagedList;
+using WGHotel.Controllers;
+using WGHotel.Areas.Backend.Models;
+using WGHotel.Models;
 namespace WGHotel.Areas.Backend.Controllers
 {
     public class AdminController : BaseController
@@ -21,14 +22,14 @@ namespace WGHotel.Areas.Backend.Controllers
                          select new HotelListViewModel
                          {
                             City = h.City,
-                             Game = h.Game,
-                             ID = h.ID,
-                             Name = h.Name,
+                            Game = h.Game,
+                            ID = h.ID,
+                            Name = h.Name,
                             UserId = h.UserId
                          }).ToList().OrderBy(o => o.ID);
                          
             var currentPage = Page < 1 ? 1 : Page;
-            var PageSize = 30;
+            var PageSize = 15;
 
             var PageModel = model.ToPagedList(currentPage, PageSize);
 
@@ -40,20 +41,24 @@ namespace WGHotel.Areas.Backend.Controllers
 
            
         }
-        // GET: Backend/Admin
-        //public ActionResult Index()
-        //{
 
-        //    var model = new AccountHotelViewModel();
+        
+         //GET: Backend/Admin
+        public ActionResult Create()
+        {
 
-        //    var AccountAndImgKey = Guid.NewGuid().GetHashCode().ToString("x");
-        //    model.Account = AccountAndImgKey.ToUpper();
-        //    model.Password = Guid.NewGuid().GetHashCode().ToString("x");
-        //    ViewBag.HotelFacility = model.HotelFacility;
-        //    ViewBag.ImgKey = AccountAndImgKey;
-        //    Session[AccountAndImgKey] = new List<ImageViewModel>();
-        //    return View(model);
-        //}
+            var model = new AccountHotelViewModel();
+
+            var AccountAndImgKey = Guid.NewGuid().GetHashCode().ToString("x");
+            model.Account = AccountAndImgKey.ToUpper();
+            model.Password = Guid.NewGuid().GetHashCode().ToString("x");
+            ViewBag.HotelFacility = model.HotelFacility;
+            ViewBag.ImgKey = AccountAndImgKey;
+            Session[AccountAndImgKey] = new List<ImageViewModel>();
+            //model.ImgKey = AccountAndImgKey;
+         
+            return View(model);
+        }
 
         [HttpPost]
         public ActionResult Create(AccountHotelViewModel model)
@@ -91,6 +96,9 @@ namespace WGHotel.Areas.Backend.Controllers
                 LinkUrl = model.LinkUrl,
                 Game = model.Game
             });
+
+
+
             return View();
         }
     }

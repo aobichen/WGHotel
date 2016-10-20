@@ -3,7 +3,7 @@
 @using (Html.BeginForm("RegisterAndCreateHotel", "Account",new {area=""}, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) 
 {
     @Html.AntiForgeryToken()
-
+    @*@Html.HiddenFor(model=>model.ImgKey)*@
     <div class="panel">
         <div class="panel-body">
             <div class="row">

@@ -29,13 +29,14 @@ namespace WGHotel.Controllers
 
         protected WGHotelZHEntities _dbzh;
         protected WGHotelUSEntities _dbus;
-       
+        protected WGHotelBaseEntities _basedb;
         // GET: Base
         public BaseController()
             : base()
         {
             _dbzh = new WGHotelZHEntities();
             _dbus = new WGHotelUSEntities();
+            _basedb = new WGHotelBaseEntities();
         }
     }
 }

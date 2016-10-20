@@ -206,7 +206,8 @@ namespace WGHotel.Controllers
                 if (result.Succeeded)
                 {                    
                     model.Create(user.Id);
-                    return RedirectToAction("Index", "Admin", new { area = "Beckend"});
+
+                    return Redirect("~/Backend/Admin");                    
                 }
                 else
                 {
