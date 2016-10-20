@@ -30,5 +30,6 @@ namespace WGHotel.Models
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Room> Room { get; set; }
         public virtual DbSet<RoomPrice> RoomPrice { get; set; }
+        public virtual DbSet<Facility> Facility { get; set; }
     }
 }

@@ -204,7 +204,7 @@
       <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facility.cs">
-      <DependentUpon>WGHotelZH.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hotel.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>

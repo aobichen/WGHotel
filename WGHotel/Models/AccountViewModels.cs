@@ -48,10 +48,14 @@ namespace WGHotel.Models
 
     public class LoginViewModel
     {
-        [Required]
+       
         [Display(Name = "電子郵件")]
         [EmailAddress]
         public string Email { get; set; }
+
+        [Required]
+       
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

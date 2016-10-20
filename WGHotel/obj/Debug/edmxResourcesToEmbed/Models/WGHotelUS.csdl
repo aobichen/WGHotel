@@ -30,6 +30,7 @@
     <Property Name="Enabled" Type="Boolean" Nullable="false" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Room" Relationship="Self.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
+    <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -114,5 +115,14 @@
       <End Role="Room" EntitySet="Room" />
       <End Role="RoomPrice" EntitySet="RoomPrice" />
     </AssociationSet>
+    <EntitySet Name="Facility" EntityType="USModel.Facility" />
   </EntityContainer>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

@@ -23,6 +23,8 @@ namespace WGHotel.Areas.Backend.Models
 
         public string Area { get; set; }
 
+        public string Tel { get; set; }
+
         public string Game { get; set; }
 
         public string Facilies { get; set; }
@@ -44,7 +46,8 @@ namespace WGHotel.Areas.Backend.Models
                 LinkUrl = LinkUrl,
                 Facilities = Facilies,
                 Game = Game,
-                UserId = userId
+                UserId = userId,
+                Tel = Tel
             };
              
             ZHdb.Hotel.Add(HotelZh);           
@@ -63,7 +66,8 @@ namespace WGHotel.Areas.Backend.Models
                 Enabled = true,
                 LinkUrl = LinkUrl,
                 Game = Game,
-                UserId = userId
+                UserId = userId,
+                Tel = Tel
             };
             USdb.Hotel.Add(HotelUs);
 
@@ -100,8 +104,8 @@ namespace WGHotel.Areas.Backend.Models
     {
         public int ID { get; set; }
         public int UserId { get; set; }
-        
 
+        public string Tel { get; set; }
         public string Name { get; set; }
         
         //public string Feature { get; set; }

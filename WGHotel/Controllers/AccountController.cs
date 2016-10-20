@@ -89,7 +89,7 @@ namespace WGHotel.Controllers
 
             // 這不會計算為帳戶鎖定的登入失敗
             // 若要啟用密碼失敗來觸發帳戶鎖定，請變更為 shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -200,9 +200,9 @@ namespace WGHotel.Controllers
 
             model.Facilies = Facility;
             
-                var user = new ApplicationUser { UserName = model.Account };
+                var user = new ApplicationUser { UserName = model.Account.ToLower() };
                 //var user = new ApplicationUser { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await UserManager.CreateAsync(user, model.Password.ToLower());
                 if (result.Succeeded)
                 {                    
                     model.Create(user.Id);

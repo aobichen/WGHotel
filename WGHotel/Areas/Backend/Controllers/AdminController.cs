@@ -15,8 +15,9 @@ namespace WGHotel.Areas.Backend.Controllers
         public ActionResult Index(string SearchString="",int Page=1)
         {
 
+            ViewBag.ViewMessage = string.IsNullOrEmpty(SearchString) ? "目前無任何資料":"沒有任何搜尋資訊";
            // var model = _dbzh.Hotel.ToList();
-
+            
             var model = (from h in _db.Hotel
                          where string.IsNullOrEmpty(SearchString) || h.Name.Contains(SearchString)
                          select new HotelListViewModel
@@ -25,7 +26,8 @@ namespace WGHotel.Areas.Backend.Controllers
                             Game = h.Game,
                             ID = h.ID,
                             Name = h.Name,
-                            UserId = h.UserId
+                            UserId = h.UserId,
+                            Tel = h.Tel
                          }).ToList().OrderBy(o => o.ID);
                          
             var currentPage = Page < 1 ? 1 : Page;

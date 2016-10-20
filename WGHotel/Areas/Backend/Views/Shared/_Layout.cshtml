@@ -31,13 +31,13 @@
 
             <div class="nav search-row" id="top_menu">
                 <!--  search form start -->
-                <ul class="nav top-menu">
+                @*<ul class="nav top-menu">
                     <li>
                         <form class="navbar-form">
                             <input class="form-control" placeholder="Search" type="text">
                         </form>
                     </li>
-                </ul>
+                </ul>*@
                 <!--  search form end -->
             </div>
 
@@ -77,13 +77,19 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu">
-                    <li class="" id="Account">
-                        <a class="" href="index.html">
-                            <i class="icon_id-2"></i>
-                            <span>Account</span>
+                    <li class="" id="Hotel">
+                        <a class="" href="@Url.Action("Index", "Admin", new {area = "Beckend" })">
+                            <i class="icon_house_alt"></i>
+                            <span>Hotels</span>
                         </a>
                     </li>
-                    <li class="sub-menu">
+                    <li class="" id="Room">
+                        <a class="" href="@Url.Action("Room", "Admin", new {area = "Beckend" })">
+                            <i class="icon_briefcase"></i>
+                            <span>Room</span>
+                        </a>
+                    </li>
+                    @*<li class="sub-menu">
                         <a href="javascript:void(0);" class="">
                             <i class="glyphicon glyphicon-list-alt"></i>
                             <span>Forms</span>
@@ -93,7 +99,7 @@
                             <li id="FormElements"><a class="" href="form_component.html">Form Elements</a></li>
                             <li><a class="" href="form_validation.html">Form Validation</a></li>
                         </ul>
-                    </li>
+                    </li>*@
                     <li class="sub-menu">
                         <a href="javascript:;" class="">
                             <i class="fa fa-desktop"></i>
@@ -168,7 +174,7 @@
 
         jQuery(function () {
             var title = $("#title").val();
-           
+            console.log(title);
             $('li', '.sidebar-menu').removeClass('active');
            
             var avtive = $('.sidebar-menu').find('li[id=' + title + ']');

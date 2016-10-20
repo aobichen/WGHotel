@@ -37,6 +37,7 @@
     <Property Name="Facilities" Type="nvarchar" MaxLength="200" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Order">
     <Key>

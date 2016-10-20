@@ -20,7 +20,6 @@ namespace WGHotel.Models
             this.Room = new HashSet<Room>();
         }
     
-      
         public int ID { get; set; }
         public string Name { get; set; }
         public string Game { get; set; }
@@ -32,6 +31,7 @@ namespace WGHotel.Models
         public string Facilities { get; set; }
         public bool Enabled { get; set; }
         public int UserId { get; set; }
+        public string Tel { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Room { get; set; }

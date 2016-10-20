@@ -15,13 +15,13 @@ namespace WGHotel.Models
     
     public partial class WGHotelZHEntities : DbContext
     {
-        public WGHotelZHEntities(string connectionStringName)
-            : base("name=" + connectionStringName)
-        {
-        }
-        
         public WGHotelZHEntities()
             : base("name=WGHotelZHEntities")
+        {
+        }
+
+        public WGHotelZHEntities(string ConnentionName)
+            : base("name=" + ConnentionName)
         {
         }
     

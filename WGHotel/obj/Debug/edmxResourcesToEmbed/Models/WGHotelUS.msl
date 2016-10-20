@@ -19,6 +19,7 @@
     <EntitySetMapping Name="Hotel">
       <EntityTypeMapping TypeName="USModel.Hotel">
         <MappingFragment StoreEntitySet="Hotel">
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Game" ColumnName="Game" />
@@ -75,6 +76,15 @@
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="SaleOff" ColumnName="SaleOff" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facility">
+      <EntityTypeMapping TypeName="USModel.Facility">
+        <MappingFragment StoreEntitySet="Facility">
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
