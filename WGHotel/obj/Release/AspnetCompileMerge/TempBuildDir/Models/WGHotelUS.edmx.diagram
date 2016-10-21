@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="USModel.RoomPrice" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
         <AssociationConnector Association="USModel.FK_Room_Hotel" ManuallyRouted="false" />
         <AssociationConnector Association="USModel.FK_RoomPrice_Room" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="USModel.Facility" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

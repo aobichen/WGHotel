@@ -189,6 +189,7 @@
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\BundleConfig.cs" />
     <Compile Include="Areas\Backend\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Backend\Controllers\RoomController.cs" />
     <Compile Include="Areas\Backend\Models\AccountHotelViewModel.cs" />
     <Compile Include="Areas\Backend\Models\CodeFiles.cs" />
     <Compile Include="Areas\Backend\RouteConfig.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Models\Hotel.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HotelViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImageStore.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>
@@ -280,9 +282,13 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="WepApi\ImageUploadController.cs" />
+    <Compile Include="WepApi\RoomController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="404.html" />
+    <Content Include="Content\Admin\css\bootstrap-switch.css" />
+    <Content Include="Content\Admin\css\bootstrap-switch.min.css" />
+    <Content Include="Content\Admin\js\bootstrap-switch.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\ElegantIcons.svg" />
@@ -1014,6 +1020,8 @@
     </Content>
     <Content Include="Areas\Backend\Views\Admin\_Table.cshtml" />
     <Content Include="Areas\Backend\Views\Admin\Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Room\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Room\_FullCalendar.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />
@@ -1080,6 +1088,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_SliderCarousel.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Home\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

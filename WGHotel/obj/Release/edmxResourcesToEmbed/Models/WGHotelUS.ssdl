@@ -14,6 +14,14 @@
     <Property Name="Modified" Type="datetime" Nullable="false" />
     <Property Name="Modify" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Hotel">
     <Key>
       <PropertyRef Name="ID" />
@@ -29,6 +37,7 @@
     <Property Name="Facilities" Type="nvarchar" MaxLength="200" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -98,6 +107,7 @@
   </Association>
   <EntityContainer Name="USModelStoreContainer">
     <EntitySet Name="CodeFile" EntityType="Self.CodeFile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Facility" EntityType="Self.Facility" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />

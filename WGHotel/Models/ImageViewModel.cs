@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -69,6 +70,18 @@ namespace WGHotel.Models
                     db.SaveChanges();
                 }
             }
+        }
+
+        public byte[] EmptyImageForHotel()
+        {
+            var ImagePath =HttpContext.Current.Server.MapPath("~/images/uploads/img.jpg");
+            var bitmap = Image.FromFile(ImagePath);
+            MemoryStream mr = new MemoryStream();
+            bitmap.Save(mr, System.Drawing.Imaging.ImageFormat.Jpeg);
+           
+            mr.Dispose();
+            bitmap.Dispose();
+            return mr.ToArray();
         }
     }
 }

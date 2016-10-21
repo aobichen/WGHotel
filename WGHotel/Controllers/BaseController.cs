@@ -18,11 +18,15 @@ namespace WGHotel.Controllers
             if (Request.Cookies["lang"]!=null && Request.Cookies["lang"].Value.ToLower().Equals("us"))
             {
                  _db = new WGHotelZHEntities("WGHotelUSEntities");
+                 CurrentLanguage = Request.Cookies["lang"].Value.ToLower();
             }
             else
             {
                  _db = new WGHotelZHEntities("WGHotelZHEntities");
+                 CurrentLanguage = "zh";
             }
+
+            
         }
 
         protected WGHotelZHEntities _db;
@@ -30,6 +34,8 @@ namespace WGHotel.Controllers
         protected WGHotelZHEntities _dbzh;
         protected WGHotelUSEntities _dbus;
         protected WGHotelBaseEntities _basedb;
+
+        protected string CurrentLanguage;
         // GET: Base
         public BaseController()
             : base()
