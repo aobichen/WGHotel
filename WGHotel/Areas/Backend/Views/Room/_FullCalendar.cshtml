@@ -1,14 +1,12 @@
 ﻿
-
-<script src="~/Content/Admin/js/fullcalendar.min.js"></script>
-<link href="~/Content/Admin/css/fullcalendar.css" rel="stylesheet" />
+<script src="~/Content/fullcalendar-3.0.1/moment.min.js"></script>
+<script src="~/Content/fullcalendar-3.0.1/fullcalendar.min.js"></script>
+<link href="~/Content/fullcalendar-3.0.1/fullcalendar.min.css" rel="stylesheet" />
+<link href="~/Content/fullcalendar-3.0.1/fullcalendar.print.css" media="print" rel="stylesheet" />
 <script src="~/Content/Admin/js/bootstrap-switch.min.js"></script>
 <link href="~/Content/Admin/css/bootstrap-switch.min.css" rel="stylesheet" />
 <style type="text/css">
-    .fc-header-price{
-      border-color:#4cd964;
-      background-color:rgba(74, 217, 98,.1);
-    }
+   
 
     th.fc-sun{
          color:#FF5151;
@@ -22,26 +20,83 @@
        th.fc-sat,td.fc-sat{
         background-color:rgba(255, 232, 219,.2);
     }
+
+   .fc-day-header input{
+        height: 20px;   
+        width:90%;
+        margin:2px;
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #555555;
+        vertical-align: middle;   
+       
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+   }
+
+   .fc-day-header input.price{
+        background-color:rgba(74, 217, 98,.1);
+        border: 1px solid #4cd964;
+   }
+
+   .fc-day-header input.quantity{
+        background-color:rgba(254, 210, 139,.1);
+        border: 1px solid #fed189;
+   }
+
+  .fc-input {  
+    height: 20px;   
+    width:75%;
+    margin:2px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #4cd964;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+  .fc-quantity{
+      border:1px solid #fed189;
+  }
 </style>
-      
+
 <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2><strong>Calendar</strong></h2>
                     <div class="panel-actions">
-                        <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="wminimize">
+                        <i class="fa fa-chevron-up"></i></a>
                         <a href="#" class="wclose"><i class="fa fa-times"></i></a>
                     </div>
 
-                </div><br><br><br>
+                </div>
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <button type="button" class="btn btn-primary">
+                儲存
+            </button>
+        </div>
+    </div>
                 <div class="panel-body">
                     <!-- Widget content -->
                     <!-- Below line produces calendar. I am using FullCalendar plugin. -->
-                    <div id="calendar"></div>
+                    <div class="col-lg-12">
+                        <div id="calendar"></div>
+                    </div>
                 </div>
             </div>
 
-        
-    
+
+
 
 
 <script type="text/javascript">
@@ -51,15 +106,50 @@
         let tridx = 0;
         $('#calendar').fullCalendar({
             eventRender: function (event, element, view) {
-               
-                var $div = $('<div>' + tridx + '</div>');
-                var $input =$('<input>').css({'margin-top':'1%','margin-bottom':'5px'}).addClass('form-control');
-                $div.append($input.val('100'));
-                $div.append(OffSwitch(true));
-               
+                var start = moment(event.start).format('YYYY-MM-DD');
+                
+                var $div = $('<div>').addClass('form-group fc-date').attr('data-date',start);
+                let $labelQuantity = $('<label>').text('數量');
+                var $inputQuantity = $('<input>').addClass('fc-input fc-quantity').appendTo($labelQuantity);
+                let $labelPrice = $('<label>').text('房價');
+                var $inputPrice = $('<input>').addClass('fc-input fc-price').appendTo($labelPrice);
+                $div.append($labelQuantity);
+                $div.append($labelPrice);
+                $div.append(OffSwitch(true,1));
+                
                 return $div;
             },
-            events: function (start, end, callback) {
+            viewRender: function (currentView) {
+                var $fcheader = $('.fc-day-header');
+                var headerQuantityInput = $('<input>').attr({
+                    type: 'text',
+                    placeholder: '數量'
+                }).addClass('quantity').appendTo($fcheader);
+
+                var headerInput = $('<input>').attr({
+                    type: 'text',
+                    placeholder: '房價'
+                }).addClass('price').appendTo($fcheader);
+
+                
+                
+                
+            },
+            eventAfterAllRender:function(view){
+                $("input.switch").bootstrapSwitch({
+                    onText: 'ON',
+                    offText: 'OFF',
+                    size: 'small'
+                });
+
+                $("input.switch").on('switchChange.bootstrapSwitch', function (event, state) {
+                    console.log($(this).attr('data-id')); // DOM element
+                    //console.log(event); // jQuery event
+                    console.log(state); // true | false
+                    //console.log($(this).prop('checked'));
+                });
+            },
+            events: function (start, end, timezone, callback) {
                 tridx = 0;
                 $.ajax({
                     type: "POST",
@@ -77,7 +167,7 @@
                             });
                         });
                         callback(events);
-                        $("[name='off-check']").bootstrapSwitch();
+                       
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         alert('There was an error');
@@ -86,39 +176,62 @@
             }
         });
 
-        $('.wclose').on("click", function () {
-            id = '2';  
-            $('#calendar').fullCalendar('refetchEvents');
-        });
-
-        var $fcheader = $('.fc-widget-header');
        
-        var headerInput = $('<input>').attr({
-            type: 'text',           
-        }).addClass('fc-header-price form-control').appendTo($fcheader);
         
-        $('.fc-header-price').on('change', function () {
-            let $self = $(this);
-            let idx = $self.closest('th').index();
-            let $table = $self.closest('table');
-          
-            var td = $table.find('tbody > tr:eq(' + idx + ') > td');
-            for (var i = 0, max = td.length; i <= max; i++) {
-                var input = $(td[i]).find('input');
-                console.log(input.length);
+        $('.wclose').on("click", function () {
+            //id = '2';
+            //$('#calendar').fullCalendar('refetchEvents');
+            //console.log($('tbody > tr > td[data-date="2016-10-18"]').length);
+            //console.log($('tbody > tr > td[data-date="2016-10-18"]').html());
+            //$('tbody > tr > td[data-date="2016-10-18"]')
+            let div = $('.fc-date');
+            for (var i = 0, max = div.length; i < max; i++) {
+                var input = $(div[i]).find('.fc-price');
+               
+                console.log(input.val());
             }
             
         });
 
+        
+        $('.fc-day-header').delegate('.price', 'keyup', function () {
+            let $self = $(this);
+            let val = $self.val();
+            let idx = $self.closest('th').index();
+            //console.log(idx);
+            var fcContent = $('.fc-content-skeleton');
+
+            for (var i = 0, max = fcContent.length; i <= max; i++) {
+                var input = $(fcContent[i]).find('table > tbody > tr > td:eq(' + idx + ')');
+                input.find('.fc-price').val(val);
+                //console.log(input.length);
+            }
+        });
+      
+        $('.fc-day-header').delegate('.quantity', 'keyup', function () {
+            let $self = $(this);
+            let val = $self.val();
+            let idx = $self.closest('th').index();
+            //console.log(idx);
+            var fcContent = $('.fc-content-skeleton');
+
+            for (var i = 0, max = fcContent.length; i <= max; i++) {
+                var input = $(fcContent[i]).find('table > tbody > tr > td:eq(' + idx + ')');
+                input.find('.fc-quantity').val(val);
+                //console.log(input.length);
+            }
+        });
+
+        
         //$fcheader.append(headerInput);
-        function OffSwitch(switchOn){
+        function OffSwitch(switchOn,id){
             //let offswitch = `<div class="switch has-switch"><div class="switch-animate switch-on"><input type="checkbox" checked="" data-toggle="switch"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div></div>`;
             //let onSwitch = `<div class="switch has-switch"><div class="switch-animate switch-off"><input type="checkbox" data-toggle="switch"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div></div>`;
-            
-            let offinput = $('<input>').attr({type:'checkbox',name:'off-check'});
-            let offswitch = $('<input>').attr({type:'checkbox',name:'off-check'});
-            let onSwitch = $('<input>').attr({ type: 'checkbox', name: 'off-check',checked:true });
-            
+
+            let offinput = $('<input>').attr({type:'checkbox',name:'off-check'}).addClass('switch');
+            let offswitch = $('<input>').attr({type:'checkbox',name:'off-check','data-id':id}).addClass('switch');
+            let onSwitch = $('<input>').attr({ type: 'checkbox', name: 'off-check', 'data-id': id, checked: true }).addClass('switch');
+
             if (!switchOn) {
               return  $(offswitch);
             }else{
@@ -126,7 +239,14 @@
             }
         }
 
-        $("[name='off-check']").bootstrapSwitch();
+        //.on('switchChange.bootstrapSwitch', function (event, state) {}); 
+        //$("[name='off-check']").bootstrapSwitch();
+        //$("[name='off-check'").on('switchChange.bootstrapSwitch', function (event, state) {
+        //    console.log('this'); // DOM element
+        //    //console.log(event); // jQuery event
+        //    console.log(state); // true | false
+        //    console.log($(this).prop('checked'));
+        //});
         //var offswitch = `<div class="switch has-switch"><div class="switch-animate switch-on"><input type="checkbox" checked="" data-toggle="switch"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div></div>`;
         //$('.fc-widget-content').not('.fc-other-month').append($(offswitch));
     });
