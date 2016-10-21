@@ -13,9 +13,9 @@ namespace WGHotel.WepApi
         public string Price { get; set; }
         public bool Off { get; set; }
 
-        public double Start { get; set; }
+        public DateTime Start { get; set; }
 
-        public double End { get; set; }
+        public DateTime End { get; set; }
     }
     public class RoomController : ApiController
     {
@@ -23,15 +23,16 @@ namespace WGHotel.WepApi
         [Route("GetRoomPrice/{id}")]
         public List<CalendarEvent> HotelImageUpload(int id)
         {
-            var start = DateTime.Now.AddDays(-10);
-            var end = DateTime.Now.AddDays(10);
+            var d = id == 1 ? 5 : 10;
+            var start = DateTime.Now.AddDays(-d);
+            var end = DateTime.Now.AddDays(d);
             DateTime epoc = new DateTime(1970, 1, 1);
             List<CalendarEvent> events = new List<CalendarEvent>(); 
             for (var date = start; date < end; date = date.AddDays(1.0))
             {
                 var beginDay = DateTime.Parse(date.ToShortDateString() + " 00:00:00");
                 var endDay = DateTime.Parse(date.ToShortDateString() + " 00:00:00");
-                events.Add(new CalendarEvent { Title = "Event 1", Start = beginDay.Subtract(epoc).TotalSeconds, End = endDay.Subtract(epoc).TotalSeconds });
+                events.Add(new CalendarEvent { Title = "Event"+id.ToString(), Start = beginDay, End = endDay });
             }
             return events;
         }

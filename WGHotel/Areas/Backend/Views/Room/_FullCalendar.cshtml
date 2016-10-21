@@ -46,18 +46,24 @@
 
 <script type="text/javascript">
     $(function () {
+
+        let id ='1';
+        let tridx = 0;
         $('#calendar').fullCalendar({
-            eventRender: function(event, element, view) {
-                var $div = $('<div></div>');
-                var $input =$('<input>').css({'margin-top':'5%','margin-bottom':'5px'}).addClass('form-control');
+            eventRender: function (event, element, view) {
+               
+                var $div = $('<div>' + tridx + '</div>');
+                var $input =$('<input>').css({'margin-top':'1%','margin-bottom':'5px'}).addClass('form-control');
                 $div.append($input.val('100'));
                 $div.append(OffSwitch(true));
+               
                 return $div;
             },
-           events: function(start,end,callback){
+            events: function (start, end, callback) {
+                tridx = 0;
                 $.ajax({
                     type: "POST",
-                    url: '/GetRoomPrice/1',
+                    url: '/GetRoomPrice/'+id,
                     cache: false,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -80,6 +86,10 @@
             }
         });
 
+        $('.wclose').on("click", function () {
+            id = '2';  
+            $('#calendar').fullCalendar('refetchEvents');
+        });
 
         var $fcheader = $('.fc-widget-header');
        
@@ -87,6 +97,19 @@
             type: 'text',           
         }).addClass('fc-header-price form-control').appendTo($fcheader);
         
+        $('.fc-header-price').on('change', function () {
+            let $self = $(this);
+            let idx = $self.closest('th').index();
+            let $table = $self.closest('table');
+          
+            var td = $table.find('tbody > tr:eq(' + idx + ') > td');
+            for (var i = 0, max = td.length; i <= max; i++) {
+                var input = $(td[i]).find('input');
+                console.log(input.length);
+            }
+            
+        });
+
         //$fcheader.append(headerInput);
         function OffSwitch(switchOn){
             //let offswitch = `<div class="switch has-switch"><div class="switch-animate switch-on"><input type="checkbox" checked="" data-toggle="switch"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div></div>`;

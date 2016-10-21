@@ -167,8 +167,6 @@ C:\Users\Aobi\Documents\MYSPACE\WGHotel\WGHotel\obj\Debug\WGHotel.csproj.Generat
 C:\Users\Aobi\Documents\MYSPACE\WGHotel\WGHotel\obj\Debug\WGHotel.dll
 C:\Users\Aobi\Documents\MYSPACE\WGHotel\WGHotel\obj\Debug\WGHotel.pdb
 C:\Users\Aobi\Documents\MYSPACE\WGHotel\WGHotel\obj\Debug\WGHotel.csprojResolveAssemblyReference.cache
-C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.App_GlobalResources.Resource-zh.resources
-C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.csproj.GenerateResource.Cache
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.pdb
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\Antlr3.Runtime.dll
@@ -324,6 +322,8 @@ C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\zh-Hant\Microsoft.Owin.S
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\zh-Hant\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\zh-Hant\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\zh-Hant\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.csprojResolveAssemblyReference.cache
+C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.App_GlobalResources.Resource-zh.resources
+C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.csproj.GenerateResource.Cache
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.dll
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.pdb
-C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.csprojResolveAssemblyReference.cache
