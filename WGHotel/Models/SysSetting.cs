@@ -19,5 +19,6 @@ namespace WGHotel.Models
         public string Code { get; set; }
         public string Value { get; set; }
         public string Unit { get; set; }
+        public string Remark { get; set; }
     }
 }

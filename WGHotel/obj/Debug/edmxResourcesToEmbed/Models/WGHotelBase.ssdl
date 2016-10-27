@@ -23,9 +23,10 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" />
-    <Property Name="Code" Type="nvarchar" MaxLength="5" />
+    <Property Name="Code" Type="nvarchar" MaxLength="15" />
     <Property Name="Value" Type="nvarchar" MaxLength="50" />
     <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityContainer Name="WGHotelBaseModelStoreContainer">
     <EntitySet Name="ImageStore" EntityType="Self.ImageStore" Schema="dbo" store:Type="Tables" />

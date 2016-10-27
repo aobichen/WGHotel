@@ -19,11 +19,6 @@ namespace WGHotel.Models
             : base("name=WGHotelZHEntities")
         {
         }
-
-        public WGHotelZHEntities(string ConnentionName)
-            : base("name=" + ConnentionName)
-        {
-        }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<WGHotel.Models.Room>
+
+<p>
+   
+</p>
+
+
+<div class="row">
+    <div class="form-group ">
+       
+        <div class="col-lg-offset-10">
+            @Html.ActionLink("Create New", "Create",null, new { @class = "btn btn-primary"})
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <table class="table table-responsive table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HOTELID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BedType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sell)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Quantiy)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HOTELID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BedType)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sell)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantiy)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                </td>
+            </tr>
+}
+
+    </table>
+</div>

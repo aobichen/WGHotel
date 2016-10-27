@@ -22,6 +22,7 @@
     <EntitySetMapping Name="SysSetting">
       <EntityTypeMapping TypeName="WGHotelBaseModel.SysSetting">
         <MappingFragment StoreEntitySet="SysSetting">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Code" ColumnName="Code" />

@@ -10,7 +10,7 @@ using WGHotel.Areas.Backend.Models;
 using WGHotel.Models;
 namespace WGHotel.Areas.Backend.Controllers
 {
-    public class AdminController : BaseController
+    public class HotelController : BaseController
     {
         public ActionResult Index(string SearchString="",int Page=1)
         {

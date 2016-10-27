@@ -35,13 +35,9 @@ namespace WGHotel.WepApi
 
             for (int i = 0; i < HttpContext.Current.Request.Files.Count; i++)
             {
-                var file = HttpContext.Current.Request.Files[i];
-                // var image = FileToByte(file);
+                var file = HttpContext.Current.Request.Files[i];                
                 var subName = Path.GetExtension(file.FileName);
-                var fileName = Guid.NewGuid().GetHashCode().ToString("x");
-                //var webPath = Path.Combine(FolderPath, fileName + ".jpg");
-                //var path = Path.Combine(HttpContext.Current.Server.MapPath(FolderPath), fileName + ".jpg");
-                //file.SaveAs(path);
+                var fileName = Guid.NewGuid().GetHashCode().ToString("x");               
                 var image = ImgDao.FileToByte(file);
                 Images.Add(new ImageViewModel { Image = image, Name = fileName, Extension = subName });
             }

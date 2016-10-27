@@ -31,6 +31,7 @@ namespace WGHotel.Models
         public string Notice { get; set; }
         public Nullable<int> Quantiy { get; set; }
         public Nullable<bool> Enabled { get; set; }
+        public Nullable<int> ParentId { get; set; }
     
         public virtual Hotel Hotel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -78,29 +78,34 @@
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu">
                     <li class="" id="Hotel">
-                        <a href="@Url.Action("Index", "Admin")">
+                        <a href="@Url.Action("Index", "Hotel")">
                             <i class="icon_house_alt"></i>
-                            <span>Hotels</span>
+                            <span>旅館</span>
                         </a>
                     </li>
                     <li class="" id="Room">
                         <a class="" href="@Url.Action("Index", "Room")">
                             <i class="icon_briefcase"></i>
-                            <span>Room</span>
+                            <span>房型</span>
                         </a>
                     </li>
-                    @*<li class="sub-menu">
+                    
+                    <li class="sub-menu" id="System">
                         <a href="javascript:void(0);" class="">
-                            <i class="glyphicon glyphicon-list-alt"></i>
-                            <span>Forms</span>
+                            <i class="fa fa-cogs"></i>
+                            <span>系統</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li id="FormElements"><a class="" href="form_component.html">Form Elements</a></li>
-                            <li><a class="" href="form_validation.html">Form Validation</a></li>
+                            <li id="RoomPriceDate">
+                                <a class="" href="@Url.Action("RoomPriceDate")">房價起訖日</a>
+                            </li>
+                            <li>
+                            <a class="" href="form_validation.html">Form Validation</a>
+                            </li>
                         </ul>
-                    </li>*@
-                    <li class="sub-menu">
+                    </li>
+                    @*<li class="sub-menu">
                         <a href="javascript:;" class="">
                             <i class="fa fa-desktop"></i>
                             <span>UI Fitures</span>
@@ -150,7 +155,7 @@
                             <li><a class="" href="blank.html">Blank Page</a></li>
                             <li><a class="" href="404.html">404 Error</a></li>
                         </ul>
-                    </li>
+                    </li>*@
 
                 </ul>
                 <!-- sidebar menu end-->

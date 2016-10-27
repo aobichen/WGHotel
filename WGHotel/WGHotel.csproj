@@ -188,10 +188,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\BundleConfig.cs" />
-    <Compile Include="Areas\Backend\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Backend\Controllers\HotelController.cs" />
     <Compile Include="Areas\Backend\Controllers\RoomController.cs" />
+    <Compile Include="Areas\Backend\Controllers\SystemController.cs" />
     <Compile Include="Areas\Backend\Models\AccountHotelViewModel.cs" />
     <Compile Include="Areas\Backend\Models\CodeFiles.cs" />
+    <Compile Include="Areas\Backend\Models\RoomViewModel.cs" />
+    <Compile Include="Areas\Backend\Models\SysSetting.cs" />
     <Compile Include="Areas\Backend\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -289,6 +292,56 @@
     <Content Include="Content\Admin\css\bootstrap-switch.css" />
     <Content Include="Content\Admin\css\bootstrap-switch.min.css" />
     <Content Include="Content\Admin\js\bootstrap-switch.min.js" />
+    <Content Include="Content\bootstrap-datetimepicker\css\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-datetimepicker\js\bootstrap-datetimepicker.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.ar.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.az.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.bg.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.bn.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.ca.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.cs.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.da.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.de.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.ee.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.el.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.es.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.fi.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.fr.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.he.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.hr.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.hu.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.hy.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.id.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.is.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.it.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.ja.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.ka.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.ko.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.lt.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.lv.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.ms.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.nb.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.nl.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.no.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.pl.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.pt-BR.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.pt.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.ro.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.rs-latin.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.rs.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.ru.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.sk.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.sl.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.sv.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.sw.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.th.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.tr.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.ua.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.uk.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.zh-CN.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.zh-TW.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\ElegantIcons.svg" />
@@ -940,7 +993,7 @@
     <Content Include="Content\Admin\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Admin\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Admin\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Areas\Backend\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Hotel\Index.cshtml" />
     <Content Include="Areas\Backend\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Backend\Views\web.config">
       <SubType>Designer</SubType>
@@ -975,7 +1028,7 @@
     </Content>
     <Content Include="Areas\Backend\Views\Shared\_HotelFacility.cshtml" />
     <Content Include="Areas\Backend\Views\Shared\_ImageUpload.cshtml" />
-    <Content Include="Areas\Backend\Views\Admin\_Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Hotel\_Create.cshtml" />
     <EntityDeploy Include="Models\WGHotelBase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WGHotelBase.Designer.cs</LastGenOutput>
@@ -983,10 +1036,18 @@
     <Content Include="Models\WGHotelBase.edmx.diagram">
       <DependentUpon>WGHotelBase.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Backend\Views\Admin\_Table.cshtml" />
-    <Content Include="Areas\Backend\Views\Admin\Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Hotel\_Table.cshtml" />
+    <Content Include="Areas\Backend\Views\Hotel\Create.cshtml" />
     <Content Include="Areas\Backend\Views\Room\Index.cshtml" />
     <Content Include="Areas\Backend\Views\Room\_FullCalendar.cshtml" />
+    <Content Include="Areas\Backend\Views\System\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\System\_List.cshtml" />
+    <Content Include="Areas\Backend\Views\System\RoomPriceDate.cshtml" />
+    <Content Include="Areas\Backend\Views\Room\_List.cshtml" />
+    <Content Include="Areas\Backend\Views\Room\_Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Shared\_RoomFacility.cshtml" />
+    <Content Include="Areas\Backend\Views\Room\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Room\Create.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />
