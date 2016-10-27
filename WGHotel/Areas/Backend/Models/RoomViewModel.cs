@@ -165,4 +165,15 @@ namespace WGHotel.Areas.Backend.Models
         public string Name { get; set; }
         public bool Checked { get; set; }
     }
+
+    public class RoomList{
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string HotelName {get;set;}
+        public int HOTELID { get; set; }
+        public string RoomType { get; set; }
+        public string BedType { get; set; }
+        public int Quantiy { get; set; }
+        public decimal Sell { get; set; }
+    }
 }

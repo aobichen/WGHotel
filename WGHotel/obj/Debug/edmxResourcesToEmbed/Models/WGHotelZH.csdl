@@ -38,7 +38,7 @@
     <Property Name="Enabled" Type="Boolean" Nullable="false" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Room" Relationship="Self.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
-    <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -73,6 +73,7 @@
     <Property Name="Enabled" Type="Boolean" />
     <NavigationProperty Name="Hotel" Relationship="Self.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
     <NavigationProperty Name="RoomPrice" Relationship="Self.FK_RoomPrice_Room" FromRole="Room" ToRole="RoomPrice" />
+    <Property Name="ParentId" Type="Int32" />
   </EntityType>
   <EntityType Name="RoomPrice">
     <Key>

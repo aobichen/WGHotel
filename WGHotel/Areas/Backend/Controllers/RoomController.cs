@@ -11,10 +11,24 @@ namespace WGHotel.Areas.Backend.Controllers
     public class RoomController : BaseController
     {
         // GET: Backend/Room
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            //var model = _dbzh.Room.Where();
-            var model = _dbzh.Room.ToList();
+            //var model = _dbzh.Room.Where(o=>o.HOTELID == id).ToList();
+            var model = (from room in _dbzh.Room
+                         join hotel in _dbzh.Hotel
+                         on room.HOTELID equals hotel.ID                         
+                         select new RoomList
+                         {
+                             ID = room.ID,
+                             Name = room.Name,
+                             RoomType = room.RoomType,
+                             HOTELID = hotel.ID,
+                             HotelName = hotel.Name,
+                             Quantiy = room.Quantiy.Value,
+                             Sell = room.Sell.Value,
+                             BedType = room.BedType
+                         }).ToList();
+
             return View(model);
         }
 
@@ -80,6 +94,11 @@ namespace WGHotel.Areas.Backend.Controllers
                 model.Create();
                 return View("Edit");
             }
+            return View();
+        }
+
+        public ActionResult Price(int id)
+        {
             return View();
         }
     }

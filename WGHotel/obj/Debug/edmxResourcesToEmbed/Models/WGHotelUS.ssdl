@@ -37,7 +37,7 @@
     <Property Name="Facilities" Type="nvarchar" MaxLength="200" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Tel" Type="nvarchar" MaxLength="20" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -70,6 +70,7 @@
     <Property Name="Notice" Type="nvarchar" MaxLength="1500" />
     <Property Name="Quantiy" Type="int" />
     <Property Name="Enabled" Type="bit" />
+    <Property Name="ParentId" Type="int" />
   </EntityType>
   <EntityType Name="RoomPrice">
     <Key>

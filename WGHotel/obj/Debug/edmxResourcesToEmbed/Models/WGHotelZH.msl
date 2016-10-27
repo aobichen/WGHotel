@@ -63,6 +63,7 @@
     <EntitySetMapping Name="Room">
       <EntityTypeMapping TypeName="ZHModel.Room">
         <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="HOTELID" ColumnName="HOTELID" />
           <ScalarProperty Name="Name" ColumnName="Name" />

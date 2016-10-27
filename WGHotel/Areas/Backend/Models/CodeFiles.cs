@@ -26,5 +26,7 @@ namespace WGHotel.Areas.Backend.Models
             return Items;
         }
 
+        
+
     }
 }

@@ -203,6 +203,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CodeFiles.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CodeFile.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
@@ -1048,6 +1049,7 @@
     <Content Include="Areas\Backend\Views\Shared\_RoomFacility.cshtml" />
     <Content Include="Areas\Backend\Views\Room\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\Room\Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Room\Price.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />

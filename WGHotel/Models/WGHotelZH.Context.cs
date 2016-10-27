@@ -15,6 +15,10 @@ namespace WGHotel.Models
     
     public partial class WGHotelZHEntities : DbContext
     {
+        public WGHotelZHEntities(string db)
+            : base("name="+db)
+        {
+        }
         public WGHotelZHEntities()
             : base("name=WGHotelZHEntities")
         {

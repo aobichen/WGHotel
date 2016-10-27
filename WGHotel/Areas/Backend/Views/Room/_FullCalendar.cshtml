@@ -81,7 +81,7 @@
                 </div>
     <div class="panel-body">
         <div class="col-lg-12">
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" id="save">
                 儲存
             </button>
         </div>
@@ -104,8 +104,13 @@
 
         let id ='1';
         let tridx = 0;
+        let currentMonth = "0";
+
         $('#calendar').fullCalendar({
             eventRender: function (event, element, view) {
+                //console.log(event.start.format("MM"));
+                if (event.start.format("MM") != currentMonth) { return false;}
+                
                 var start = moment(event.start).format('YYYY-MM-DD');
                 
                 var $div = $('<div>').addClass('form-group fc-date').attr('data-date',start);
@@ -130,10 +135,9 @@
                     type: 'text',
                     placeholder: '房價'
                 }).addClass('price').appendTo($fcheader);
-
-                
-                
-                
+                var date = $("#calendar").fullCalendar('getDate');
+                currentMonth = date.format("MM");
+               
             },
             eventAfterAllRender:function(view){
                 $("input.switch").bootstrapSwitch({
@@ -176,7 +180,15 @@
             }
         });
 
-       
+        $('#save').on('click',function(){
+            Save();
+    });
+
+        function Save() {
+            var elements = $('.fc-date').not('[data-date=""]');
+            console.log(elements.length);
+        }
+
         
         $('.wclose').on("click", function () {
             //id = '2';
