@@ -31,5 +31,18 @@
   <EntityContainer Name="WGHotelBaseEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ImageStore" EntityType="Self.ImageStore" />
     <EntitySet Name="SysSetting" EntityType="Self.SysSetting" />
+    <EntitySet Name="RoomPrice" EntityType="WGHotelBaseModel.RoomPrice" />
   </EntityContainer>
+  <EntityType Name="RoomPrice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ROOMID" Type="Int32" Nullable="false" />
+    <Property Name="ROOMIDOFUS" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SaleOff" Type="Boolean" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

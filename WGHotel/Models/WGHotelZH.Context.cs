@@ -16,7 +16,7 @@ namespace WGHotel.Models
     public partial class WGHotelZHEntities : DbContext
     {
         public WGHotelZHEntities(string db)
-            : base("name="+db)
+            : base("name=" + db)
         {
         }
         public WGHotelZHEntities()
@@ -34,6 +34,5 @@ namespace WGHotel.Models
         public virtual DbSet<Hotel> Hotel { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Room> Room { get; set; }
-        public virtual DbSet<RoomPrice> RoomPrice { get; set; }
     }
 }

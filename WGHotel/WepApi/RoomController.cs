@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using WGHotel.Areas.Backend.Models;
 using WGHotel.Models;
+using Newtonsoft.Json;
 
 namespace WGHotel.WepApi
 {
@@ -18,9 +19,30 @@ namespace WGHotel.WepApi
         public DateTime Start { get; set; }
 
         public DateTime End { get; set; }
+
+        public int Quantity { get; set; }
+    }
+
+    public class CalendarPost
+    {
+        public DateTime date { get; set; }
+        public decimal price { get; set; }
+        public bool off { get; set; }
+
+        public int quantity { get; set; }
+
+        public int roomid { get; set; }
     }
     public class RoomController : ApiController
     {
+        private WGHotelBaseEntities db = new WGHotelBaseEntities();
+        public RoomController()
+        {
+            if (db == null)
+            {
+                db = new WGHotelBaseEntities();
+            }
+        }
         [HttpPost]
         [Route("GetRoomPrice/{id}")]
         public List<CalendarEvent> HotelImageUpload(int id)
@@ -30,20 +52,21 @@ namespace WGHotel.WepApi
             var End = DateTime.Parse(Room.End);
             decimal Price = 0;
             List<CalendarEvent> Events = new List<CalendarEvent>();
-            using (var db = new WGHotelZHEntities())
+            using (var _db = new WGHotelZHEntities())
             {
-                Price = db.Room.Find(id).Sell.Value;
-
-                Events =  (from room in db.RoomPrice where room.ROOMID == id
-                          select new CalendarEvent
-                            {
-                                   Start = room.Date,
-                                   //End = room.Date.AddDays(1),
-                                   Off = room.SaleOff,
-                                   Price = room.Price
-
-                            }).ToList();
+                Price =_db.Room.Find(id).Sell.Value;               
             }
+
+            Events = (from room in db.RoomPrice
+                      where room.ROOMID == id
+                      select new CalendarEvent
+                      {
+                          Start = room.Date,
+                          //End = room.Date.AddDays(1),
+                          Off = room.SaleOff,
+                          Price = room.Price,
+                          Quantity = room.Quantity
+                      }).ToList();
            
             DateTime epoc = new DateTime(1970, 1, 1);
             List<CalendarEvent> events = new List<CalendarEvent>();
@@ -51,53 +74,110 @@ namespace WGHotel.WepApi
             {
                 for (var date = Begin; date < End; date = date.AddDays(1.0))
                 {
-                    var beginDay = DateTime.Parse(date.ToShortDateString() + " 00:00:00");
-                    var endDay = DateTime.Parse(date.ToShortDateString() + " 00:00:00");
-                    events.Add(new CalendarEvent { Title = "Event" + id.ToString(), Start = beginDay, End = endDay });
+                    var beginDay = DateTime.Parse(date.ToShortDateString());
+                    var endDay = DateTime.Parse(date.ToShortDateString());
+                    events.Add(new CalendarEvent { 
+                        Title = "Event" + id.ToString(),
+                        Start = beginDay,
+                        End = endDay,
+                        Price = Price, 
+                        Off = true,
+                        Quantity = 0 
+                    });
                 }
             }
             else
             {
                 for (var date = Begin; date < End; date = date.AddDays(1.0))
                 {
-                     
-                    var beginDay = DateTime.Parse(date.ToShortDateString() + " 00:00:00");
-                    var endDay = DateTime.Parse(date.ToShortDateString() + " 00:00:00");
-                    var Off = true;
+
+                    var beginDay =DateTime.Parse(date.ToShortDateString());
+                    var endDay = DateTime.Parse(date.ToShortDateString());
+                    var Off = false;
                     decimal CurrentPrice = 0;
+                    int Quantity = 0;
                     var Current = Events.Where(o => o.Start == beginDay).FirstOrDefault();
                     if (Current != null)
                     {
                         CurrentPrice = Current.Price;
                         Off = Current.Off;
+                        Quantity = Current.Quantity;
                     }
                     else
                     {
                         CurrentPrice = Price;
                         Off = true;
+                        Quantity = 0;
                     }
-                    events.Add(new CalendarEvent { Title = "Event" + id.ToString(), Start = beginDay, End = endDay, Off = Off, Price = CurrentPrice });
+                    events.Add(new CalendarEvent {
+                        Title = "Event" + id.ToString(),
+                        Start = beginDay,
+                        End = endDay,
+                        Price = Price,
+                        Off = Off,
+                        Quantity = Quantity
+                    });
                 }
             }
             return events;
         }
 
         [HttpPost]
-        [Route("RoomSave/{id}")]
-        public List<CalendarEvent> RoomPriceSave(int id)
+        [Route("RoomSave")]
+        public HttpResponseMessage RoomPriceSave(List<CalendarPost> data)
         {
-            var d = id == 1 ? 5 : 10;
-            var start = DateTime.Now.AddDays(-d);
-            var end = DateTime.Now.AddDays(d);
-            DateTime epoc = new DateTime(1970, 1, 1);
-            List<CalendarEvent> events = new List<CalendarEvent>();
-            for (var date = start; date < end; date = date.AddDays(1.0))
+           
+            HttpResponseMessage response = new HttpResponseMessage()
             {
-                var beginDay = DateTime.Parse(date.ToShortDateString() + " 00:00:00");
-                var endDay = DateTime.Parse(date.ToShortDateString() + " 00:00:00");
-                events.Add(new CalendarEvent { Title = "Event" + id.ToString(), Start = beginDay, End = endDay });
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(JsonConvert.SerializeObject(new { message = "ok" }))
+            };
+
+            if (data.Count <= 0)
+            {
+               return response;
             }
-            return events;
+
+            try
+            {
+                foreach (var item in data)
+                {
+                    if (db.RoomPrice.Any(o => o.Date == item.date && o.ROOMID == item.roomid))
+                    {
+                        var obj = db.RoomPrice.Where(o => o.Date == item.date && o.ROOMID == item.roomid).FirstOrDefault();
+                        obj.ROOMID = item.roomid;
+                        obj.Date = item.date;
+                        obj.Price = item.price;
+                        obj.Quantity = item.quantity;
+                        obj.SaleOff = item.off;
+                    }
+                    else
+                    {
+                        db.RoomPrice.Add(new RoomPrice
+                        {
+                            SaleOff = item.off,
+                            Quantity = item.quantity,
+                            Price = item.price,
+                            Date = item.date,
+                            ROOMID = item.roomid
+                        });
+                    }
+                    db.SaveChanges();
+                }
+            }
+            catch(Exception ex)
+            {
+                response = new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.NotFound,
+                    Content = new StringContent(JsonConvert.SerializeObject(new { message = ex.Message.ToString() }))
+                };
+
+                return response;
+            }
+
+           
+            return response;
         }
     }
 }

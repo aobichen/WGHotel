@@ -27,5 +27,6 @@ namespace WGHotel.Models
     
         public virtual DbSet<ImageStore> ImageStore { get; set; }
         public virtual DbSet<SysSetting> SysSetting { get; set; }
+        public virtual DbSet<RoomPrice> RoomPrice { get; set; }
     }
 }

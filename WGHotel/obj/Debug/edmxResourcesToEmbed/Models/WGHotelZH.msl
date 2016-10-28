@@ -78,16 +78,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RoomPrice">
-      <EntityTypeMapping TypeName="ZHModel.RoomPrice">
-        <MappingFragment StoreEntitySet="RoomPrice">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ROOMID" ColumnName="ROOMID" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="SaleOff" ColumnName="SaleOff" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

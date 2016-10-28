@@ -64,19 +64,7 @@
     <Property Name="Quantiy" Type="Int32" />
     <Property Name="Enabled" Type="Boolean" />
     <NavigationProperty Name="Hotel" Relationship="Self.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
-    <NavigationProperty Name="RoomPrice" Relationship="Self.FK_RoomPrice_Room" FromRole="Room" ToRole="RoomPrice" />
     <Property Name="ParentId" Type="Int32" />
-  </EntityType>
-  <EntityType Name="RoomPrice">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ROOMID" Type="Int32" Nullable="false" />
-    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="SaleOff" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Room" Relationship="Self.FK_RoomPrice_Room" FromRole="RoomPrice" ToRole="Room" />
   </EntityType>
   <Association Name="FK_Room_Hotel">
     <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
@@ -90,31 +78,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_RoomPrice_Room">
-    <End Role="Room" Type="Self.Room" Multiplicity="1" />
-    <End Role="RoomPrice" Type="Self.RoomPrice" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Room">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="RoomPrice">
-        <PropertyRef Name="ROOMID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="WGHotelUSEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CodeFile" EntityType="Self.CodeFile" />
     <EntitySet Name="Hotel" EntityType="Self.Hotel" />
     <EntitySet Name="Order" EntityType="Self.Order" />
     <EntitySet Name="Room" EntityType="Self.Room" />
-    <EntitySet Name="RoomPrice" EntityType="Self.RoomPrice" />
     <AssociationSet Name="FK_Room_Hotel" Association="Self.FK_Room_Hotel">
       <End Role="Hotel" EntitySet="Hotel" />
       <End Role="Room" EntitySet="Room" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RoomPrice_Room" Association="Self.FK_RoomPrice_Room">
-      <End Role="Room" EntitySet="Room" />
-      <End Role="RoomPrice" EntitySet="RoomPrice" />
     </AssociationSet>
     <EntitySet Name="Facility" EntityType="USModel.Facility" />
   </EntityContainer>

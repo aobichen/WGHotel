@@ -14,12 +14,6 @@ namespace WGHotel.Models
     
     public partial class Room
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Room()
-        {
-            this.RoomPrice = new HashSet<RoomPrice>();
-        }
-    
         public int ID { get; set; }
         public int HOTELID { get; set; }
         public string Name { get; set; }
@@ -34,7 +28,5 @@ namespace WGHotel.Models
         public Nullable<int> ParentId { get; set; }
     
         public virtual Hotel Hotel { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RoomPrice> RoomPrice { get; set; }
     }
 }

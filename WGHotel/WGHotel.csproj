@@ -228,7 +228,7 @@
       <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoomPrice.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SysSetting.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>

@@ -7,6 +7,7 @@
       <Diagram DiagramId="4947cf5451144fbcaaac58c627e3b240" Name="Diagram1">
         <EntityTypeShape EntityType="WGHotelBaseModel.ImageStore" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WGHotelBaseModel.SysSetting" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WGHotelBaseModel.RoomPrice" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

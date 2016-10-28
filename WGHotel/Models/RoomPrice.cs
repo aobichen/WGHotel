@@ -16,10 +16,10 @@ namespace WGHotel.Models
     {
         public int ID { get; set; }
         public int ROOMID { get; set; }
+        public Nullable<int> ROOMIDOFUS { get; set; }
         public decimal Price { get; set; }
         public System.DateTime Date { get; set; }
         public bool SaleOff { get; set; }
-    
-        public virtual Room Room { get; set; }
+        public int Quantity { get; set; }
     }
 }

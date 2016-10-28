@@ -28,7 +28,7 @@ namespace WGHotel.Areas.Backend.Controllers
                              Sell = room.Sell.Value,
                              BedType = room.BedType
                          }).ToList();
-
+            
             return View(model);
         }
 
@@ -99,6 +99,7 @@ namespace WGHotel.Areas.Backend.Controllers
 
         public ActionResult Price(int id)
         {
+            ViewBag.RoomId = id;
             return View();
         }
     }
