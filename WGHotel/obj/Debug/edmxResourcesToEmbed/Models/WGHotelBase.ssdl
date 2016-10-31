@@ -16,6 +16,18 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Location" Type="int" />
   </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="NUSF" Type="nvarchar" MaxLength="300" />
+    <Property Name="Tel1" Type="nvarchar" MaxLength="20" />
+    <Property Name="Tel2" Type="nvarchar" MaxLength="20" />
+    <Property Name="Telmobile" Type="nvarchar" MaxLength="30" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="20" />
+  </EntityType>
   <EntityType Name="ImageStore">
     <Key>
       <PropertyRef Name="ID" />
@@ -71,6 +83,7 @@
   <EntityContainer Name="WGHotelBaseModelStoreContainer">
     <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImageStore" EntityType="Self.ImageStore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RoomPrice" EntityType="Self.RoomPrice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SysSetting" EntityType="Self.SysSetting" Schema="dbo" store:Type="Tables" />

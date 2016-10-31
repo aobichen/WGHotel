@@ -67,16 +67,16 @@ namespace WGHotel.Areas.Backend.Controllers
         [HttpPost]
         public ActionResult Create(AccountHotelViewModel model)
         {
-            if (Request["HotelFacility"] != null)
-            {
-                var a = Request["HotelFacility"].ToString();
-            }
+            //if (Request["HotelFacility"] != null)
+            //{
+            //    var a = Request["HotelFacility"].ToString();
+            //}
 
             
 
-            var account = new RegisterViewModel { UserName = model.Account, Password = model.Password, ConfirmPassword=model.Password };
+           // var account = new RegisterViewModel { UserName = model.Account, Password = model.Password, ConfirmPassword=model.Password };
 
-            var aw = new AccountController().Register(account);
+            //var aw = new AccountController().Register(account);
 
             _dbzh.Hotel.Add(new Hotel { 
                 Name = model.Namezh,
@@ -108,6 +108,13 @@ namespace WGHotel.Areas.Backend.Controllers
             return View();
         }
 
+        public ActionResult Edit(int id)
+        {
+            //var zh = _dbzh.Hotel.Find(id);
+            //var us = _dbus.Hotel.Find()
+
+            return View();
+        }
         
     }
 }

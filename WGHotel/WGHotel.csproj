@@ -188,6 +188,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\BundleConfig.cs" />
+    <Compile Include="Areas\Backend\Controllers\CountryController.cs" />
     <Compile Include="Areas\Backend\Controllers\GameSiteController.cs" />
     <Compile Include="Areas\Backend\Controllers\HotelController.cs" />
     <Compile Include="Areas\Backend\Controllers\RoomController.cs" />
@@ -209,13 +210,16 @@
     <Compile Include="Helpers\CodeFiles.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Area.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\City.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CodeFile.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facility.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
@@ -1067,6 +1071,14 @@
     <Content Include="Areas\Backend\Views\Room\Create.cshtml" />
     <Content Include="Areas\Backend\Views\Room\Price.cshtml" />
     <Content Include="Areas\Backend\Views\Shared\_GameSite.cshtml" />
+    <Content Include="Areas\Backend\Views\GameSite\_List.cshtml" />
+    <Content Include="Areas\Backend\Views\GameSite\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\GameSite\_Create.cshtml" />
+    <Content Include="Areas\Backend\Views\GameSite\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Country\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Country\_List.cshtml" />
+    <Content Include="Areas\Backend\Views\Country\_Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Country\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />
@@ -1140,7 +1152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Backend\Views\GameSite\" />
     <Folder Include="Content\Admin\assets\jquery-file-upload\server\php\files\thumbnail\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ImageUpload\" />
