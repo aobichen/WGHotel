@@ -23,12 +23,62 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Code" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
     <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityContainer Name="WGHotelBaseEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ImageStore" EntityType="Self.ImageStore" />
     <EntitySet Name="SysSetting" EntityType="Self.SysSetting" />
+    <EntitySet Name="RoomPrice" EntityType="WGHotelBaseModel.RoomPrice" />
+    <EntitySet Name="Area" EntityType="WGHotelBaseModel.Area" />
+    <EntitySet Name="City" EntityType="WGHotelBaseModel.City" />
+    <AssociationSet Name="FK__Area__CID__239E4DCF" Association="WGHotelBaseModel.FK__Area__CID__239E4DCF">
+      <End Role="City" EntitySet="City" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="RoomPrice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ROOMID" Type="Int32" Nullable="false" />
+    <Property Name="ROOMIDOFUS" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SaleOff" Type="Boolean" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="CID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="City" Relationship="WGHotelBaseModel.FK__Area__CID__239E4DCF" FromRole="Area" ToRole="City" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="Int32" />
+    <NavigationProperty Name="Area" Relationship="WGHotelBaseModel.FK__Area__CID__239E4DCF" FromRole="City" ToRole="Area" />
+  </EntityType>
+  <Association Name="FK__Area__CID__239E4DCF">
+    <End Type="WGHotelBaseModel.City" Role="City" Multiplicity="1" />
+    <End Type="WGHotelBaseModel.Area" Role="Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="CID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

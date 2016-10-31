@@ -7,6 +7,10 @@
       <Diagram DiagramId="4947cf5451144fbcaaac58c627e3b240" Name="Diagram1">
         <EntityTypeShape EntityType="WGHotelBaseModel.ImageStore" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WGHotelBaseModel.SysSetting" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WGHotelBaseModel.RoomPrice" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="WGHotelBaseModel.Area" Width="1.5" PointX="7.625" PointY="0.875" />
+        <EntityTypeShape EntityType="WGHotelBaseModel.City" Width="1.5" PointX="5.375" PointY="0.875" />
+        <AssociationConnector Association="WGHotelBaseModel.FK__Area__CID__239E4DCF" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

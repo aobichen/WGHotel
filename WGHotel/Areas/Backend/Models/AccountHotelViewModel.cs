@@ -19,7 +19,7 @@ namespace WGHotel.Areas.Backend.Models
         public string Addressus { get; set; }
 
         public string LinkUrl { get; set; }
-        public string City { get; set; }
+        public int City { get; set; }
 
         public string Area { get; set; }
 

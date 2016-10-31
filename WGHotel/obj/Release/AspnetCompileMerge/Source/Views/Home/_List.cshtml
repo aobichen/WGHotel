@@ -5,31 +5,31 @@
 {
     <article class="one-fourth">
         <figure>
-            <a href="location.html" title="">
-               <img src="@Url.Action("HotelFirstImage", "Home", new  { id = item.Image})" alt="@item.Name" />
-         
+            <a href="@Url.Action("Detail","Home",new{id = item.ID})" title="">
+                <img style="min-height:220px;" src="@Url.Action("HotelFirstImage", "Home", new  { id = item.Image})" alt="@item.Name" />
             </a>
         </figure>
         <div class="details">
-            <a href="location.html" title="View all" class="gradient-button">View all</a>
+            <a href="@Url.Action("Detail","Home",new{id = item.ID})" title="View all" class="gradient-button" data-localize="viewall">瀏覽</a>
             <h4>@item.Name</h4>
-            <span class="count">(02)1234-5678</span>
+            <span class="count">@item.Tel</span>
             <div class="ribbon">
-                <div class="half">
-                    
-                    <a href="hotels.html" title="View all">
-                        @*<span class="small">from</span>
-                        <span class="price">&#36; @item.Game</span>*@
-                        <span class="small">台北市</span>
-                        <span class="price">巨蛋田徑</span>
+                <div class="half flight">
+
+                    <a href="@item.LinkUrl" title="View all">
+                        <span class="small"></span>
+                        <span class="price" style="font-size:14px;" data-localize="forward">訂房</span>
                     </a>
-                    
+
                 </div>
                 <div class="half hotel">
                     <a href="flights.html" title="View all">
                         <span class="small"></span>
-                        <span class="price">&#36; @item.ID</span>
-                    </a>
+                        @if (item.Sell.HasValue)
+                        {
+                            <span class="price" style="font-size:14px;">&#36; @item.Sell.Value.ToString("#,##0")</span>
+                        }
+                            </a>
                 </div>
             </div>
         </div>

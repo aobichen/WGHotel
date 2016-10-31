@@ -33,7 +33,8 @@ namespace WGHotel
                       //"~/Content/bootstrap.css",
                      // "~/Content/site.css",
                       "~/Content/style.css",
-                      "~/Content/lightslider.min.css"));                      
+                      "~/Content/lightslider.min.css",
+                      "~/Content/lightgallery.min.css"));                      
         }
     }
 }

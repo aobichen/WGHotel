@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,6 +19,11 @@ namespace WGHotel.Areas.Backend.Models
             RoomTypes();
             Facility();
             BedTypes();
+
+            if(!Directory.Exists(HttpContext.Current.Server.MapPath("/UserFolder")))
+                {
+                    Directory.CreateDirectory(HttpContext.Current.Server.MapPath("/UserFolder"));
+                };
         }
 
         private WGHotelZHEntities _db { get; set; }
@@ -31,6 +37,9 @@ namespace WGHotel.Areas.Backend.Models
         public string NameUs { get; set; }
         public string NoticeUs { get; set; }
 
+        public string FeatureUs { get; set; }
+        public string FeatureZh { get; set; }
+
         public string RoomType { get; set; }
         public string BedType { get; set; }
         public string Facilities { get; set; }
@@ -39,6 +48,7 @@ namespace WGHotel.Areas.Backend.Models
         public int Quantiy { get; set; }
         public bool Enabled { get; set; }
 
+        public string ImgKey { get; set; }
         public SelectList RoomTypeSelectList { get; set; }
         public SelectList BedTypeSelectList { get; set; }
 
@@ -81,6 +91,7 @@ namespace WGHotel.Areas.Backend.Models
                 var Room = new Room();
                 Room.Name = NameZh;
                 Room.Notice = NoticeZh;
+                Room.Feature = FeatureZh;
                 Room.BedType = BedType;
                 Room.RoomType = RoomType;
                 Room.Sell = Sell;
@@ -99,6 +110,7 @@ namespace WGHotel.Areas.Backend.Models
 
                 var Room = new Room();
                 Room.Name = NameUs;
+                Room.Feature = FeatureUs;
                 Room.Notice = NoticeUs;
                 Room.BedType = BedType;
                 Room.RoomType = RoomType;
@@ -112,6 +124,34 @@ namespace WGHotel.Areas.Backend.Models
                 db.Room.Add(Room);
                 db.SaveChanges();
                 USID = Room.ID;
+            }
+
+            var Session = HttpContext.Current.Session;
+
+            if (Session[ImgKey] != null)
+            {
+                var Basedb = new WGHotelBaseEntities();
+                var Now = DateTime.Now;
+                var images = (List<ImageViewModel>)Session[ImgKey];
+                foreach (var img in images)
+                {
+                    var file = string.Format("/UserFolder/{0}{1}", img.Name, img.Extension);
+                    var path = HttpContext.Current.Server.MapPath(file);
+                    File.WriteAllBytes(path, img.Image);
+                    Basedb.ImageStore.Add(new ImageStore
+                    {
+                        Path = file,
+                        Created = Now,
+                        Extension = img.Extension,
+                        Deleted = false,
+                        ReferIdUS = ZHID,
+                        ReferIdZH = USID,
+                        Type = "Room",
+                        Name = img.Name,
+                        Image = img.Image
+                    });
+                }
+                Basedb.SaveChanges();
             }
         }
 

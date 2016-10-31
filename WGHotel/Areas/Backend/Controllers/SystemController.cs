@@ -16,6 +16,8 @@ namespace WGHotel.Areas.Backend.Controllers
             return View();
         }
 
+
+
         public ActionResult RoomPriceDate()
         {
            

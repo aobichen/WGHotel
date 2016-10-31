@@ -1,5 +1,16 @@
 ﻿{
-    "myaccount": "My Account",
+    "myaccount": "Hotel Manage",
     "english": "English",
-    "zhtw": "zh-tw"
+    "zhtw": "traditional Chinese",
+    "viewall": "View All",
+    "forward": "Forward",
+    "hasbreakfast": "Has-breakfast",
+    "nonbreakfast": "Non-Breakfast",
+    "roomtype1": "Room Type:",
+    "bedtype": "Bed Type",
+    "roomprice": "Price",
+    "rooms": "Rooms",
+    "facilities": "Facilities",
+    "location": "Location",
+    "hotelfeature": "Feature"
 }

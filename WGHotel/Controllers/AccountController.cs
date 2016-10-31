@@ -207,11 +207,11 @@ namespace WGHotel.Controllers
                 {                    
                     model.Create(user.Id);
 
-                    return Redirect("~/Backend/Admin");                    
+                    return Redirect("~/Backend/Hotel");                    
                 }
                 else
                 {
-                    return RedirectToAction("Create", "Admin", new { area = "Beckend", model=model });
+                    return RedirectToAction("Create", "Hotel", new { area = "Beckend", model=model });
                 }
                 //AddErrors(result);
             

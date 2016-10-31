@@ -113,7 +113,7 @@ namespace WGHotel.WepApi
                         Title = "Event" + id.ToString(),
                         Start = beginDay,
                         End = endDay,
-                        Price = Price,
+                        Price = CurrentPrice,
                         Off = Off,
                         Quantity = Quantity
                     });

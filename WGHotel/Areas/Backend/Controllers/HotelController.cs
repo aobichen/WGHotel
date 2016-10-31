@@ -19,10 +19,11 @@ namespace WGHotel.Areas.Backend.Controllers
            // var model = _dbzh.Hotel.ToList();
             
             var model = (from h in _db.Hotel
+                         join c in _db.City on h.City equals c.ID
                          where string.IsNullOrEmpty(SearchString) || h.Name.Contains(SearchString)
                          select new HotelListViewModel
                          {
-                            City = h.City,
+                            City = c.Name,
                             Game = h.Game,
                             ID = h.ID,
                             Name = h.Name,
@@ -58,7 +59,8 @@ namespace WGHotel.Areas.Backend.Controllers
             ViewBag.ImgKey = AccountAndImgKey;
             Session[AccountAndImgKey] = new List<ImageViewModel>();
             //model.ImgKey = AccountAndImgKey;
-         
+            ViewBag.GameSites = new GameSiteModel().List();
+            ViewBag.City = new GameSiteModel().Citys();
             return View(model);
         }
 
@@ -69,6 +71,8 @@ namespace WGHotel.Areas.Backend.Controllers
             {
                 var a = Request["HotelFacility"].ToString();
             }
+
+            
 
             var account = new RegisterViewModel { UserName = model.Account, Password = model.Password, ConfirmPassword=model.Password };
 
@@ -103,5 +107,7 @@ namespace WGHotel.Areas.Backend.Controllers
 
             return View();
         }
+
+        
     }
 }

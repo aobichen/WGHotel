@@ -23,7 +23,7 @@ namespace WGHotel.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Game { get; set; }
-        public string City { get; set; }
+        public int City { get; set; }
         public string Area { get; set; }
         public string Address { get; set; }
         public string Features { get; set; }

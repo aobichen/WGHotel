@@ -1,5 +1,18 @@
 ﻿{
-    "myaccount": "我的帳戶",
+    "myaccount": "飯店管理",
     "english": "英文",
-    "zhtw": "繁體中文"
+    "zhtw": "繁體中文",
+    "viewall": "瀏覽",
+    "forward": "前往",
+    "hasbreakfast": "含早餐",
+    "nonbreakfast": "不含早餐",
+    "roomtype1": "房型:",
+    "bedtype": "床型:",
+    "roomprice": "房價:",
+    "rooms": "房型",
+    "roomtype2": "各式房型",
+    "feature": "飯店介紹",
+    "facilities": "提供設施",
+    "location": "地點",
+    "hotelfeature": "旅館介紹"
 }

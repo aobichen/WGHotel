@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WGHotel.Areas.Backend.Models;
 using WGHotel.Controllers;
+using WGHotel.Models;
 
 namespace WGHotel.Areas.Backend.Controllers
 {
@@ -14,9 +15,12 @@ namespace WGHotel.Areas.Backend.Controllers
         public ActionResult Index(int? id)
         {
             //var model = _dbzh.Room.Where(o=>o.HOTELID == id).ToList();
+            var hotelId = id.Value;
+            ViewBag.HotelID = hotelId;
             var model = (from room in _dbzh.Room
                          join hotel in _dbzh.Hotel
-                         on room.HOTELID equals hotel.ID                         
+                         on room.HOTELID equals hotel.ID
+                         where hotel.ID == hotelId
                          select new RoomList
                          {
                              ID = room.ID,
@@ -36,10 +40,22 @@ namespace WGHotel.Areas.Backend.Controllers
         public ActionResult Create(int id)
         {
             var RoomModel = new RoomViewModel();
+            RoomModel.HOTELID = id;
+            //ViewBag.HotelID = id;
             ViewBag.RoomTypes = RoomModel.RoomTypeSelectList;
             ViewBag.BedTypes = RoomModel.BedTypeSelectList;
+            
             ViewBag.RoomFacility = RoomModel.FacilityList;
-            return View();
+
+            var key = Guid.NewGuid().GetHashCode().ToString("x");
+            RoomModel.ImgKey = key;
+            ViewBag.ImgKey = key;
+            Session[key] = new List<ImageViewModel>();
+
+            RoomModel.Sell = 2000;
+            RoomModel.Quantiy = 1;
+
+            return View(RoomModel);
         }
 
         [HttpPost]
@@ -47,9 +63,9 @@ namespace WGHotel.Areas.Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.HOTELID = 11;
+                model.HOTELID = model.HOTELID;
                 model.Create();
-                return View();
+                return RedirectToAction("", new {id = model.HOTELID });
             }
 
             var RoomModel = new RoomViewModel();

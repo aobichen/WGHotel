@@ -12,10 +12,10 @@ namespace WGHotel.Areas.Backend
         internal static void RegisterRoutes(AreaRegistrationContext context)
         {
             //routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            //context.MapRoute(
-            //    "Room",
-            //     "Backend/Room/{id}",
-            //    new { action = "Index", id = UrlParameter.Optional });
+            context.MapRoute(
+                "Room",
+                 "Backend/Room/{id}",
+                new {controller = "Room", action = "Index", id = UrlParameter.Optional });
 
             context.MapRoute(
                "Backend_default",

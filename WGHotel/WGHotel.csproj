@@ -188,11 +188,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\BundleConfig.cs" />
+    <Compile Include="Areas\Backend\Controllers\GameSiteController.cs" />
     <Compile Include="Areas\Backend\Controllers\HotelController.cs" />
     <Compile Include="Areas\Backend\Controllers\RoomController.cs" />
     <Compile Include="Areas\Backend\Controllers\SystemController.cs" />
     <Compile Include="Areas\Backend\Models\AccountHotelViewModel.cs" />
     <Compile Include="Areas\Backend\Models\CodeFiles.cs" />
+    <Compile Include="Areas\Backend\Models\GameSiteViewModel.cs" />
     <Compile Include="Areas\Backend\Models\RoomViewModel.cs" />
     <Compile Include="Areas\Backend\Models\SysSetting.cs" />
     <Compile Include="Areas\Backend\RouteConfig.cs" />
@@ -200,15 +202,25 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CodeFiles.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Area.cs">
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\City.cs">
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CodeFile.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facility.cs">
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GameSite.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hotel.cs">
@@ -230,6 +242,7 @@
     <Compile Include="Models\RoomPrice.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RoomViewModel.cs" />
     <Compile Include="Models\SysSetting.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
@@ -859,12 +872,15 @@
     <Content Include="images\backgrounds\white_tiles.png" />
     <Content Include="images\backgrounds\wild_oliva.png" />
     <Content Include="images\backgrounds\wood_1.png" />
+    <Content Include="images\banners\banner1.jpg" />
+    <Content Include="images\banners\banner2.jpg" />
     <Content Include="images\favicon.ico" />
     <Content Include="images\ico\calendar.png" />
     <Content Include="images\ico\controls.png" />
     <Content Include="images\ico\loading.gif" />
     <Content Include="images\ico\star-rating-off.png" />
     <Content Include="images\ico\star-rating-on.png" />
+    <Content Include="images\logos\wghotel.png" />
     <Content Include="images\settings.png" />
     <Content Include="images\txt\logo.png" />
     <Content Include="images\uploads\avatar.jpg" />
@@ -1050,6 +1066,7 @@
     <Content Include="Areas\Backend\Views\Room\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\Room\Create.cshtml" />
     <Content Include="Areas\Backend\Views\Room\Price.cshtml" />
+    <Content Include="Areas\Backend\Views\Shared\_GameSite.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />
@@ -1111,6 +1128,9 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Home\Detail.cshtml" />
+    <Content Include="Views\Home\_RoomTypes.cshtml" />
+    <Content Include="Views\Shared\_GamesDropDown.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1120,9 +1140,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Backend\Views\GameSite\" />
     <Folder Include="Content\Admin\assets\jquery-file-upload\server\php\files\thumbnail\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ImageUpload\" />
+    <Folder Include="Views\Room\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

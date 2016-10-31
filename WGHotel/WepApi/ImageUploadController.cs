@@ -18,10 +18,15 @@ namespace WGHotel.WepApi
         [Route("ImageUpload")]
         public object HotelImageUpload()
         {
-            var Current = HttpContext.Current;
-            var key = Current.Request["key"];
-            
+            HttpRequestMessage request = this.Request;
+            if (!request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            } 
             var Images = new List<ImageViewModel>();
+            
+            var Current = HttpContext.Current;
+            var key = Current.Request["key"];         
 
             if (Current.Session[key] != null)
             {

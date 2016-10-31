@@ -67,8 +67,22 @@
   .fc-quantity{
       border:1px solid #fed189;
   }
-</style>
 
+  .message{
+      display:none;
+  }
+
+  .message.active{
+      display:block;
+     color:red;
+     font-weight:bold;
+transition: all 2s;
+-moz-transition: all 2s; /* Firefox 4 */
+-webkit-transition: all 2s; /* Safari 和 Chrome */
+-o-transition: all 2s; /* Opera */
+  }
+</style>
+<p class="message">已儲存!</p>
 <div class="panel panel-default">
    <input id="roomid" type="hidden" value="@ViewBag.RoomId" />
                 <div class="panel-heading">
@@ -111,8 +125,7 @@
        
         $('#calendar').fullCalendar({
             eventRender: function (event, element, view) {
-                //console.log(event.start.format("MM"));
-                console.log(event.Price);
+                $('.message').removeClass('active');
                 if (event.start.format("MM") != currentMonth) { return false;}
                 
                 var start = moment(event.start).format('YYYY-MM-DD');
@@ -161,12 +174,40 @@
                     //console.log(state); // true | false
                     ////console.log($(this).prop('checked'));
                 });
+
+
+                $('.fc-day-header').delegate('.price', 'keyup', function () {
+                    let $self = $(this);
+                    let val = $self.val();
+                    let idx = $self.closest('th').index();
+
+                    let fcContent = $('.fc-content-skeleton');
+
+                    for (var i = 0, max = fcContent.length; i <= max; i++) {
+                        var input = $(fcContent[i]).find('table > tbody > tr > td:eq(' + idx + ')');
+                        input.find('.fc-price').val(val);
+                    }
+                });
+
+                $('.fc-day-header').delegate('.quantity', 'keyup', function () {
+
+                    let $self = $(this);
+                    let val = $self.val();
+                    console.log(val);
+                    let idx = $self.closest('th').index();
+                    let fcContent = $('.fc-content-skeleton');
+
+                    for (let i = 0, max = fcContent.length; i <= max; i++) {
+                        let input = $(fcContent[i]).find('table > tbody > tr > td:eq(' + idx + ')');
+                        input.find('.fc-quantity').val(val);
+                    }
+                });
             },
             events: function (start, end, timezone, callback) {
                 tridx = 0;
                 $.ajax({
                     type: "POST",
-                    url: '/GetRoomPrice/'+id,
+                    url: '/GetRoomPrice/' + roomid,
                     cache: false,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -226,7 +267,9 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
+
                     saved = true;
+                    $('.message').addClass('active');
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     //alert('There was an error');
@@ -235,7 +278,7 @@
         }
         
         $('.fc-date').delegate("input", "change", function () {
-            console.log('aa');
+           
             saved = false;
         });
 
@@ -243,36 +286,12 @@
             let div = $('.fc-date');
             for (var i = 0, max = div.length; i < max; i++) {
                 var input = $(div[i]).find('.fc-price');              
-                //console.log(input.val());
+               
             }
             
         });
 
-        
-        $('.fc-day-header').delegate('.price', 'keyup', function () {
-            let $self = $(this);
-            let val = $self.val();
-            let idx = $self.closest('th').index();
-            
-            let fcContent = $('.fc-content-skeleton');
-
-            for (var i = 0, max = fcContent.length; i <= max; i++) {
-                var input = $(fcContent[i]).find('table > tbody > tr > td:eq(' + idx + ')');
-                input.find('.fc-price').val(val);
-            }
-        });
-      
-        $('.fc-day-header').delegate('.quantity', 'keyup', function () {
-            let $self = $(this);
-            let val = $self.val();
-            let idx = $self.closest('th').index();            
-            let fcContent = $('.fc-content-skeleton');
-
-            for (let i = 0, max = fcContent.length; i <= max; i++) {
-                let input = $(fcContent[i]).find('table > tbody > tr > td:eq(' + idx + ')');
-                input.find('.fc-quantity').val(val);               
-            }
-        });
+  
 
         
        

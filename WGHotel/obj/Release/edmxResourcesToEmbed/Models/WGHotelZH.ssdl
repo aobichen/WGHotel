@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ZHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="CID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Location" Type="int" />
+  </EntityType>
   <EntityType Name="CodeFile">
     <Key>
       <PropertyRef Name="ID" />
@@ -22,6 +38,17 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="GameSite">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sports" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Venue" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+    <Property Name="ParentId" Type="int" />
+  </EntityType>
   <EntityType Name="Hotel">
     <Key>
       <PropertyRef Name="ID" />
@@ -29,7 +56,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Game" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="City" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="City" Type="int" Nullable="false" />
     <Property Name="Area" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Features" Type="nvarchar" MaxLength="500" Nullable="false" />
@@ -37,7 +64,7 @@
     <Property Name="Facilities" Type="nvarchar" MaxLength="200" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Tel" Type="nvarchar" MaxLength="20" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -70,17 +97,21 @@
     <Property Name="Notice" Type="nvarchar" MaxLength="1500" />
     <Property Name="Quantiy" Type="int" />
     <Property Name="Enabled" Type="bit" />
+    <Property Name="ParentId" Type="int" />
+    <Property Name="Feature" Type="nvarchar" MaxLength="1500" />
   </EntityType>
-  <EntityType Name="RoomPrice">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ROOMID" Type="int" Nullable="false" />
-    <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="Date" Type="date" Nullable="false" />
-    <Property Name="SaleOff" Type="bit" Nullable="false" />
-  </EntityType>
+  <Association Name="FK__Area__CID__1CF15040">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="CID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Room_Hotel">
     <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
     <End Role="Room" Type="Self.Room" Multiplicity="*" />
@@ -93,32 +124,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_RoomPrice_Room">
-    <End Role="Room" Type="Self.Room" Multiplicity="1" />
-    <End Role="RoomPrice" Type="Self.RoomPrice" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Room">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="RoomPrice">
-        <PropertyRef Name="ROOMID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="ZHModelStoreContainer">
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CodeFile" EntityType="Self.CodeFile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Facility" EntityType="Self.Facility" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GameSite" EntityType="Self.GameSite" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="RoomPrice" EntityType="Self.RoomPrice" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Area__CID__1CF15040" Association="Self.FK__Area__CID__1CF15040">
+      <End Role="City" EntitySet="City" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
     <AssociationSet Name="FK_Room_Hotel" Association="Self.FK_Room_Hotel">
       <End Role="Hotel" EntitySet="Hotel" />
       <End Role="Room" EntitySet="Room" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RoomPrice_Room" Association="Self.FK_RoomPrice_Room">
-      <End Role="Room" EntitySet="Room" />
-      <End Role="RoomPrice" EntitySet="RoomPrice" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

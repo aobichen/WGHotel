@@ -26,6 +26,7 @@ namespace WGHotel.Models
         public Nullable<int> Quantiy { get; set; }
         public Nullable<bool> Enabled { get; set; }
         public Nullable<int> ParentId { get; set; }
+        public string Feature { get; set; }
     
         public virtual Hotel Hotel { get; set; }
     }
