@@ -46,8 +46,8 @@
     <Property Name="Quantiy" Type="Int32" />
     <Property Name="Enabled" Type="Boolean" />
     <Property Name="ParentId" Type="Int32" />
-    <NavigationProperty Name="Hotel" Relationship="USModel.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
     <Property Name="Feature" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Hotel" Relationship="USModel.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
   </EntityType>
   <EntityContainer Name="WGHotelUSEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CodeFile" EntityType="Self.CodeFile" />
@@ -124,7 +124,7 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Game" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="City" Type="Int32" Nullable="false" />
-    <Property Name="Area" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Area" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Features" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -132,6 +132,7 @@
     <Property Name="Enabled" Type="Boolean" Nullable="false" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="Tel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ParentId" Type="Int32" />
     <NavigationProperty Name="Room" Relationship="USModel.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
   </EntityType>
   <Association Name="FK_Room_Hotel">

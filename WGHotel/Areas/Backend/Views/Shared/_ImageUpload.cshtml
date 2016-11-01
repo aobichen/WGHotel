@@ -53,8 +53,10 @@
                     var reader = new FileReader();          
                     reader.onload = function (e) {               
                         let col = $('<div class="col-md-3"></div>');
+                        let DeleteIcon = $('<i class="glyphicon glyphicon-remove remove"></i>');
                         let imageTemp = $('<img/>').attr('src', e.target.result).addClass('img-responsive');
                         col.append(imageTemp);
+                        col.append(DeleteIcon);
                         imgPanel.append(col);                       
                     }
  
@@ -72,7 +74,6 @@
                     
                     size += files[i].size;
                     formData.append("files" + i, files[i]);
-                    console.log(size);
                 }
 
                 if (size > maxSize) {
@@ -90,8 +91,7 @@
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: function (xhr) {
-                    
+                success: function (xhr) {                   
                     preview(file);
                 },
                 error: function (xhr) {
@@ -103,7 +103,23 @@
         };
         
 
-       
+        $('#image-panel').delegate(".remove", "click", function () {
+            var self = $(this);
+            $.ajax({
+                type: "POST",
+                url: '/ImageDelete',
+                data: {SessionKey : key},
+                contentType: false,
+                processData: false,
+                success: function (xhr) {
+                    preview(file);
+                },
+                error: function (xhr) {
+                    $('#message').html('上傳資料過大').show();
+                    console.log("ERROR");
+                }
+            });
+        });
 
            
     })

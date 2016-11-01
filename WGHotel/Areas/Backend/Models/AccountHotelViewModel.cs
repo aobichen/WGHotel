@@ -1,58 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using WGHotel.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity; // Maybe this one too
+
 
 namespace WGHotel.Areas.Backend.Models
 {
     public class AccountHotelViewModel
     {
+        [Required]
         public string Account { get; set; }
+         [Required]
         public string Password { get; set; }
-        
+        [Required(ErrorMessage="必填項目")]
         public string Namezh { get; set; }
+         [Required]
         public string Nameus { get; set; }
         public string Featurezh { get; set; }
         public string Featureus { get; set; }
+         [Required]
         public string Addresszh { get; set; }
+         [Required]
         public string Addressus { get; set; }
 
+        [Required]
         public string LinkUrl { get; set; }
+        [Required]
         public int City { get; set; }
 
         public string Area { get; set; }
 
+        [Required]
         public string Tel { get; set; }
 
         public string Game { get; set; }
 
         public string Facilies { get; set; }
-        public List<CodeFile> HotelFacility { get { return new CodeFiles().GetHotelFacility(); } }
+
+        public int UserId { get; set; }
+        //public List<CodeFile> HotelFacility { get { return new CodeFiles().GetHotelFacility(); } }
 
         public string ImgKey { get; set; }
 
-        public void Create(int userId)
+        public void Create()
         {
+           
             var ZHdb = new WGHotelZHEntities();
-            var HotelZh = new Hotel
-            {
-                Name = Namezh,
-                Address = Addresszh,
-                Area = Area,
-                City = City,
-                Features = Featurezh,
-                Enabled = true,
-                LinkUrl = LinkUrl,
-                Facilities = Facilies,
-                Game = Game,
-                UserId = userId,
-                Tel = Tel
-            };
-             
-            ZHdb.Hotel.Add(HotelZh);           
+            var zhHotel = new Hotel();
+            zhHotel.Name = Namezh;
+            zhHotel.Address = Addresszh;
+            zhHotel.Area = Area;
+            zhHotel.City = City;
+            zhHotel.Facilities = Facilies;
+            zhHotel.Features = Featurezh;
+            zhHotel.Enabled = true;
+            zhHotel.LinkUrl = LinkUrl;
+            zhHotel.Game = Game;
+            zhHotel.Tel = Tel;
+            zhHotel.UserId = UserId;
+
+
+            ZHdb.Hotel.Add(zhHotel);           
             ZHdb.SaveChanges();
-            var ReferIdZH = HotelZh.ID;
+            var ReferIdZH = zhHotel.ID;
 
             var USdb = new WGHotelUSEntities();
             var HotelUs = new Hotel
@@ -66,8 +80,9 @@ namespace WGHotel.Areas.Backend.Models
                 Enabled = true,
                 LinkUrl = LinkUrl,
                 Game = Game,
-                UserId = userId,
-                Tel = Tel
+                UserId = UserId,
+                Tel = Tel,
+                ParentId = zhHotel.ID
             };
             USdb.Hotel.Add(HotelUs);
 
@@ -98,7 +113,11 @@ namespace WGHotel.Areas.Backend.Models
             }
            
         }
+
+       
     }
+
+     
 
     public class HotelListViewModel
     {

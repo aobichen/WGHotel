@@ -57,7 +57,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Game" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="City" Type="int" Nullable="false" />
-    <Property Name="Area" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Area" Type="nvarchar" MaxLength="10" />
     <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Features" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="LinkUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
@@ -65,6 +65,7 @@
     <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="Tel" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ParentId" Type="int" />
   </EntityType>
   <EntityType Name="Order">
     <Key>

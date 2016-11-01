@@ -156,35 +156,78 @@ namespace WGHotel.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public void Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 //var user = new ApplicationUser { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // 如需如何啟用帳戶確認和密碼重設的詳細資訊，請造訪 http://go.microsoft.com/fwlink/?LinkID=320771
                     // 傳送包含此連結的電子郵件
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "確認您的帳戶", "請按一下此連結確認您的帳戶 <a href=\"" + callbackUrl + "\">這裏</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
+                //AddErrors(result);
             }
 
             // 如果執行到這裡，發生某項失敗，則重新顯示表單
-            return View(model);
+           // return View(model);
+        }
+
+
+        //
+        // POST: /Account/Register
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Register(RegisterViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+        //        //var user = new ApplicationUser { UserName = model.UserName };
+        //        var result = await UserManager.CreateAsync(user, model.Password);
+        //        if (result.Succeeded)
+        //        {
+        //            await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+        //            // 如需如何啟用帳戶確認和密碼重設的詳細資訊，請造訪 http://go.microsoft.com/fwlink/?LinkID=320771
+        //            // 傳送包含此連結的電子郵件
+        //            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+        //            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+        //            // await UserManager.SendEmailAsync(user.Id, "確認您的帳戶", "請按一下此連結確認您的帳戶 <a href=\"" + callbackUrl + "\">這裏</a>");
+
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        AddErrors(result);
+        //    }
+
+        //    // 如果執行到這裡，發生某項失敗，則重新顯示表單
+        //    return View(model);
+        //}
+
+
+        public int Create(AccountHotelViewModel model)
+        {
+            var user = new ApplicationUser { UserName = model.Account.ToLower() };
+            var Manager = UserManager == null ? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>() : UserManager;
+            var result = Manager.Create(user, model.Password.ToLower());
+            var id = UserManager.FindByName(user.UserName).Id;
+            //var user = new ApplicationUser { UserName = model.UserName };
+            //var result = await UserManager.CreateAsync(user, model.Password.ToLower());
+            
+            return id;
         }
 
         [HttpPost]
@@ -192,6 +235,12 @@ namespace WGHotel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterAndCreateHotel(AccountHotelViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                TempData["HotelModel"] = model;
+               
+                return RedirectToAction("Create", "Hotel", new { area = "Backend" });
+            }
             var Facility = string.Empty;
             if (Request["HotelFacility"] != null)
             {
@@ -203,15 +252,18 @@ namespace WGHotel.Controllers
                 var user = new ApplicationUser { UserName = model.Account.ToLower() };
                 //var user = new ApplicationUser { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password.ToLower());
+                TempData["HotelModel"] = model;
                 if (result.Succeeded)
                 {                    
-                    model.Create(user.Id);
+                    //model.Create(user.Id);
 
-                    return Redirect("~/Backend/Hotel");                    
+                    //return Redirect("~/Backend/Hotel");   
+                    
+                    return RedirectToAction("Create", "Hotel", new { area = "Backend" });
                 }
                 else
                 {
-                    return RedirectToAction("Create", "Hotel", new { area = "Beckend", model=model });
+                    return RedirectToAction("Create", "Hotel", new { area = "Backend", model=model });
                 }
                 //AddErrors(result);
             

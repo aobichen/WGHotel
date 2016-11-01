@@ -1,8 +1,9 @@
 ﻿@model WGHotel.Areas.Backend.Models.AccountHotelViewModel
 
-@using (Html.BeginForm("RegisterAndCreateHotel", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@*@using (Html.BeginForm("RegisterAndCreateHotel", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))*@
+@using (Html.BeginForm())
 {
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+   @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.AntiForgeryToken()
     @*@Html.HiddenFor(model=>model.ImgKey)*@
     <div class="panel">

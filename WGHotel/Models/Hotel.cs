@@ -32,6 +32,7 @@ namespace WGHotel.Models
         public bool Enabled { get; set; }
         public int UserId { get; set; }
         public string Tel { get; set; }
+        public Nullable<int> ParentId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Room { get; set; }

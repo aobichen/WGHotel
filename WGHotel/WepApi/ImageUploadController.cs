@@ -70,8 +70,20 @@ namespace WGHotel.WepApi
                     {
                         images.Remove(images.Where(o => o.Name == img.Name).FirstOrDefault());
                         new ImageDAO().Delete(img.Name);
-                    }
+
+                        using (var db = new WGHotelBaseEntities())
+                        {
+                            var dbimg = db.ImageStore.Where(o => o.Name == img.Name).FirstOrDefault();
+                            if (dbimg != null)
+                            {
+                                db.ImageStore.Remove(dbimg);
+                                db.SaveChanges();
+                            }
+                        }
+                    }                    
                 }
+
+                
 
                 HttpContext.Current.Session[data.SessionKey] = images;
               
