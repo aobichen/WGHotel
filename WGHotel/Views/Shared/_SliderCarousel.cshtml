@@ -21,7 +21,7 @@
                     @*<h5><span>01</span> What?</h5>*@
                     <h5>場次</h5>
                     <div class="row">
-                        @Html.DropDownList("Game", (SelectList)ViewBag.GameSite)
+                        @Html.DropDownList("Game", (List<SelectListItem>)ViewBag.GameSite)
                     </div>
                 </div>
                 <!--//column-->

@@ -135,26 +135,31 @@ namespace WGHotel.Areas.Backend.Models
             return Items;
         }
 
-        public SelectList SelectList(List<string> checkeds = null)
+        public List<SelectListItem> SelectList(List<int> Selected = null)
         {
             var Items = new List<GameSiteViewModel>();
 
 
             var Games = db.GameSite.ToList();
-
-            foreach (var item in Games)
+            var SelectList = new List<SelectListItem>();
+            foreach (var i in Games)
             {
-                var id = item.ID.ToString();
-                bool IsChecked = (checkeds == null || checkeds.Count <= 0) ? false : (checkeds.Contains(id) ? true : false);
-                Items.Add(new GameSiteViewModel { Value = item.Venue+"/"+item.Sports, ID = item.ID, Checked = IsChecked });
+                SelectList.Add(item: new SelectListItem
+                {
+                    Text = string.Format("{0}/{1}", i.Venue,i.Sports),
+                    Value = i.ID.ToString(),
+                    Selected = Selected == null
+                       ? false
+                       : Selected.Contains(i.ID)
+                });
             }
 
-            var List = new SelectList(Items, "ID", "Value");
+            
 
-            return List;
+            return SelectList;
         }
 
-        public SelectList Citys()
+        public SelectList Citys(int id=0)
         {
             var city = new List<City>();
             using (var db = new WGHotelZHEntities())
@@ -162,7 +167,7 @@ namespace WGHotel.Areas.Backend.Models
                city = db.City.ToList();
             }
 
-            var List = new SelectList(city,"ID", "Name");
+            var List = new SelectList(city,"ID", "Name",id);
             return List;
         }
         

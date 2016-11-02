@@ -52,10 +52,12 @@ namespace WGHotel.Areas.Backend.Controllers
 
         
          //GET: Backend/Admin
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
+            
            
-            var model = new AccountHotelViewModel();           
+            var model = new AccountHotelViewModel();
+
             var AccountAndImgKey = Guid.NewGuid().GetHashCode().ToString("x");
             model.Account = AccountAndImgKey.ToUpper();
             model.Password = Guid.NewGuid().GetHashCode().ToString("x");
@@ -63,7 +65,7 @@ namespace WGHotel.Areas.Backend.Controllers
             ViewBag.ImgKey = AccountAndImgKey;
             Session[AccountAndImgKey] = new List<ImageViewModel>();
             //model.ImgKey = AccountAndImgKey;
-            ViewBag.GameSites = new GameSiteModel().List();
+            ViewBag.GameSites = new GameSiteModel().SelectList();
             ViewBag.City = new GameSiteModel().Citys();
             return View(model);
         }
@@ -81,6 +83,16 @@ namespace WGHotel.Areas.Backend.Controllers
                 Facility = Request["HotelFacility"].ToString();
             }
             model.Facilies = Facility;
+
+
+            var GameSite = string.Empty;
+            if (Request["GameSite"] != null)
+            {
+                GameSite = Request["GameSite"].ToString();
+            }
+
+            model.Game = GameSite;
+
            if (ModelState.IsValid)
             {
                 var Manager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -107,8 +119,45 @@ namespace WGHotel.Areas.Backend.Controllers
         {
             //var zh = _dbzh.Hotel.Find(id);
             //var us = _dbus.Hotel.Find()
+            var ZHmodel = _dbzh.Hotel.Find(id);
+            var USmodel = _dbus.Hotel.Find(id);
 
-            return View();
+            var Manager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var u = Manager.FindById(ZHmodel.UserId).UserName;
+
+            var model = new AccountHotelViewModel();
+            model.Account = u;
+            model.Addressus = USmodel.Address;
+            model.Addresszh = ZHmodel.Address;
+            model.Area = ZHmodel.Area;
+            model.Featureus = USmodel.Features;
+            model.Featurezh = ZHmodel.Features;
+            model.Tel = ZHmodel.Tel;
+            model.Nameus = USmodel.Name;
+            model.Namezh = ZHmodel.Name;
+            model.LinkUrl = ZHmodel.LinkUrl;
+            var sessionkey = Guid.NewGuid().GetHashCode().ToString("x");
+            ViewBag.ImgKey = sessionkey;
+            
+            var Imgs = _basedb.ImageStore.Where(o => o.ReferIdZH == ZHmodel.ID && o.Type == "Hotel").Select(o => new ImageViewModel
+            {
+                ReferIdZH = o.ReferIdZH.Value,
+                Extension = o.Extension,
+                Image = o.Image,
+                Name = o.Name,
+                SessionKey = sessionkey,
+                Type = o.Type
+
+            }).ToList();
+
+            Session[sessionkey] = Imgs;
+            //model.Facilies = 
+            var Facilies = ZHmodel.Facilities.Split(',').Select(int.Parse).ToList();
+            var GameSite = ZHmodel.Game.Split(',').Select(int.Parse).ToList();
+            ViewBag.HotelFacility = new CodeFiles().GetHotelFacility(Facilies);
+            ViewBag.GameSites = new GameSiteModel().SelectList(GameSite);
+            ViewBag.City = new GameSiteModel().Citys(ZHmodel.City);
+            return View(model);
         }
         
     }

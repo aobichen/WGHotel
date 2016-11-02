@@ -14,7 +14,19 @@
 
             </p>
             <div class="row" id="image-panel">
-
+                @if (Session[ViewBag.ImgKey] != null)
+                {
+                    var images = (List<WGHotel.Models.ImageViewModel>)Session[ViewBag.ImgKey];
+                    foreach (var img in images)
+                    {
+                        var base64 = Convert.ToBase64String(img.Image);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                        <div class="col-md-3">
+                            <img class="img-responsive" src="@imgSrc" />
+                            <i class="glyphicon glyphicon-remove remove" data-name="@img.Name"></i>
+                        </div>
+                    }
+                }
             </div>
         </div>
     </div>
@@ -70,14 +82,13 @@
             var formData = new FormData();
             
             if (files.length > 0) {
-                for (var i = 0, max = files.length; i < max; i++) {
-                    
+                for (var i = 0, max = files.length; i < max; i++) {                    
                     size += files[i].size;
                     formData.append("files" + i, files[i]);
                 }
 
                 if (size > maxSize) {
-                    $('#message').html('上傳資料過大').show();
+                    $('#message').html('上傳資料過大，請分次上傳').show();
                     size = 0;
                     return false;
                 }

@@ -3,7 +3,7 @@
 @*@using (Html.BeginForm("RegisterAndCreateHotel", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))*@
 @using (Html.BeginForm())
 {
-   @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.AntiForgeryToken()
     @*@Html.HiddenFor(model=>model.ImgKey)*@
     <div class="panel">
@@ -18,37 +18,37 @@
                     </ol>
                 </div>
             </div>
-           
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-primary">
-                            <header class="panel-heading">
-                                帳號
-                            </header>
-                            <div class="panel-body">
-                                <div class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">帳號</label>
-                                        <div class="col-sm-10">
-                                            @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control" } })
 
-                                        </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <header class="panel-heading">
+                            帳號
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">帳號</label>
+                                    <div class="col-sm-10">
+                                        @*@Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control" } })*@
+                                        <label class="form-control"> @Model.Account</label>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">密碼</label>
-                                        <div class="col-sm-10">
-                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-
-                                        </div>
-                                    </div>
-
                                 </div>
+                                @*<div class="form-group">
+                                    <label class="col-sm-2 control-label">密碼</label>
+                                    <div class="col-sm-10">
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    </div>
+                                </div>*@
+
                             </div>
                         </div>
                     </div>
                 </div>
-            
-            
+            </div>
+
+
 
             <div class="row">
                 <div class="col-lg-12">
@@ -62,7 +62,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">場次</label>
                                     <div class="col-sm-10">
-                                       @Html.Partial("_GameSite")
+                                        @Html.Partial("_GameSite")
                                         @*@Html.EditorFor(model => model.Game, new { htmlAttributes = new { @class = "form-control" } })*@
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                     <label class="col-sm-2 control-label">縣市</label>
                                     <div class="col-sm-10 col-md-6 col-lg-6">
                                         @*@Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })*@
-                                        @Html.DropDownList("City", (SelectList)ViewBag.City, new {@class="form-control" })
+                                        @Html.DropDownList("City", (SelectList)ViewBag.City, new { @class = "form-control" })
                                     </div>
                                 </div>
 
@@ -118,8 +118,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">飯店介紹</label>
                                     <div class="col-sm-10">
-                                        @Html.TextAreaFor(model => model.Featurezh,  new { @class = "form-control" })
-                                       
+                                        @Html.TextAreaFor(model => model.Featurezh, new { @class = "form-control" })
+
                                     </div>
                                 </div>
 
@@ -168,7 +168,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">訂房網址</label>
                                     <div class="col-sm-10">
-                                       @Html.EditorFor(model => model.LinkUrl, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.LinkUrl, new { htmlAttributes = new { @class = "form-control" } })
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -200,11 +200,12 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
-    
-   
-    
+
+
+
 }
+
 
 

@@ -207,7 +207,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CheckBoxListExtensions.cs" />
     <Compile Include="Helpers\CodeFiles.cs" />
+    <Compile Include="Helpers\Position.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Area.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
@@ -1080,6 +1082,8 @@
     <Content Include="Areas\Backend\Views\Country\_List.cshtml" />
     <Content Include="Areas\Backend\Views\Country\_Create.cshtml" />
     <Content Include="Areas\Backend\Views\Country\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Hotel\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Hotel\_Edit.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />
