@@ -164,13 +164,13 @@ namespace WGHotel.Areas.Backend.Controllers
         {
             //var zh = _dbzh.Hotel.Find(id);
             //var us = _dbus.Hotel.Find()
-            var ZHmodel = _dbzh.Hotel.Find(id);
-            var USmodel = _dbus.Hotel.Find(id);
+            var ZHmodel = _dbzh.Hotel.Find(model.ID);
+            var USmodel = _dbus.Hotel.Find(model.ID);
 
             var Manager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var u = Manager.FindById(ZHmodel.UserId).UserName;
 
-            var model = new AccountHotelViewModel();
+            //var model = new AccountHotelViewModel();
             model.Account = u;
             model.Addressus = USmodel.Address;
             model.Addresszh = ZHmodel.Address;

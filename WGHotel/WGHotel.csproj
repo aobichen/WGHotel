@@ -212,10 +212,10 @@
     <Compile Include="Helpers\Position.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Area.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\City.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CodeFile.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>

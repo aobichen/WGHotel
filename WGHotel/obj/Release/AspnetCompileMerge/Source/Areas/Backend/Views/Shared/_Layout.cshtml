@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@ViewBag.Title - 我的 ASP.NET 應用程式</title>
+<title>WGHotel Admin</title>
 @Styles.Render("~/Admin/Content/css")
 @Scripts.Render("~/bundles/modernizr")
 @Scripts.Render("~/bundles/jquery")
@@ -104,10 +104,10 @@
                         </a>
                         <ul class="sub">
                             <li id="RoomPriceDate">
-                                <a class="" href="@Url.Action("RoomPriceDate")">房價起訖日</a>
+                                <a class="" href="@Url.Action("","RoomPriceDate")">房價起訖日</a>
                             </li>
-                            <li>
-                            <a class="" href="form_validation.html">Form Validation</a>
+                            <li id="GameSite">
+                                <a class="" href="@Url.Action("","GameSite")">場次管理</a>
                             </li>
                         </ul>
                     </li>

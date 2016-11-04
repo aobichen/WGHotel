@@ -21,12 +21,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="NUSF" Type="nvarchar" MaxLength="300" />
-    <Property Name="Tel1" Type="nvarchar" MaxLength="20" />
-    <Property Name="Tel2" Type="nvarchar" MaxLength="20" />
-    <Property Name="Telmobile" Type="nvarchar" MaxLength="30" />
-    <Property Name="Fax" Type="nvarchar" MaxLength="20" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="NUSF" Type="nvarchar" MaxLength="400" />
+    <Property Name="Tel1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tel2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telmobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="ImageStore">
     <Key>

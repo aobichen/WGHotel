@@ -94,6 +94,7 @@
     <EntitySetMapping Name="Hotel">
       <EntityTypeMapping TypeName="USModel.Hotel">
         <MappingFragment StoreEntitySet="Hotel">
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="Tel" ColumnName="Tel" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />

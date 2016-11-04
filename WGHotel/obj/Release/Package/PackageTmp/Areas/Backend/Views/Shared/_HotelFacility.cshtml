@@ -1,10 +1,5 @@
 ﻿@if (ViewBag.HotelFacility != null) { 
-<div class="form-group">
-    @foreach (var item in (List<WGHotel.Models.CodeFile>)ViewBag.HotelFacility)
-    {
-        <label class="checkbox-inline">
-            <input name="HotelFacility" type="checkbox" value="@item.ID" />@item.ItemDescription
-        </label>
-    }
+<div class="full-width">
+  @Html.CheckBoxList("HotelFacility", (List<SelectListItem>)ViewBag.HotelFacility, null, WGHotel.Helpers.Position.Vertical, 5)
 </div>
 }

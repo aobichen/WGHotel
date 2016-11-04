@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="WGHotelBaseModel.Area" Width="1.5" PointX="7.625" PointY="0.875" />
         <EntityTypeShape EntityType="WGHotelBaseModel.City" Width="1.5" PointX="5.375" PointY="0.875" />
         <AssociationConnector Association="WGHotelBaseModel.FK__Area__CID__239E4DCF" />
-        <EntityTypeShape EntityType="WGHotelBaseModel.Country" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="WGHotelBaseModel.Country" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -38,6 +38,7 @@
       <End Role="City" EntitySet="City" />
       <End Role="Area" EntitySet="Area" />
     </AssociationSet>
+    <EntitySet Name="Country" EntityType="WGHotelBaseModel.Country" />
   </EntityContainer>
   <EntityType Name="RoomPrice">
     <Key>
@@ -81,4 +82,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="NUSF" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="Tel1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tel2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Telmobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>
