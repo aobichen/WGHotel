@@ -5,16 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using WGHotel.Areas.Backend.Models;
 using WGHotel.Controllers;
-
+using PagedList;
 namespace WGHotel.Areas.Backend.Controllers
 {
     public class GameSiteController : BaseController
     {
         // GET: Backend/GameSite
-        public ActionResult Index()
+        public ActionResult Index(int Page =1)
         {
-            ViewBag.GameList = new GameSiteListModel().List();
-            return View();
+            var currentPage = Page < 1 ? 1 : Page;
+            var PageSize = 15;
+            var model = new GameSiteListModel().List();
+            var PageModel = model.ToPagedList(currentPage, PageSize);
+            //ViewBag.GameList = new GameSiteListModel().List();
+            return View(PageModel);
         }
 
         public ActionResult Edit(int? id)

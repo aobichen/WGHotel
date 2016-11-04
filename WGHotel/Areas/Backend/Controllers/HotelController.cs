@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -139,6 +138,52 @@ namespace WGHotel.Areas.Backend.Controllers
             var sessionkey = Guid.NewGuid().GetHashCode().ToString("x");
             ViewBag.ImgKey = sessionkey;
             
+            var Imgs = _basedb.ImageStore.Where(o => o.ReferIdZH == ZHmodel.ID && o.Type == "Hotel").Select(o => new ImageViewModel
+            {
+                ReferIdZH = o.ReferIdZH.Value,
+                Extension = o.Extension,
+                Image = o.Image,
+                Name = o.Name,
+                SessionKey = sessionkey,
+                Type = o.Type
+
+            }).ToList();
+
+            Session[sessionkey] = Imgs;
+            //model.Facilies = 
+            var Facilies = ZHmodel.Facilities.Split(',').Select(int.Parse).ToList();
+            var GameSite = ZHmodel.Game.Split(',').Select(int.Parse).ToList();
+            ViewBag.HotelFacility = new CodeFiles().GetHotelFacility(Facilies);
+            ViewBag.GameSites = new GameSiteModel().SelectList(GameSite);
+            ViewBag.City = new GameSiteModel().Citys(ZHmodel.City);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(AccountHotelViewModel model)
+        {
+            //var zh = _dbzh.Hotel.Find(id);
+            //var us = _dbus.Hotel.Find()
+            var ZHmodel = _dbzh.Hotel.Find(id);
+            var USmodel = _dbus.Hotel.Find(id);
+
+            var Manager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var u = Manager.FindById(ZHmodel.UserId).UserName;
+
+            var model = new AccountHotelViewModel();
+            model.Account = u;
+            model.Addressus = USmodel.Address;
+            model.Addresszh = ZHmodel.Address;
+            model.Area = ZHmodel.Area;
+            model.Featureus = USmodel.Features;
+            model.Featurezh = ZHmodel.Features;
+            model.Tel = ZHmodel.Tel;
+            model.Nameus = USmodel.Name;
+            model.Namezh = ZHmodel.Name;
+            model.LinkUrl = ZHmodel.LinkUrl;
+            var sessionkey = Guid.NewGuid().GetHashCode().ToString("x");
+            ViewBag.ImgKey = sessionkey;
+
             var Imgs = _basedb.ImageStore.Where(o => o.ReferIdZH == ZHmodel.ID && o.Type == "Hotel").Select(o => new ImageViewModel
             {
                 ReferIdZH = o.ReferIdZH.Value,

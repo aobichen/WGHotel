@@ -125,34 +125,8 @@ namespace WGHotel.Areas.Backend.Models
                 db.SaveChanges();
                 USID = Room.ID;
             }
-
-            var Session = HttpContext.Current.Session;
-
-            if (Session[ImgKey] != null)
-            {
-                var Basedb = new WGHotelBaseEntities();
-                var Now = DateTime.Now;
-                var images = (List<ImageViewModel>)Session[ImgKey];
-                foreach (var img in images)
-                {
-                    var file = string.Format("/UserFolder/{0}{1}", img.Name, img.Extension);
-                    var path = HttpContext.Current.Server.MapPath(file);
-                    File.WriteAllBytes(path, img.Image);
-                    Basedb.ImageStore.Add(new ImageStore
-                    {
-                        Path = file,
-                        Created = Now,
-                        Extension = img.Extension,
-                        Deleted = false,
-                        ReferIdUS = ZHID,
-                        ReferIdZH = USID,
-                        Type = "Room",
-                        Name = img.Name,
-                        Image = img.Image
-                    });
-                }
-                Basedb.SaveChanges();
-            }
+            SaveImageStore(ZHID,USID);
+          
         }
 
         public void Edit()
@@ -196,6 +170,40 @@ namespace WGHotel.Areas.Backend.Models
             USModel.Quantiy = Quantiy;
             db.Room.Add(USModel);
             db.SaveChanges();
+
+            SaveImageStore(ZHModel.ID, USModel.ID);
+        }
+
+        public void SaveImageStore(int ZHID, int USID)
+        {
+            var Session = HttpContext.Current.Session;
+
+            if (Session[ImgKey] != null)
+            {
+                var Basedb = new WGHotelBaseEntities();
+                var Now = DateTime.Now;
+                var images = (List<ImageViewModel>)Session[ImgKey];
+                foreach (var img in images)
+                {
+                    var fileName = Guid.NewGuid().GetHashCode().ToString("x");
+                    //var file = string.Format("/UserFolder/{0}{1}",fileName, img.Extension);
+                    //var path = HttpContext.Current.Server.MapPath(file);
+                    //File.WriteAllBytes(path, img.Image);
+                    Basedb.ImageStore.Add(new ImageStore
+                    {
+                        // Path = file,
+                        Created = Now,
+                        Extension = img.Extension,
+                        Deleted = false,
+                        ReferIdUS = ZHID,
+                        ReferIdZH = USID,
+                        Type = "Room",
+                        Name = fileName,
+                        Image = img.Image
+                    });
+                }
+                Basedb.SaveChanges();
+            }
         }
     }
 

@@ -1,4 +1,5 @@
-﻿<div class="alert">
+﻿@model PagedList.IPagedList<WGHotel.Areas.Backend.Models.GameSiteListModel>
+<div class="alert">
     <a class="btn btn-primary" href="@Url.Action("Edit","GameSite")">
        新增
     </a>
@@ -12,7 +13,7 @@
         </tr>
     </thead>*@
     <tbody>
-        @foreach (var item in (List<WGHotel.Areas.Backend.Models.GameSiteListModel>)ViewBag.GameList)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -52,3 +53,6 @@
         }
     </tbody>
 </table>
+<div class="panel-footer">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+</div>

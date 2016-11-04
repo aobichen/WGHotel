@@ -1,4 +1,4 @@
-﻿
+﻿@model PagedList.IPagedList<WGHotel.Areas.Backend.Models.GameSiteListModel>
 @{
     ViewBag.Title = "Index";
 }
@@ -6,7 +6,7 @@
 <section class="wrapper">
     
         <div class="col-lg-12">
-            @Html.Partial("_List")
+            @Html.Partial("_List",Model)
         </div>
     
  </section>

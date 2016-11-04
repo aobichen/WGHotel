@@ -1,4 +1,4 @@
-﻿
+﻿@model PagedList.IPagedList<WGHotel.Models.Country>
 <div class="alert">
     <a class="btn btn-primary" href="@Url.Action("Edit","Country")">
         新增
@@ -31,7 +31,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in (List<WGHotel.Models.Country>)ViewBag.Country)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -66,3 +66,6 @@
         }
     </tbody>
 </table>
+<div class="panel-footer">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+</div>

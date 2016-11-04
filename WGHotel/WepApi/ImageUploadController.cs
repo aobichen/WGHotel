@@ -42,7 +42,8 @@ namespace WGHotel.WepApi
             {
                 var file = HttpContext.Current.Request.Files[i];                
                 var subName = Path.GetExtension(file.FileName);
-                var fileName = Guid.NewGuid().GetHashCode().ToString("x");               
+                //var fileName = Guid.NewGuid().GetHashCode().ToString("x");    
+                var fileName = file.FileName;
                 var image = ImgDao.FileToByte(file);
                 Images.Add(new ImageViewModel { Image = image, Name = fileName, Extension = subName });
             }
