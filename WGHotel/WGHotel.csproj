@@ -188,13 +188,18 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\BundleConfig.cs" />
+    <Compile Include="Areas\Backend\Controllers\BannerController.cs" />
     <Compile Include="Areas\Backend\Controllers\CountryController.cs" />
+    <Compile Include="Areas\Backend\Controllers\FacilityController.cs" />
     <Compile Include="Areas\Backend\Controllers\GameSiteController.cs" />
     <Compile Include="Areas\Backend\Controllers\HotelController.cs" />
+    <Compile Include="Areas\Backend\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Backend\Controllers\ReportController.cs" />
     <Compile Include="Areas\Backend\Controllers\RoomController.cs" />
     <Compile Include="Areas\Backend\Controllers\SystemController.cs" />
     <Compile Include="Areas\Backend\Models\AccountHotelViewModel.cs" />
     <Compile Include="Areas\Backend\Models\CodeFiles.cs" />
+    <Compile Include="Areas\Backend\Models\FacilityViewModel.cs" />
     <Compile Include="Areas\Backend\Models\GameSiteViewModel.cs" />
     <Compile Include="Areas\Backend\Models\RoomViewModel.cs" />
     <Compile Include="Areas\Backend\Models\SysSetting.cs" />
@@ -212,10 +217,10 @@
     <Compile Include="Helpers\Position.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Area.cs">
-      <DependentUpon>WGHotelBase.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\City.cs">
-      <DependentUpon>WGHotelBase.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CodeFile.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
@@ -312,6 +317,11 @@
     <Content Include="404.html" />
     <Content Include="Content\Admin\css\bootstrap-switch.css" />
     <Content Include="Content\Admin\css\bootstrap-switch.min.css" />
+    <Content Include="Content\Admin\img\avatar_md.png" />
+    <Content Include="Content\Admin\img\human-24.png" />
+    <Content Include="Content\Admin\img\human-32.png" />
+    <Content Include="Content\Admin\img\human-48.png" />
+    <Content Include="Content\Admin\img\icons\avatar_md.ico" />
     <Content Include="Content\Admin\js\bootstrap-switch.min.js" />
     <Content Include="Content\bootstrap-datetimepicker\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
@@ -1084,6 +1094,10 @@
     <Content Include="Areas\Backend\Views\Country\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\Hotel\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\Hotel\_Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Facility\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Facility\_List.cshtml" />
+    <Content Include="Areas\Backend\Views\Hotel\_MyHotel.cshtml" />
+    <Content Include="Areas\Backend\Views\Hotel\MyHotel.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />
@@ -1157,6 +1171,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Backend\Views\Banner\" />
+    <Folder Include="Areas\Backend\Views\Profile\" />
+    <Folder Include="Areas\Backend\Views\Report\" />
     <Folder Include="Content\Admin\assets\jquery-file-upload\server\php\files\thumbnail\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ImageUpload\" />

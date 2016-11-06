@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WGHotel.Models;
-
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 namespace WGHotel.Controllers
 {
     public class BaseController : Controller
@@ -14,7 +15,7 @@ namespace WGHotel.Controllers
         {
             base.Initialize(requestContext);
             var Requset = requestContext.HttpContext.Request;
-            
+            UserId = requestContext.HttpContext.User.Identity.GetUserId<int>();
             if (Request.Cookies["lang"]!=null && Request.Cookies["lang"].Value.ToLower().Equals("us"))
             {
                  _db = new WGHotelZHEntities("WGHotelUSEntities");
@@ -36,6 +37,9 @@ namespace WGHotel.Controllers
         protected WGHotelBaseEntities _basedb;
 
         protected string CurrentLanguage;
+
+        private int UserId { get; set; }
+
         // GET: Base
         public BaseController()
             : base()
@@ -43,6 +47,21 @@ namespace WGHotel.Controllers
             _dbzh = new WGHotelZHEntities();
             _dbus = new WGHotelUSEntities();
             _basedb = new WGHotelBaseEntities();
+        }
+
+        protected ApplicationDbContext Account_db
+        {
+
+            get { return new ApplicationDbContext(); }
+        }
+
+        protected ApplicationUser CurrentUser
+        {
+            get
+            {
+
+                return Account_db.Users.Where(o => o.Id == UserId).FirstOrDefault();
+            }
         }
     }
 }

@@ -16,12 +16,19 @@ namespace WGHotel.Areas.Backend.Controllers
 {
     public class HotelController : BaseController
     {
+       
         public ActionResult Index(string SearchString="",int Page=1)
         {
 
+            var IsHotel = User.IsInRole("Hotel");
+            var IsAdmin = User.IsInRole("Admin");
             ViewBag.ViewMessage = string.IsNullOrEmpty(SearchString) ? "目前無任何資料":"沒有任何搜尋資訊";
            // var model = _dbzh.Hotel.ToList();
-            
+            if (!IsAdmin)
+            {
+                SearchString = string.Empty;
+                Page = 1;
+            }
             var model = (from h in _db.Hotel
                          join c in _db.City on h.City equals c.ID
                          where string.IsNullOrEmpty(SearchString) || h.Name.Contains(SearchString)
@@ -33,7 +40,12 @@ namespace WGHotel.Areas.Backend.Controllers
                             Name = h.Name,
                             UserId = h.UserId,
                             Tel = h.Tel
-                         }).ToList().OrderBy(o => o.ID);
+                         }).OrderBy(o => o.ID).ToList();
+
+                if (!IsAdmin)
+                {
+                    model = model.Where(o => o.UserId == CurrentUser.Id).ToList();
+                }
                          
             var currentPage = Page < 1 ? 1 : Page;
             var PageSize = 15;
@@ -94,10 +106,23 @@ namespace WGHotel.Areas.Backend.Controllers
 
            if (ModelState.IsValid)
             {
-                var Manager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var UserManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var user = new ApplicationUser { UserName = model.Account, Email = model.Account };
-                Manager.Create(user, model.Password);
-                var id = Manager.FindByName(model.Account).Id;
+                ApplicationRoleManager _roleManager =  HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+                var CurrentRole = "Hotel";
+                var SystemRoles = new string[] { "User", "Hotel", "Admin" };
+                foreach (var r in SystemRoles)
+                {
+                    if (!_roleManager.RoleExists(r))
+                    {
+                        var role = new Role(r);
+                        _roleManager.Create(role);
+                    }
+                }
+
+               UserManager.Create(user, model.Password);
+               UserManager.AddToRole(user.Id, CurrentRole);
+               var id = UserManager.FindByName(model.Account).Id;
                 model.UserId = id;
                 model.Create();
                 return RedirectToAction("Create");
@@ -203,6 +228,58 @@ namespace WGHotel.Areas.Backend.Controllers
             ViewBag.GameSites = new GameSiteModel().SelectList(GameSite);
             ViewBag.City = new GameSiteModel().Citys(ZHmodel.City);
             return View(model);
+        }
+
+        public ActionResult MyHotel(int id)
+        {
+            var ZHmodel = _dbzh.Hotel.Find(id);
+
+            if (CurrentUser.Id != ZHmodel.UserId)
+            {
+                return RedirectToAction("","Hotel");
+            }
+
+            var USmodel = _dbus.Hotel.Find(id);
+
+
+            var Manager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var u = Manager.FindById(ZHmodel.UserId).UserName;
+
+            var model = new AccountHotelViewModel();
+            model.Account = u;
+            model.Addressus = USmodel.Address;
+            model.Addresszh = ZHmodel.Address;
+            model.Area = ZHmodel.Area;
+            model.Featureus = USmodel.Features;
+            model.Featurezh = ZHmodel.Features;
+            model.Tel = ZHmodel.Tel;
+            model.Nameus = USmodel.Name;
+            model.Namezh = ZHmodel.Name;
+            model.LinkUrl = ZHmodel.LinkUrl;
+            model.City = ZHmodel.City;
+            var sessionkey = Guid.NewGuid().GetHashCode().ToString("x");
+            ViewBag.ImgKey = sessionkey;
+
+            var Imgs = _basedb.ImageStore.Where(o => o.ReferIdZH == ZHmodel.ID && o.Type == "Hotel").Select(o => new ImageViewModel
+            {
+                ReferIdZH = o.ReferIdZH.Value,
+                Extension = o.Extension,
+                Image = o.Image,
+                Name = o.Name,
+                SessionKey = sessionkey,
+                Type = o.Type
+
+            }).ToList();
+
+            Session[sessionkey] = Imgs;
+            //model.Facilies = 
+            var Facilies = ZHmodel.Facilities.Split(',').Select(int.Parse).ToList();
+            var GameSite = ZHmodel.Game.Split(',').Select(int.Parse).ToList();
+            ViewBag.HotelFacility = new CodeFiles().GetHotelFacility(Facilies);
+            ViewBag.GameSites = new GameSiteModel().SelectList(GameSite);
+            ViewBag.City = new GameSiteModel().Citys(ZHmodel.City);
+            return View(model);
+            
         }
         
     }

@@ -55,6 +55,7 @@
     <EntitySetMapping Name="Facility">
       <EntityTypeMapping TypeName="USModel.Facility">
         <MappingFragment StoreEntitySet="Facility">
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />

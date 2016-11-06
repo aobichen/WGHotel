@@ -7,10 +7,12 @@
             <h2>
                 旅館
             </h2>
-            <div class="panel-actions">
-                <a href="@Url.Action("Create")" class="btn-setting" title="新增"><i class="fa fa-plus-circle"></i></a>
+            @if (User.IsInRole("Admin")) { 
+                <div class="panel-actions">
+                    <a href="@Url.Action("Create")" class="btn-setting" title="新增"><i class="fa fa-plus-circle"></i></a>
                 
-            </div>
+                </div>
+            }
         </div>
 
         
@@ -62,10 +64,17 @@
 
                             <td>
                                 <div class="btn-group">
-
+                                    @if (User.IsInRole("Admin")) { 
                                     <a class="btn btn-success" href="@Url.Action("Edit", new { id = item.ID})">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-success" href="@Url.Action("MyHotel", new { id = item.ID})">
+                                            <i class="fa fa-external-link-square"></i>
+                                        </a>
+                                    }
                                     <a class="btn btn-primary" href="@Url.Action("/","Room", new { id = item.ID})">
                                         <i class="icon_briefcase"></i>
                                     </a>

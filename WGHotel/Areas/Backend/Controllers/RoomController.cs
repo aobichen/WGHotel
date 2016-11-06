@@ -14,8 +14,14 @@ namespace WGHotel.Areas.Backend.Controllers
         // GET: Backend/Room
         public ActionResult Index(int? id)
         {
+            var Userid = CurrentUser == null ? 0 : CurrentUser.Id;
+            var Hotel =  Userid > 0 ? _dbzh.Hotel.Where(o => o.UserId == Userid).FirstOrDefault():null;
             //var model = _dbzh.Room.Where(o=>o.HOTELID == id).ToList();
-            var hotelId = id.Value;
+            if (!id.HasValue || Hotel == null)
+            {
+                return RedirectToAction("","Hotel");
+            }
+            var hotelId = id.HasValue ? id.Value : Hotel.ID;
             ViewBag.HotelID = hotelId;
             var model = (from room in _dbzh.Room
                          join hotel in _dbzh.Hotel

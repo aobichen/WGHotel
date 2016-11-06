@@ -17,5 +17,6 @@ namespace WGHotel.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public bool Enabled { get; set; }
+        public Nullable<int> ParentId { get; set; }
     }
 }

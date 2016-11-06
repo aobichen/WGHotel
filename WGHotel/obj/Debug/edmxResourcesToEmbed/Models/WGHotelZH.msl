@@ -19,6 +19,7 @@
     <EntitySetMapping Name="Facility">
       <EntityTypeMapping TypeName="ZHModel.Facility">
         <MappingFragment StoreEntitySet="Facility">
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />

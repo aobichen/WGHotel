@@ -71,6 +71,7 @@ namespace WGHotel.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -86,6 +87,8 @@ namespace WGHotel.Controllers
             {
                 return View(model);
             }
+
+            returnUrl = string.IsNullOrEmpty(returnUrl) ? "/Backend/Hotel" : returnUrl;
 
             // 這不會計算為帳戶鎖定的登入失敗
             // 若要啟用密碼失敗來觸發帳戶鎖定，請變更為 shouldLockout: true
@@ -285,7 +288,7 @@ namespace WGHotel.Controllers
             }
         }
 
-        private void AddRoles()
+        public void AddRoles()
         {
             var SystemRoles = new string[] { "User", "Hotel", "Admin" };
             foreach (var r in SystemRoles)

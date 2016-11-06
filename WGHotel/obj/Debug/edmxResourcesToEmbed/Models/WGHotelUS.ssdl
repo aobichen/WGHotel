@@ -37,6 +37,7 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="ParentId" Type="int" />
   </EntityType>
   <EntityType Name="GameSite">
     <Key>

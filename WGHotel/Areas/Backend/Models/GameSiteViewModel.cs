@@ -159,16 +159,29 @@ namespace WGHotel.Areas.Backend.Models
             return SelectList;
         }
 
-        public SelectList Citys(int id=0)
+        public List<SelectListItem> Citys(int Selected = 0)
         {
             var city = new List<City>();
+            var SelectList = new List<SelectListItem>();
             using (var db = new WGHotelZHEntities())
             {
                city = db.City.ToList();
+
+               foreach (var i in city)
+               {
+                   SelectList.Add(item: new SelectListItem
+                   {
+                       Text = i.Name,
+                       Value = i.ID.ToString(),
+                       Selected = Selected == 0
+                          ? false
+                          : Selected.Equals(i.ID)
+                   });
+               }
             }
 
-            var List = new SelectList(city,"ID", "Name",id);
-            return List;
+           // var List = new SelectList(city,"ID", "Name",id.ToString());
+            return SelectList;
         }
         
     }

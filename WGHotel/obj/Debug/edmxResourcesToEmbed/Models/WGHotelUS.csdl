@@ -74,6 +74,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
   </EntityType>
   <EntityType Name="GameSite">
     <Key>

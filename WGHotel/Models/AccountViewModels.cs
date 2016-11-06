@@ -53,7 +53,7 @@ namespace WGHotel.Models
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="帳號欄位是必填項目")]
        
         public string UserName { get; set; }
 
