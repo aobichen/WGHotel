@@ -55,6 +55,56 @@ namespace WGHotel.WepApi
             return Json(new { data = data, message = Message });
         }
 
+
+        public class ImageModel
+        {
+            public string image { get; set; }
+            public string name { get; set; }
+        }
+
+        [HttpPost]
+        [Route("ImageUpload1")]
+        public object HotelImageUpload1(ImageModel data)
+        {
+            var a = "";
+            //byte[] bytes = Convert.FromBase64String(file);
+            //HttpRequestMessage request = this.Request;
+            //if (!request.Content.IsMimeMultipartContent())
+            //{
+            //    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            //}
+            //var Images = new List<ImageViewModel>();
+
+            //var Current = HttpContext.Current;
+            //var key = Current.Request["key"];
+
+            //if (Current.Session[key] != null)
+            //{
+
+            //    Images = (List<ImageViewModel>)Current.Session[key];
+            //    //Images = Images.Select(o => { o.Hotel = null; return o; }).ToList();
+            //}
+
+
+            //var ImgDao = new ImageDAO();
+
+            //for (int i = 0; i < HttpContext.Current.Request.Files.Count; i++)
+            //{
+            //    var file = HttpContext.Current.Request.Files[i];
+            //    var subName = Path.GetExtension(file.FileName);
+            //    //var fileName = Guid.NewGuid().GetHashCode().ToString("x");    
+            //    var fileName = file.FileName;
+            //    var image = ImgDao.FileToByte(file);
+            //    Images.Add(new ImageViewModel { Image = image, Name = fileName, Extension = subName });
+            //}
+
+            //var Message = "完成上傳";
+
+            //Current.Session[key] = Images;
+            //var data = JsonConvert.SerializeObject(Images);
+            return Json(new {  message = "OK" });
+        }
+
         [HttpPost]
         [Route("ImageDelete")]
         public object HotelImageDelete(ImageViewModel data)

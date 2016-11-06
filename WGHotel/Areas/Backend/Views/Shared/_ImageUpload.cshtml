@@ -81,52 +81,73 @@
         }
 
         function filesUpload(file) {
-            var img = document.createElement("img");
             var canvas = document.createElement("canvas");
-            var width = 900;
-            var height = 600;
-            canvas.width = 900;
-            canvas.height = 600;
             var ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, width, height);
-            console.log(img);
-            img.src = canvas.toDataURL("image/jpeg");
-            imgPanel.append(img);
-            var files = file.files;
-            var formData = new FormData();
-            
-            if (files.length > 0) {
-                for (var i = 0, max = files.length; i < max; i++) {                    
-                    size += files[i].size;
-                    formData.append("files" + i, files[i]);
+            var model = {};
+            console.log(file.files);
+            let files = file.files;
+            for (var i = 0, max = files.length; i < max; i++) {                    
+                if (!files[i].type.match(/^image/)) { //去除非圖片檔
+                    console.log('file ' + (i + 1) + ' is not an image');
+                    continue;
                 }
 
-                if (size > maxSize) {
-                    $('#message').html('上傳資料過大，請分次上傳').show();
-                    size = 0;
-                    return false;
-                }
+                let Myfile = files[i];
+                var name = Myfile.name;
+                var src = window.URL.createObjectURL(Myfile);
+                var img = document.createElement("img");
+                var image = new Image();
+                image.onload = function () {
+
+                    var width = 200;
+                    var height = 100;
+                    canvas.width = 200;
+                    canvas.height = 100;
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    //var image = new Image();
+                    ctx.drawImage(image, 0, 0, width, height);
+                    var dataurl = canvas.toDataURL("image/jpeg");
+                    //去掉 dataurl 開頭的 data:image/png;base64,
+                    var regex = new RegExp('^data:' + 'image/jpeg' + ';base64,');
+                    var base64 = dataurl.replace(regex, '');
+                   
+                    model.image = base64;
+                    model.name = name;
+                    var myimg = $('<img>').attr('src', dataurl);
+                    imgPanel.append(myimg);
+                };
+                
+                //img.src = canvas.toDataURL("image/jpeg");
+                image.src = src;
             }
-
-            formData.append("key", key);
-
-            //$.ajax({
-            //    type: "POST",
-            //    url: '/ImageUpload',
-            //    data: formData,
-            //    contentType: false,
-            //    processData: false,
-            //    success: function (xhr) {                   
-            //        //preview(file);
-            //    },
-            //    error: function (xhr) {
-            //        $('#message').html('上傳資料過大').show();
-            //        console.log("ERROR");
-            //    }
-            //});
-            //file.val('');
+            
+            SelfPost(model);
+            
         };
         
+
+        var SelfPost = function (model) {
+            console.log(model);
+            $.ajax({
+                type: "POST",
+                url: '/ImageUpload1',
+                data: { data: model },
+                cache: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                //contentType: false,
+                //processData: false,
+                success: function (xhr) {
+                    //preview(file);
+                },
+                error: function (xhr) {
+                    $('#message').html('上傳資料過大').show();
+                    console.log("ERROR");
+                }
+            });
+        }
+
 
         $('#image-panel').delegate(".remove", "click", function () {
             var self = $(this);
