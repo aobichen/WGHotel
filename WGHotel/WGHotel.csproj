@@ -1098,6 +1098,8 @@
     <Content Include="Areas\Backend\Views\Facility\_List.cshtml" />
     <Content Include="Areas\Backend\Views\Hotel\_MyHotel.cshtml" />
     <Content Include="Areas\Backend\Views\Hotel\MyHotel.cshtml" />
+    <Content Include="Areas\Backend\Views\Facility\_Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Facility\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />

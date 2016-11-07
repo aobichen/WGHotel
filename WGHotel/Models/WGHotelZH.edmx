@@ -39,7 +39,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
           <Property Name="ParentId" Type="int" />
@@ -167,15 +167,6 @@
           <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Modify" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Facility">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Enabled" Type="Boolean" Nullable="false" />
-          <Property Name="ParentId" Type="Int32" />
-        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="ID" />
@@ -213,7 +204,6 @@
         </EntityType>
         <EntityContainer Name="WGHotelZHEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CodeFile" EntityType="Self.CodeFile" />
-          <EntitySet Name="Facility" EntityType="Self.Facility" />
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="Room" EntityType="Self.Room" />
           <EntitySet Name="GameSite" EntityType="ZHModel.GameSite" />
@@ -228,6 +218,7 @@
             <End Role="Hotel" EntitySet="Hotel" />
             <End Role="Room" EntitySet="Room" />
           </AssociationSet>
+          <EntitySet Name="Facility" EntityType="ZHModel.Facility" />
         </EntityContainer>
         <EntityType Name="GameSite">
           <Key>
@@ -301,6 +292,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Facility">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -319,16 +319,6 @@
                 <ScalarProperty Name="Creator" ColumnName="Creator" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="Modify" ColumnName="Modify" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Facility">
-            <EntityTypeMapping TypeName="ZHModel.Facility">
-              <MappingFragment StoreEntitySet="Facility">
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -412,6 +402,16 @@
                 <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facility">
+            <EntityTypeMapping TypeName="ZHModel.Facility">
+              <MappingFragment StoreEntitySet="Facility">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

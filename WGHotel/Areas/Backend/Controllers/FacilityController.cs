@@ -43,69 +43,39 @@ namespace WGHotel.Areas.Backend.Controllers
         }
 
         // GET: Backend/Facility/Create
-        public ActionResult Create()
+        public ActionResult Edit(int? id)
         {
+            if (id.HasValue)
+            {
+                var model = new FacilityModel();
+                var zh = _dbzh.Facility.Find(id);
+                var us = _dbzh.Facility.Where(o => o.ParentId == zh.ID).First();
+                model.ID = zh.ID;
+                model.NameZH = zh.Name;
+                model.NameUS = us.Name;
+                model.Enabled = zh.Enabled;
+                return View(model);
+            }
             return View();
         }
 
         // POST: Backend/Facility/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Edit(FacilityModel model)
         {
-            try
+            if (model.ID <= 0)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                model.Create();
+                return RedirectToAction("","Facility");
             }
-            catch
+            else
             {
-                return View();
+                model.Edit();
             }
-        }
-
-        // GET: Backend/Facility/Edit/5
-        public ActionResult Edit(int id)
-        {
             return View();
         }
 
-        // POST: Backend/Facility/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+       
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Backend/Facility/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Backend/Facility/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

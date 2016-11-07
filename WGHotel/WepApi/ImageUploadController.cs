@@ -61,8 +61,7 @@ namespace WGHotel.WepApi
         {
             public string image { get; set; }
             public string name { get; set; }
-            public string url { get; set; }
-            public string path { get; set; }
+            public string key { get; set; }
         }
 
 
@@ -72,17 +71,31 @@ namespace WGHotel.WepApi
         [Route("ImageUpload1")]
         public object HotelImageUpload1(ImageModel model)
         {
-            
-            byte[] bytes = Convert.FromBase64String(model.image);
-              MemoryStream ms = new MemoryStream(bytes);
-              Image returnImage = Image.FromStream(ms);
-           if(!Directory.Exists(HttpContext.Current.Server.MapPath("~/UserPicture"))){
-               Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/UserPicture"));
-           }
+            var key = model.key;
+            var Images = new List<ImageViewModel>();
 
-            var path = string.Format("/UserPicture/{0}.jpg",Guid.NewGuid().ToString());
-            returnImage.Save(HttpContext.Current.Server.MapPath(path));
-            model.path = path;
+            var Current = HttpContext.Current;
+            if (Current.Session[key] != null)
+            {
+
+                Images = (List<ImageViewModel>)Current.Session[key];
+                //Images = Images.Select(o => { o.Hotel = null; return o; }).ToList();
+            }
+            //Images = (List<ImageViewModel>)Current.Session[key];
+            //var a = "";
+            byte[] bytes = Convert.FromBase64String(model.image);
+            var Extension = Path.GetExtension(model.name);
+            Images.Add(new ImageViewModel { Image = bytes, Name = model.name, Extension = Extension });
+            Current.Session[key] = Images;
+            //   MemoryStream ms = new MemoryStream(bytes);
+           //   Image returnImage = Image.FromStream(ms);
+           //if(!Directory.Exists(HttpContext.Current.Server.MapPath("~/UserPicture"))){
+           //    Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/UserPicture"));
+           //}
+
+           // var path = string.Format("/UserPicture/{0}.jpg",Guid.NewGuid().ToString());
+           // returnImage.Save(HttpContext.Current.Server.MapPath(path));
+           // model.path = path;
             //HttpRequestMessage request = this.Request;
             //if (!request.Content.IsMimeMultipartContent())
             //{
@@ -117,7 +130,7 @@ namespace WGHotel.WepApi
 
             //Current.Session[key] = Images;
             //var data = JsonConvert.SerializeObject(Images);
-            return Json(new { data = model, message = "OK" });
+            return Json(new { message = "OK" });
         }
 
         [HttpPost]

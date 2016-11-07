@@ -39,7 +39,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
           <Property Name="ParentId" Type="int" />
@@ -206,7 +206,6 @@
           <EntitySet Name="CodeFile" EntityType="Self.CodeFile" />
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="Room" EntityType="Self.Room" />
-          <EntitySet Name="Facility" EntityType="USModel.Facility" />
           <EntitySet Name="GameSite" EntityType="USModel.GameSite" />
           <EntitySet Name="City" EntityType="USModel.City" />
           <EntitySet Name="Area" EntityType="USModel.Area" />
@@ -219,16 +218,8 @@
             <End Role="Hotel" EntitySet="Hotel" />
             <End Role="Room" EntitySet="Room" />
           </AssociationSet>
+          <EntitySet Name="Facility" EntityType="USModel.Facility" />
         </EntityContainer>
-        <EntityType Name="Facility">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Enabled" Type="Boolean" Nullable="false" />
-          <Property Name="ParentId" Type="Int32" />
-        </EntityType>
         <EntityType Name="GameSite">
           <Key>
             <PropertyRef Name="ID" />
@@ -301,6 +292,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Facility">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -358,16 +358,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Facility">
-            <EntityTypeMapping TypeName="USModel.Facility">
-              <MappingFragment StoreEntitySet="Facility">
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="GameSite">
             <EntityTypeMapping TypeName="USModel.GameSite">
               <MappingFragment StoreEntitySet="GameSite">
@@ -412,6 +402,16 @@
                 <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facility">
+            <EntityTypeMapping TypeName="USModel.Facility">
+              <MappingFragment StoreEntitySet="Facility">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
