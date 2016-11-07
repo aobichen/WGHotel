@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -60,14 +61,28 @@ namespace WGHotel.WepApi
         {
             public string image { get; set; }
             public string name { get; set; }
+            public string url { get; set; }
+            public string path { get; set; }
         }
+
+
+        
 
         [HttpPost]
         [Route("ImageUpload1")]
-        public object HotelImageUpload1(ImageModel data)
+        public object HotelImageUpload1(ImageModel model)
         {
-            var a = "";
-            //byte[] bytes = Convert.FromBase64String(file);
+            
+            byte[] bytes = Convert.FromBase64String(model.image);
+              MemoryStream ms = new MemoryStream(bytes);
+              Image returnImage = Image.FromStream(ms);
+           if(!Directory.Exists(HttpContext.Current.Server.MapPath("~/UserPicture"))){
+               Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/UserPicture"));
+           }
+
+            var path = string.Format("/UserPicture/{0}.jpg",Guid.NewGuid().ToString());
+            returnImage.Save(HttpContext.Current.Server.MapPath(path));
+            model.path = path;
             //HttpRequestMessage request = this.Request;
             //if (!request.Content.IsMimeMultipartContent())
             //{
@@ -102,7 +117,7 @@ namespace WGHotel.WepApi
 
             //Current.Session[key] = Images;
             //var data = JsonConvert.SerializeObject(Images);
-            return Json(new {  message = "OK" });
+            return Json(new { data = model, message = "OK" });
         }
 
         [HttpPost]
