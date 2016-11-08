@@ -1,9 +1,24 @@
 ﻿
 @model WGHotel.Areas.Backend.Models.AccountHotelViewModel
 
+<script type="text/javascript">
+    jQuery(function () {
+        $('input,textarea').prop('disabled', true);
+        $('input[type="file"]').hide();
+    })
+</script>
+<style>
+    .remove{
+        display:none;
+    }
+
+    #btnUpload{
+        display:none;
+    }
+</style>
+
 @*@using (Html.BeginForm("RegisterAndCreateHotel", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))*@
-@using (Html.BeginForm())
-{
+
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.AntiForgeryToken()
     @*@Html.HiddenFor(model=>model.ImgKey)*@
@@ -45,17 +60,15 @@
                                     <label class="col-sm-2 control-label">縣市</label>
                                     <div class="col-sm-10 col-md-6 col-lg-6">
                                         @*@Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })*@
-                                        @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.City, new { @class = "form-control" })
+                                        @Html.DropDownList("City",null,null, new { @class = "form-control",@disabled="" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">地區</label>
                                     <div class="col-sm-10">
+                                        @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control" } })
                                        
-                                        <label class="well-sm">
-                                            @Model.Area
-                                        </label>
                                     </div>
                                 </div>
 
@@ -166,22 +179,11 @@
 
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group">
-                    <!-- Buttons -->
-                    <div class="col-lg-offset-10 col-md-offset-10 col-lg-9">
-                        <button type="submit" class="btn btn-primary">確定</button>
-
-                    </div>
-                </div>
-            </div>
+            
         </div>
 
     </div>
 
-
-
-}
 
 
 

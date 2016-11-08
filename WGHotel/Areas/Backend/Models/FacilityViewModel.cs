@@ -33,7 +33,7 @@ namespace WGHotel.Areas.Backend.Models
             FactitlUS.ParentId = FactitlyZH.ID;
             using (var us = new WGHotelUSEntities())
             {
-                us.Facility.Add(FactitlyZH);
+                us.Facility.Add(FactitlUS);
                 us.SaveChanges();
             }
         }

@@ -49,7 +49,7 @@ namespace WGHotel.Areas.Backend.Controllers
             {
                 var model = new FacilityModel();
                 var zh = _dbzh.Facility.Find(id);
-                var us = _dbzh.Facility.Where(o => o.ParentId == zh.ID).First();
+                var us = _dbus.Facility.Where(o => o.ParentId == zh.ID).First();
                 model.ID = zh.ID;
                 model.NameZH = zh.Name;
                 model.NameUS = us.Name;

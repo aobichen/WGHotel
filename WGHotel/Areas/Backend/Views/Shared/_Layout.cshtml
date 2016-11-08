@@ -60,7 +60,7 @@
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li class="eborder-top">
-                                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                                <a href="@Url.Action("ChangePassword", "Profile", new { area = "Backend" })"><i class="icon_profile"></i> 變更密碼</a>
                             </li>
                            
                             <li>
@@ -100,8 +100,8 @@
                         </a>
                     </li>
                     <li class="" id="Room">
-                        <a class="" href="javascript:void(0)">
-                            <i class="icon_briefcase"></i>
+                        <a class="" href="@Url.Action("","Report")">
+                            <i class="icon_datareport"></i>
                             <span>飯店回報</span>
                         </a>
                     </li>
@@ -114,7 +114,7 @@
                         </a>
                         <ul class="sub">
                             <li id="RoomPriceDate">
-                                <a class="" href="@Url.Action("","RoomPriceDate")">房價起訖日</a>
+                                <a class="" href="@Url.Action("RoomPriceDate", "System")">房價起訖日</a>
                             </li>
                             <li id="GameSite">
                                 <a class="" href="@Url.Action("","GameSite")">場次管理</a>

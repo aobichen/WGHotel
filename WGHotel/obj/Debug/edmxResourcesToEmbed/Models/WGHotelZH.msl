@@ -16,16 +16,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Facility">
-      <EntityTypeMapping TypeName="ZHModel.Facility">
-        <MappingFragment StoreEntitySet="Facility">
-          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Order">
       <EntityTypeMapping TypeName="ZHModel.Order">
         <MappingFragment StoreEntitySet="Order">
@@ -106,6 +96,16 @@
           <ScalarProperty Name="Area" ColumnName="Area" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Game" ColumnName="Game" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facility">
+      <EntityTypeMapping TypeName="ZHModel.Facility">
+        <MappingFragment StoreEntitySet="Facility">
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>

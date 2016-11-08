@@ -201,6 +201,7 @@
     <Compile Include="Areas\Backend\Models\CodeFiles.cs" />
     <Compile Include="Areas\Backend\Models\FacilityViewModel.cs" />
     <Compile Include="Areas\Backend\Models\GameSiteViewModel.cs" />
+    <Compile Include="Areas\Backend\Models\ReportViewModel.cs" />
     <Compile Include="Areas\Backend\Models\RoomViewModel.cs" />
     <Compile Include="Areas\Backend\Models\SysSetting.cs" />
     <Compile Include="Areas\Backend\RouteConfig.cs" />
@@ -217,10 +218,13 @@
     <Compile Include="Helpers\Position.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Area.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Banner.cs">
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\City.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CodeFile.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
@@ -247,6 +251,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Report.cs">
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Room.cs">
       <DependentUpon>WGHotelUS.tt</DependentUpon>
@@ -1100,6 +1107,15 @@
     <Content Include="Areas\Backend\Views\Hotel\MyHotel.cshtml" />
     <Content Include="Areas\Backend\Views\Facility\_Create.cshtml" />
     <Content Include="Areas\Backend\Views\Facility\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Profile\ChangePassword.cshtml" />
+    <Content Include="Areas\Backend\Views\Profile\_ChangePassword.cshtml" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Backend\Views\Banner\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Report\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Report\_List.cshtml" />
+    <Content Include="Areas\Backend\Views\Report\_Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Report\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />
@@ -1173,9 +1189,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Backend\Views\Banner\" />
-    <Folder Include="Areas\Backend\Views\Profile\" />
-    <Folder Include="Areas\Backend\Views\Report\" />
     <Folder Include="Content\Admin\assets\jquery-file-upload\server\php\files\thumbnail\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ImageUpload\" />

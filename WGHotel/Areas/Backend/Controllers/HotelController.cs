@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity; // Maybe this one too
 
 namespace WGHotel.Areas.Backend.Controllers
 {
+    [Authorize]
     public class HotelController : BaseController
     {
        
@@ -84,7 +85,21 @@ namespace WGHotel.Areas.Backend.Controllers
         [HttpPost]
         public ActionResult Create(AccountHotelViewModel model)
         {
-
+            //var UserManager1 = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            //var user1 = new ApplicationUser { UserName = "System", Email = "123456" };
+            //ApplicationRoleManager _roleManager1 = HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            //var CurrentRole1 = "SystemAdmin";
+            //var SystemRoles = new string[] { "User", "Hotel", "Admin","SystemAdmin" };
+            //foreach (var r in SystemRoles)
+            //{
+            //    if (!_roleManager1.RoleExists(r))
+            //    {
+            //        var role = new Role(r);
+            //        _roleManager1.Create(role);
+            //    }
+            //}
+            //UserManager1.Create(user1, "123456");
+            //UserManager1.AddToRole(user1.Id, CurrentRole1);
           
     //        var errors = ModelState
     //.Where(x => x.Value.Errors.Count > 0)
@@ -109,18 +124,18 @@ namespace WGHotel.Areas.Backend.Controllers
            if (ModelState.IsValid)
             {
                 var UserManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                var user = new ApplicationUser { UserName = model.Account, Email = model.Account };
+                var user = new ApplicationUser { UserName = model.Account, Email = model.Password };
                 ApplicationRoleManager _roleManager =  HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
                 var CurrentRole = "Hotel";
-                var SystemRoles = new string[] { "User", "Hotel", "Admin" };
-                foreach (var r in SystemRoles)
-                {
-                    if (!_roleManager.RoleExists(r))
-                    {
-                        var role = new Role(r);
-                        _roleManager.Create(role);
-                    }
-                }
+                //var SystemRoles = new string[] { "User", "Hotel", "Admin" };
+                //foreach (var r in SystemRoles)
+                //{
+                //    if (!_roleManager.RoleExists(r))
+                //    {
+                //        var role = new Role(r);
+                //        _roleManager.Create(role);
+                //    }
+                //}
 
                UserManager.Create(user, model.Password);
                UserManager.AddToRole(user.Id, CurrentRole);
@@ -135,7 +150,7 @@ namespace WGHotel.Areas.Backend.Controllers
             ViewBag.ImgKey = model.ImgKey;
             Session[model.ImgKey] = new List<ImageViewModel>();
             //model.ImgKey = AccountAndImgKey;
-            ViewBag.GameSites = new GameSiteModel().List();
+            ViewBag.GameSites = new GameSiteModel().SelectList();
             ViewBag.City = new GameSiteModel().Citys();
             ModelState.AddModelError("", "錯誤!請檢查資料");
             return View(model);
