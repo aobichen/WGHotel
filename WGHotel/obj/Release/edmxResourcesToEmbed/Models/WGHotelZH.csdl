@@ -14,14 +14,6 @@
     <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Modify" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="Facility">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Enabled" Type="Boolean" Nullable="false" />
-  </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="ID" />
@@ -59,7 +51,6 @@
   </EntityType>
   <EntityContainer Name="WGHotelZHEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CodeFile" EntityType="Self.CodeFile" />
-    <EntitySet Name="Facility" EntityType="Self.Facility" />
     <EntitySet Name="Order" EntityType="Self.Order" />
     <EntitySet Name="Room" EntityType="Self.Room" />
     <EntitySet Name="GameSite" EntityType="ZHModel.GameSite" />
@@ -74,6 +65,7 @@
       <End Role="Hotel" EntitySet="Hotel" />
       <End Role="Room" EntitySet="Room" />
     </AssociationSet>
+    <EntitySet Name="Facility" EntityType="ZHModel.Facility" />
   </EntityContainer>
   <EntityType Name="GameSite">
     <Key>
@@ -147,4 +139,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
+  </EntityType>
 </Schema>

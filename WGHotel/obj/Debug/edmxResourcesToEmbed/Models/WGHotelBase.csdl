@@ -126,5 +126,10 @@
     <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Modify" Type="Int32" Nullable="false" />
     <Property Name="Room" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FoodCost" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Other" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+    <Property Name="OtherCost" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Food" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+    <Property Name="UserType" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

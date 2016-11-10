@@ -8,6 +8,7 @@ using WGHotel.Controllers;
 
 namespace WGHotel.Areas.Backend.Controllers
 {
+    [Authorize(Roles = "Admin,System")]
     public class SystemController : BaseController
     {
         // GET: Backend/System

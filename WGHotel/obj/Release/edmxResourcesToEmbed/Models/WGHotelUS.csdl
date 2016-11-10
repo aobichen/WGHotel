@@ -53,7 +53,6 @@
     <EntitySet Name="CodeFile" EntityType="Self.CodeFile" />
     <EntitySet Name="Order" EntityType="Self.Order" />
     <EntitySet Name="Room" EntityType="Self.Room" />
-    <EntitySet Name="Facility" EntityType="USModel.Facility" />
     <EntitySet Name="GameSite" EntityType="USModel.GameSite" />
     <EntitySet Name="City" EntityType="USModel.City" />
     <EntitySet Name="Area" EntityType="USModel.Area" />
@@ -66,15 +65,8 @@
       <End Role="Hotel" EntitySet="Hotel" />
       <End Role="Room" EntitySet="Room" />
     </AssociationSet>
+    <EntitySet Name="Facility" EntityType="USModel.Facility" />
   </EntityContainer>
-  <EntityType Name="Facility">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Enabled" Type="Boolean" Nullable="false" />
-  </EntityType>
   <EntityType Name="GameSite">
     <Key>
       <PropertyRef Name="ID" />
@@ -147,4 +139,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
+  </EntityType>
 </Schema>

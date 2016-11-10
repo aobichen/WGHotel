@@ -44,12 +44,37 @@ namespace WGHotel.Areas.Backend.Controllers
         {
             if (id.HasValue)
             {
-                var model = _basedb.Report.Find(id);
+                var result = new ReportViewModel();
+                var model = _basedb.Report.Where(o => o.ID == id).Select(o =>
+                     new ReportViewModel
+                     {
+                         CheckInDate = o.CheckInDate,
+                         Price = o.Price,
+                         OtherCost = o.OtherCost,
+                         Other = o.Other,
+                         FoodCost = o.FoodCost,
+                         Food = o.Food,
+                         Country = o.Country,
+                         CountryID = o.CountryID,
+                         HotelID = o.HotelID,
+                         ID = o.ID,
+                         NumOfPeople = o.NumOfPeople,
+                         Remark = o.Remark,
+                         Room = o.Room,
+                         RoomID = o.RoomID,
+                         UserType = o.UserType
+                     }).FirstOrDefault();
+                    
                 var Hotel = _dbzh.Hotel.Where(o => o.UserId == CurrentUser.Id).FirstOrDefault();
+                
+                
+                
                 var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
                 ViewBag.RoomId = new SelectList(Rooms, "ID", "Name",model.RoomID);
                 var Country = _basedb.Country.ToList();
                 ViewBag.Country = new SelectList(Country, "ID", "Name",model.CountryID);
+                ViewBag.UserType = model.UserType;
+                return View(model);
             }
             else
             {
@@ -57,7 +82,7 @@ namespace WGHotel.Areas.Backend.Controllers
                 var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
                 ViewBag.RoomId = new SelectList(Rooms, "ID", "Name");
                 var Country = _basedb.Country.ToList();
-                ViewBag.Country = new SelectList(Country, "Name", "Name");
+                ViewBag.Country = new SelectList(Country, "ID", "Name");
             }
 
             
@@ -76,27 +101,31 @@ namespace WGHotel.Areas.Backend.Controllers
             model.Creator = UserId;
             model.Modified = Now;
             model.Modify = UserId;
+            model.CheckInDate = Now;
             model.Room = _dbzh.Room.Find(model.RoomID).Name;
             try
             {
                 if (model.ID <= 0)
                 {
                     model.Create();
+                    return RedirectToAction("Index");
                 }
                 else
                 {
                     model.Edit();
+                    return RedirectToAction("Edit", new { id = model.ID });
                 }
 
-                return RedirectToAction("Index");
+                
             }
-            catch
+            catch(Exception ex)
             {
                 var Hotel = _dbzh.Hotel.Where(o => o.UserId == CurrentUser.Id).FirstOrDefault();
                 var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
                 ViewBag.RoomId = new SelectList(Rooms, "ID", "Name");
                 var Country = _basedb.Country.ToList();
                 ViewBag.Country = new SelectList(Country, "ID", "Name");
+                ModelState.AddModelError("","編輯未完成，請檢查資料");
                 return View();
             }
         }

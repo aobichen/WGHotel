@@ -8,6 +8,17 @@
     <Property Name="CID" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Banner">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="image" />
+    <Property Name="Extension" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="Path" Type="nvarchar" MaxLength="500" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Enabled" Type="bit" />
+  </EntityType>
   <EntityType Name="City">
     <Key>
       <PropertyRef Name="ID" />
@@ -23,10 +34,10 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="NUSF" Type="nvarchar" MaxLength="400" />
-    <Property Name="Tel1" Type="nvarchar" MaxLength="50" />
-    <Property Name="Tel2" Type="nvarchar" MaxLength="50" />
-    <Property Name="Telmobile" Type="nvarchar" MaxLength="50" />
-    <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tel1" Type="nvarchar" MaxLength="150" />
+    <Property Name="Tel2" Type="nvarchar" MaxLength="150" />
+    <Property Name="Telmobile" Type="nvarchar" MaxLength="150" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="ImageStore">
     <Key>
@@ -44,6 +55,31 @@
     <Property Name="Extension" Type="nvarchar" MaxLength="5" Nullable="false" />
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Country" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="CountryID" Type="int" Nullable="false" />
+    <Property Name="HotelID" Type="int" Nullable="false" />
+    <Property Name="RoomID" Type="int" Nullable="false" />
+    <Property Name="Creator" Type="int" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="CheckInDate" Type="date" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="NumOfPeople" Type="int" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="Modified" Type="datetime" Nullable="false" />
+    <Property Name="Modify" Type="int" Nullable="false" />
+    <Property Name="Room" Type="nvarchar" MaxLength="50" />
+    <Property Name="FoodCost" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Other" Type="nvarchar" MaxLength="1500" />
+    <Property Name="OtherCost" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Food" Type="nvarchar" MaxLength="1500" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="RoomPrice">
     <Key>
@@ -82,9 +118,11 @@
   </Association>
   <EntityContainer Name="WGHotelBaseModelStoreContainer">
     <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImageStore" EntityType="Self.ImageStore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RoomPrice" EntityType="Self.RoomPrice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SysSetting" EntityType="Self.SysSetting" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Area__CID__239E4DCF" Association="Self.FK__Area__CID__239E4DCF">

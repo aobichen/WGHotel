@@ -90,6 +90,11 @@
     <EntitySetMapping Name="Report">
       <EntityTypeMapping TypeName="WGHotelBaseModel.Report">
         <MappingFragment StoreEntitySet="Report">
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="Food" ColumnName="Food" />
+          <ScalarProperty Name="OtherCost" ColumnName="OtherCost" />
+          <ScalarProperty Name="Other" ColumnName="Other" />
+          <ScalarProperty Name="FoodCost" ColumnName="FoodCost" />
           <ScalarProperty Name="Room" ColumnName="Room" />
           <ScalarProperty Name="Modify" ColumnName="Modify" />
           <ScalarProperty Name="Modified" ColumnName="Modified" />

@@ -26,7 +26,7 @@
             </div>
 
             <!--logo start-->
-            <a href="index.html" class="logo">WGHotel <span class="lite">Admin</span></a>
+            <a href="javascript:void(0)" class="logo">WGHotel <span class="lite">Admin</span></a>
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu">
@@ -45,27 +45,37 @@
                 <!-- notificatoin dropdown start-->
                 <ul class="nav pull-right top-menu">
 
+
+                    @if (User.Identity.IsAuthenticated) { 
                  
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="img/avatar1_small.jpg">
+                                
+                                <img alt="" src="~/Content/Admin/img/human-24.png" />
                             </span>
-                            <span class="username">Jenifer Smith</span>
+                            <span class="username">@User.Identity.Name</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li class="eborder-top">
-                                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                                <a href="@Url.Action("ChangePassword", "Profile", new { area = "Backend" })"><i class="icon_profile"></i> 變更密碼</a>
                             </li>
                            
                             <li>
-                                <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
+                                <a href="@Url.Action("Login", "Account", new {area = "" })"><i class="icon_key_alt"></i> Log Out</a>
                             </li>
                            
                         </ul>
                     </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Url.Action("Login", "Account", new {area = "" })"><i class=""></i> 登入</a>
+                        </li>
+                    }
                     <!-- user login dropdown end -->
                 </ul>
                 <!-- notificatoin dropdown end-->
@@ -90,8 +100,8 @@
                         </a>
                     </li>
                     <li class="" id="Room">
-                        <a class="" href="javascript:void(0)">
-                            <i class="icon_briefcase"></i>
+                        <a class="" href="@Url.Action("","Report")">
+                            <i class="icon_datareport"></i>
                             <span>飯店回報</span>
                         </a>
                     </li>
@@ -104,10 +114,16 @@
                         </a>
                         <ul class="sub">
                             <li id="RoomPriceDate">
-                                <a class="" href="@Url.Action("","RoomPriceDate")">房價起訖日</a>
+                                <a class="" href="@Url.Action("RoomPriceDate", "System")">房價起訖日</a>
                             </li>
                             <li id="GameSite">
                                 <a class="" href="@Url.Action("","GameSite")">場次管理</a>
+                            </li>
+                            <li id="Country">
+                                <a class="" href="@Url.Action("","Country")">參賽國家</a>
+                            </li>
+                            <li id="Facility">
+                                <a class="" href="@Url.Action("","Facility")">飯店設施</a>
                             </li>
                         </ul>
                     </li>

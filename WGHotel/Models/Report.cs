@@ -29,5 +29,10 @@ namespace WGHotel.Models
         public System.DateTime Modified { get; set; }
         public int Modify { get; set; }
         public string Room { get; set; }
+        public Nullable<decimal> FoodCost { get; set; }
+        public string Other { get; set; }
+        public Nullable<decimal> OtherCost { get; set; }
+        public string Food { get; set; }
+        public string UserType { get; set; }
     }
 }

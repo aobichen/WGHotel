@@ -75,6 +75,11 @@
     <Property Name="Modified" Type="datetime" Nullable="false" />
     <Property Name="Modify" Type="int" Nullable="false" />
     <Property Name="Room" Type="nvarchar" MaxLength="50" />
+    <Property Name="FoodCost" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Other" Type="nvarchar" MaxLength="1500" />
+    <Property Name="OtherCost" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Food" Type="nvarchar" MaxLength="1500" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="RoomPrice">
     <Key>

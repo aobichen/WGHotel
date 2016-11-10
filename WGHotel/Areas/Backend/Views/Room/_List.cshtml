@@ -1,5 +1,5 @@
-﻿@model IEnumerable<WGHotel.Areas.Backend.Models.RoomList>
-
+﻿
+@model PagedList.IPagedList<WGHotel.Areas.Backend.Models.RoomList>
 <p>
    
 </p>
@@ -18,23 +18,23 @@
     <table class="table table-responsive table-bordered">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.HotelName)
+                飯店名稱
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                房名
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RoomType)
+                房型
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BedType)
+                床型
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sell)
+                價格
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.Quantiy)
+                數量
             </th>
 
             <th></th>
@@ -81,4 +81,7 @@
 }
 
     </table>
+</div>
+<div class="panel-footer">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new WGHotel.Areas.Backend.Controllers.RoomController.PagedClientViewModel { Page = Page, id = Model[0].ID }))
 </div>

@@ -227,20 +227,20 @@
       <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CodeFile.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelZH.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CodeFileModel.cs" />
     <Compile Include="Models\Country.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facility.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelZH.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GameSite.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelZH.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hotel.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelZH.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HotelViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -250,13 +250,13 @@
     <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelZH.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Report.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Room.cs">
-      <DependentUpon>WGHotelUS.tt</DependentUpon>
+      <DependentUpon>WGHotelZH.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoomPrice.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>

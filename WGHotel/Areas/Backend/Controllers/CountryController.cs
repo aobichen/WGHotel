@@ -8,6 +8,7 @@ using WGHotel.Models;
 using PagedList;
 namespace WGHotel.Areas.Backend.Controllers
 {
+    [Authorize(Roles = "Admin,System")]
     public class CountryController : BaseController
     {
         // GET: Backend/Country

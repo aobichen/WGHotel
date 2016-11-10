@@ -6,22 +6,55 @@ using System.Web.Mvc;
 using WGHotel.Areas.Backend.Models;
 using WGHotel.Controllers;
 using WGHotel.Models;
+using PagedList;
 
 namespace WGHotel.Areas.Backend.Controllers
 {
+    [Authorize]
     public class RoomController : BaseController
     {
-        // GET: Backend/Room
-        public ActionResult Index(int? id)
+        public class PagedClientViewModel
         {
+            public int Page { get; set; }
+            public int id { get; set; }
+        }
+        // GET: Backend/Room
+        public ActionResult Index(PagedClientViewModel Page = null)
+        {
+           
+
+            if (User.IsInRole("Admin") || User.IsInRole("Admin"))
+            {
+                var result = (from room in _dbzh.Room
+                             join hotel in _dbzh.Hotel
+                             on room.HOTELID equals hotel.ID
+                             
+                             select new RoomList
+                             {
+                                 ID = room.ID,
+                                 Name = room.Name,
+                                 RoomType = room.RoomType,
+                                 HOTELID = hotel.ID,
+                                 HotelName = hotel.Name,
+                                 Quantiy = room.Quantiy.Value,
+                                 Sell = room.Sell.Value,
+                                 BedType = room.BedType
+                             }).ToList();
+                var currentPage = Page.Page < 1 ? 1 : Page.Page;
+                var PageSize = 15;
+
+                var PageModel = result.ToPagedList(currentPage, PageSize);
+                return View(PageModel);
+            }
+
             var Userid = CurrentUser == null ? 0 : CurrentUser.Id;
-            var Hotel =  Userid > 0 ? _dbzh.Hotel.Where(o => o.UserId == Userid).FirstOrDefault():null;
+            var Hotel = Userid > 0 ? _dbzh.Hotel.Where(o => o.UserId == Userid).FirstOrDefault() : null;
             //var model = _dbzh.Room.Where(o=>o.HOTELID == id).ToList();
-            if (!id.HasValue || Hotel == null)
+            if (Page == null || Hotel == null)
             {
                 return RedirectToAction("","Hotel");
             }
-            var hotelId = id.HasValue ? id.Value : Hotel.ID;
+            var hotelId = Page != null ? Page.id : Hotel.ID;
             ViewBag.HotelID = hotelId;
             var model = (from room in _dbzh.Room
                          join hotel in _dbzh.Hotel
@@ -38,8 +71,12 @@ namespace WGHotel.Areas.Backend.Controllers
                              Sell = room.Sell.Value,
                              BedType = room.BedType
                          }).ToList();
-            
-            return View(model);
+            var currentPage1 = Page.Page < 1 ? 1 : Page.Page;
+            var PageSize1 = 15;
+
+            var PageModel1 = model.ToPagedList(currentPage1, PageSize1);
+
+            return View(PageModel1);
         }
 
 
