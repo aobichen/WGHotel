@@ -62,6 +62,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -1180,6 +1181,12 @@
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Home\_RoomTypes.cshtml" />
     <Content Include="Views\Shared\_GamesDropDown.cshtml" />
+    <Content Include="Views\Home\_KeelungList.cshtml" />
+    <Content Include="Views\Home\_ListTaipei.cshtml" />
+    <Content Include="Views\Home\_NewTaipei.cshtml" />
+    <Content Include="Views\Home\_ListTaoyuan.cshtml" />
+    <Content Include="Views\Home\_ListHsinchuCity.cshtml" />
+    <Content Include="Views\Home\_ListHsinchuCountry.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -24,11 +24,17 @@
             <p>@item.Feature</p>
             @if (!item.HasBreakfast)
             {
-                <p data-localize="nonbreakfast">不含早餐</p>
+                <p >
+                    <i class="fa fa-cutlery" aria-hidden="true" style="color:#BEBEBE;"></i>
+                    <span data-localize="nonbreakfast">不含早餐</span>
+            </p>
             }
             else
             {
-                <p data-localize="hasbreakfast">包含早餐</p>
+                <p>
+                    <i class="fa fa-cutlery" aria-hidden="true" style="color:#4eafaa"></i>
+                    <span data-localize="hasbreakfast">包含早餐</span>
+            </p>
             }
            
             @*<a href="javascript:void(0)" title="more info" class="more-info">+ more info</a>*@
@@ -50,7 +56,9 @@
                 <span class="first" data-localize="roomtype">房型:</span>
                 <span class="second">@WGHotel.Helpers.CodeFiles.GetCodeFileDescription(item.RoomType)</span>
             </div>
-            <a href="@item.LinkUrl" class="gradient-button" title="Book">Book now</a>
+            <a href="@item.LinkUrl" class="gradient-button" title="Book">
+                <span data-localize="BookNow">Book now</span>
+            </a>
         </div>
         @*<div class="more-information">
             <p>Stylish and individually designed room featuring a satellite TV, mini bar and a 24-hour room service menu.</p>

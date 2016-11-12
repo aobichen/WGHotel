@@ -94,7 +94,7 @@
           <Property Name="ROOMID" Type="int" Nullable="false" />
           <Property Name="ROOMIDOFUS" Type="int" />
           <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="SaleOff" Type="bit" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
@@ -170,7 +170,6 @@
         <EntityContainer Name="WGHotelBaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ImageStore" EntityType="Self.ImageStore" />
           <EntitySet Name="SysSetting" EntityType="Self.SysSetting" />
-          <EntitySet Name="RoomPrice" EntityType="WGHotelBaseModel.RoomPrice" />
           <EntitySet Name="Area" EntityType="WGHotelBaseModel.Area" />
           <EntitySet Name="City" EntityType="WGHotelBaseModel.City" />
           <AssociationSet Name="FK__Area__CID__239E4DCF" Association="WGHotelBaseModel.FK__Area__CID__239E4DCF">
@@ -180,19 +179,8 @@
           <EntitySet Name="Country" EntityType="WGHotelBaseModel.Country" />
           <EntitySet Name="Banner" EntityType="WGHotelBaseModel.Banner" />
           <EntitySet Name="Report" EntityType="WGHotelBaseModel.Report" />
+          <EntitySet Name="RoomPrice" EntityType="WGHotelBaseModel.RoomPrice" />
         </EntityContainer>
-        <EntityType Name="RoomPrice">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ROOMID" Type="Int32" Nullable="false" />
-          <Property Name="ROOMIDOFUS" Type="Int32" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="SaleOff" Type="Boolean" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="ID" />
@@ -271,6 +259,18 @@
           <Property Name="Food" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
           <Property Name="UserType" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="RoomPrice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROOMID" Type="Int32" Nullable="false" />
+          <Property Name="ROOMIDOFUS" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SaleOff" Type="Boolean" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -304,19 +304,6 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RoomPrice">
-            <EntityTypeMapping TypeName="WGHotelBaseModel.RoomPrice">
-              <MappingFragment StoreEntitySet="RoomPrice">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="SaleOff" ColumnName="SaleOff" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ROOMIDOFUS" ColumnName="ROOMIDOFUS" />
-                <ScalarProperty Name="ROOMID" ColumnName="ROOMID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -385,6 +372,19 @@
                 <ScalarProperty Name="HotelID" ColumnName="HotelID" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomPrice">
+            <EntityTypeMapping TypeName="WGHotelBaseModel.RoomPrice">
+              <MappingFragment StoreEntitySet="RoomPrice">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SaleOff" ColumnName="SaleOff" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ROOMIDOFUS" ColumnName="ROOMIDOFUS" />
+                <ScalarProperty Name="ROOMID" ColumnName="ROOMID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

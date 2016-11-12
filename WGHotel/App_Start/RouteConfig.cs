@@ -18,6 +18,12 @@ namespace WGHotel
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+               name: "Detail",
+               url: "Detail/{id}",
+               defaults: new { controller = "Home", action = "Detail", id = UrlParameter.Optional }
+           );
         }
     }
 }

@@ -31,19 +31,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RoomPrice">
-      <EntityTypeMapping TypeName="WGHotelBaseModel.RoomPrice">
-        <MappingFragment StoreEntitySet="RoomPrice">
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="SaleOff" ColumnName="SaleOff" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="ROOMIDOFUS" ColumnName="ROOMIDOFUS" />
-          <ScalarProperty Name="ROOMID" ColumnName="ROOMID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Area">
       <EntityTypeMapping TypeName="WGHotelBaseModel.Area">
         <MappingFragment StoreEntitySet="Area">
@@ -109,6 +96,19 @@
           <ScalarProperty Name="HotelID" ColumnName="HotelID" />
           <ScalarProperty Name="CountryID" ColumnName="CountryID" />
           <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomPrice">
+      <EntityTypeMapping TypeName="WGHotelBaseModel.RoomPrice">
+        <MappingFragment StoreEntitySet="RoomPrice">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="SaleOff" ColumnName="SaleOff" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ROOMIDOFUS" ColumnName="ROOMIDOFUS" />
+          <ScalarProperty Name="ROOMID" ColumnName="ROOMID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -31,12 +31,15 @@ namespace WGHotel.Models
         public List<string> Facilities { get; set; }
 
         public string Feature { get; set; }
+        public string Address { get; set; }
 
         public string LinkUrl { get; set; }
         public string Tel { get; set; }
         public List<ImageStore> Images { get; set; }
 
         public List<RoomViewList> Rooms { get; set; }
+
+        public int ParentId { get; set; }
        
     }
 }

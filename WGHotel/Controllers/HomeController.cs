@@ -13,20 +13,174 @@ namespace WGHotel.Controllers
 {
     public class HomeController : BaseController
     {//
-        public ActionResult Index()
-        {
-            var model = (from h in _db.Hotel
-                         select new HotelViewModel
-                         {
-                             ID = h.ID,
-                             Name = h.Name,
-                             //City = h.City,
-                             Game = h.Game,
-                             Sell = h.Room.Min(o => o.Sell),
-                             Tel = h.Tel,                            
-                             LinkUrl = h.LinkUrl
-                         }).OrderBy(x => Guid.NewGuid()).Take(40).ToList();
 
+        public class SearchModel
+        {
+            public string word { get; set; }
+            public DateTime Begin { get; set; }
+            public DateTime End { get; set; }
+
+            public string Game { get; set; }
+        }
+
+        private List<HotelViewModel> RenderImages(List<HotelViewModel> model)
+        {
+            if (CurrentLanguage.Equals("us"))
+            {
+                foreach (var m in model)
+                {
+
+                    m.Image = _basedb.ImageStore.Where(o => o.ReferIdUS == m.ID).FirstOrDefault().ID;
+
+
+                }
+            }
+            else
+            {
+                foreach (var m in model)
+                {
+                    var image = _basedb.ImageStore.Where(o => o.ReferIdZH == m.ID).FirstOrDefault();
+                    m.Image = image == null ? 0 : image.ID;
+                }
+            }
+            return model;
+        }
+
+        public ActionResult Index(SearchModel search=null)
+        {
+            var model = new List<HotelViewModel>();
+            ViewBag.GameSite = new GameSiteModel().SelectList();
+            #region
+            if (string.IsNullOrEmpty(search.word) &&
+                string.IsNullOrEmpty(search.Game)&&
+                search.Begin == DateTime.MinValue &&
+                search.End == DateTime.MinValue)
+            {
+                ViewBag.IsSearch = true;
+                var Keelung = (from h in _db.Hotel
+                                  where h.City == 1 && h.Room.Count>0
+                                  select new HotelViewModel
+                                  {
+                                      ID = h.ID,
+                                      Name = h.Name,
+                                      //City = h.City,
+                                      Game = h.Game,
+                                      Sell = h.Room.Min(o => o.Sell),
+                                      Tel = h.Tel,
+                                      LinkUrl = h.LinkUrl
+                                  }).OrderBy(x => Guid.NewGuid()).Take(8).ToList();
+                ViewBag.Keelung = RenderImages(Keelung);
+
+                var Taipei = (from h in _db.Hotel
+                              where h.City == 2 && h.Room.Count > 0
+                              select new HotelViewModel
+                              {
+                                  ID = h.ID,
+                                  Name = h.Name,
+                                  //City = h.City,
+                                  Game = h.Game,
+                                  Sell = h.Room.Min(o => o.Sell),
+                                  Tel = h.Tel,
+                                  LinkUrl = h.LinkUrl
+                              }).OrderBy(x => Guid.NewGuid()).Take(8).ToList();
+                ViewBag.Taipei = RenderImages(Taipei);
+
+                var NewTaipei = (from h in _db.Hotel
+                              where h.City == 3 && h.Room.Count > 0
+                              select new HotelViewModel
+                              {
+                                  ID = h.ID,
+                                  Name = h.Name,
+                                  //City = h.City,
+                                  Game = h.Game,
+                                  Sell = h.Room.Min(o => o.Sell),
+                                  Tel = h.Tel,
+                                  LinkUrl = h.LinkUrl
+                              }).OrderBy(x => Guid.NewGuid()).Take(8).ToList();
+                ViewBag.NewTaipei = RenderImages(NewTaipei);
+
+                var Taoyuan = (from h in _db.Hotel
+                              where h.City == 4 && h.Room.Count > 0
+                              select new HotelViewModel
+                              {
+                                  ID = h.ID,
+                                  Name = h.Name,
+                                  //City = h.City,
+                                  Game = h.Game,
+                                  Sell = h.Room.Min(o => o.Sell),
+                                  Tel = h.Tel,
+                                  LinkUrl = h.LinkUrl
+                              }).OrderBy(x => Guid.NewGuid()).Take(8).ToList();
+                ViewBag.Taoyuan = RenderImages(Taoyuan);
+
+                var HsinchuCity = (from h in _db.Hotel
+                               where h.City == 5 && h.Room.Count > 0
+                               select new HotelViewModel
+                               {
+                                   ID = h.ID,
+                                   Name = h.Name,
+                                   //City = h.City,
+                                   Game = h.Game,
+                                   Sell = h.Room.Min(o => o.Sell),
+                                   Tel = h.Tel,
+                                   LinkUrl = h.LinkUrl
+                               }).OrderBy(x => Guid.NewGuid()).Take(8).ToList();
+                ViewBag.HsinchuCity = RenderImages(HsinchuCity);
+
+                var HsinchuCountry = (from h in _db.Hotel
+                                   where h.City == 6 && h.Room.Count > 0
+                                   select new HotelViewModel
+                                   {
+                                       ID = h.ID,
+                                       Name = h.Name,
+                                       //City = h.City,
+                                       Game = h.Game,
+                                       Sell = h.Room.Min(o => o.Sell),
+                                       Tel = h.Tel,
+                                       LinkUrl = h.LinkUrl
+                                   }).OrderBy(x => Guid.NewGuid()).Take(8).ToList();
+                ViewBag.HsinchuCountry = RenderImages(HsinchuCountry);
+
+                return View(model);
+            }
+
+            #endregion
+
+            var CityModel = _db.City.Where(o => o.Name.Contains(search.word)).FirstOrDefault();
+            var City = CityModel == null ? 0 : CityModel.ID;
+
+            var hotel = (from h in _db.Hotel
+                     where
+                         //(City==0||h.City == City) ||
+                     (string.IsNullOrEmpty(search.word) || h.Name.Contains(search.word))
+                     && (string.IsNullOrEmpty(search.Game) || h.Game.Contains(search.Game))
+                         select h).OrderBy(x => Guid.NewGuid()).ToList();
+            var checkInDate = search.Begin;
+            foreach(var h in hotel){
+                var r = h.Room.FirstOrDefault();
+                if (r != null)
+                {
+                   
+                    var has = _basedb.RoomPrice.Where(
+                        o => o.ROOMID == r.ID &&
+                        System.Data.Objects.EntityFunctions.TruncateTime(o.Date) == checkInDate
+                        ).FirstOrDefault();
+                    if (has == null || has.SaleOff == true)
+                    {
+                        model.Add(new HotelViewModel
+                        {
+                            ID = h.ID,
+                            Name = h.Name,
+                            Game = h.Game,
+                            Sell = h.Room.Min(o => o.Sell),
+                            Tel = h.Tel,
+                            LinkUrl = h.LinkUrl
+                        });                      
+                    }
+                }
+            }
+            
+          
             if(CurrentLanguage.Equals("us")){
                 foreach (var m in model)
                 {
@@ -45,8 +199,8 @@ namespace WGHotel.Controllers
                 }
             }
 
-            var a = new GameSiteModel().SelectList();
-           ViewBag.GameSite = new GameSiteModel().SelectList();
+          
+          
 
             return View(model);
         }
@@ -55,6 +209,7 @@ namespace WGHotel.Controllers
         {
             
             var model = _db.Hotel.Find(id);
+
 
             if (model == null)
             {
@@ -67,6 +222,7 @@ namespace WGHotel.Controllers
             detail.LinkUrl = model.LinkUrl;
             detail.Name = model.Name;
             detail.Tel = model.Tel;
+            detail.Address = model.Address;
             detail.Feature = model.Features;
             var Facilities = model.Facilities.Split(',').Select(Int32.Parse).ToList();
             detail.Facilities = _db.CodeFile.Where(o => Facilities.Contains(o.ID)).Select(p=>p.ItemDescription).ToList();
@@ -97,6 +253,30 @@ namespace WGHotel.Controllers
                 r.Images = _basedb.ImageStore.Where(o => o.ReferIdZH == r.ID && o.Type == "Room").ToList();
             }
 
+            var gamesites = model.Game.Split(',').ToList();
+
+            var NearHotels = _db.Hotel.Where(o => gamesites.Contains(o.Game) && o.ID != model.ID)
+                .Select(o => new HotelDetail
+            {
+                ID = o.ID,
+                Address = o.Address,
+                Name = o.Name,
+              ParentId = o.ParentId == null ? 0 : o.ParentId.Value
+            }).OrderBy(x => Guid.NewGuid()).Take(5).ToList();
+
+            
+
+            foreach (var item in NearHotels)
+            {
+                var ReferIdZH = item.ID;
+                if (CurrentLanguage.Equals("us"))
+                {
+                    ReferIdZH = item.ParentId;
+                }
+                item.Images = _basedb.ImageStore.Where(o => o.ReferIdZH == ReferIdZH).ToList();
+
+            }
+            ViewBag.NearHotels = NearHotels;
             return View(detail);
         }
 

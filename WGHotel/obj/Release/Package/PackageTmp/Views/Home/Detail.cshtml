@@ -1,29 +1,87 @@
 ﻿@model WGHotel.Models.HotelDetail
 <script src="~/Scripts/lightgallery-all.min.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1995kqdkunc5cGppQX1oeod30a9g-l9c&callback=initMap"
+        type="text/javascript"></script>
+<script type="text/javascript">
+    function initialize() {
+        initMap();
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map_canvas'), {
+                zoom: 15,
+                center: { lat: -34.397, lng: 150.644 }
+            });
+            var geocoder = new google.maps.Geocoder();
+            var address = document.getElementById('address').value;
+            console.log(address);
+            //document.getElementById('submit').addEventListener('click', function () {
+            geocodeAddress(geocoder,address, map);
+            //});
+        }
 
+        function geocodeAddress(geocoder,address, resultsMap) {
+
+            //var address = document.getElementById('address').value;
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+        //var secheltLoc = new google.maps.LatLng(49.47216, -123.76307);
+
+        //var myMapOptions = {
+        //    zoom: 15
+        //	,center: secheltLoc
+        //	,mapTypeId: google.maps.MapTypeId.ROADMAP
+        //};
+
+
+        //var theMap = new google.maps.Map(document.getElementById("map_canvas"), myMapOptions);
+
+
+        var marker = new google.maps.Marker({
+            map: theMap,
+            draggable: true,
+            position: new google.maps.LatLng(49.47216, -123.76307),
+            visible: true
+        });
+
+        
+    }
+</script>
 <div class="wrap">
+    <input type="hidden" id="address" value="@Model.Address" />
+    <nav class="breadcrumbs">
+       
+    </nav>
+
 <div class="row">
-    <div class="full-width">
-        <h1>@Model.Name</h1>
-    </div>
+    
     <!--hotel three-fourth content-->
-    <section class="full-width">
+    <section class="three-fourth">
         <!--gallery-->
         <div class="gallery">
             @if(Model.Images!=null && Model.Images.Count>0){
-                
+
             <ul id="image-gallery" class="cS-hidden">
                 @foreach (var img in Model.Images)
                 {
                     var base64 = Convert.ToBase64String(img.Image);
                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                    <li data-thumb="@imgSrc">
-                        <img src="@imgSrc" alt="" />
-                    </li>
+                <li data-thumb="@imgSrc">
+                    <img src="@imgSrc" alt="" />
+                </li>
 
                 }
             </ul>
-            
+
            }
         </div>
         <!--//gallery-->
@@ -31,7 +89,7 @@
         <nav class="inner-nav">
             <ul>
                 <li class="availability"><a href="#availability" title="Rooms" data-localize="rooms">房型</a></li>
-                <li class="description"><a href="#description" title="Description" data-localize="feature">特色</a></li>
+                <li class="description"><a href="#description" title="Description" data-localize="hotelfeature">特色</a></li>
                 <li class="facilities"><a href="#facilities" title="Facilities" data-localize="facilities">設施</a></li>
                 <li class="location"><a href="#location" title="Location" data-localize="location">地點</a></li>
                 @*<li class="reviews"><a href="#reviews" title="Reviews">Reviews</a></li>*@
@@ -43,12 +101,7 @@
         <section id="availability" class="tab-content">
             <article>
                 <h2 data-localize="rooms">房型</h2>
-                @*<div class="text-wrap">
-                    <a href="#" class="gradient-button right" title="Change dates">Change dates</a>
-                    <p>Available rooms from <span class="date">Thurs 29 Nov 2016</span> to <span class="date">Fri 30 Nov 2016</span>.</p>
-                </div>
-
-                <h2>Room types</h2>*@
+               
                 @Html.Partial("_RoomTypes",Model.Rooms)
             </article>
         </section>
@@ -63,7 +116,7 @@
                     </p>
                 </div>
 
-               
+
             </article>
         </section>
         <!--//description-->
@@ -75,42 +128,42 @@
                     <ul class="three-col">
                         @foreach (var fa in Model.Facilities)
                         {
-                            <li>
-                                @fa
-                            </li>
+                        <li>
+                            @fa
+                        </li>
                         }
                         @*<li>Kitchenette</li>
-                        <li>Ironing board</li>
-                        <li>Catering services</li>
-                        <li>Beachfront</li>
-                        <li>Hotspots</li>
-                        <li>Exhibition/convention floor</li>
-                        <li>Restaurant</li>
-                        <li>Room service - full menu</li>
-                        <li>Courtyard</li>
-                        <li>Lounges/bars</li>
-                        <li>Laundry/Valet service</li>
-                        <li>Airport Shuttle Service</li>
-                        <li>Complimentary breakfast</li>
-                        <li>Valet cleaning</li>
-                        <li>Car hire</li>*@
+                            <li>Ironing board</li>
+                            <li>Catering services</li>
+                            <li>Beachfront</li>
+                            <li>Hotspots</li>
+                            <li>Exhibition/convention floor</li>
+                            <li>Restaurant</li>
+                            <li>Room service - full menu</li>
+                            <li>Courtyard</li>
+                            <li>Lounges/bars</li>
+                            <li>Laundry/Valet service</li>
+                            <li>Airport Shuttle Service</li>
+                            <li>Complimentary breakfast</li>
+                            <li>Valet cleaning</li>
+                            <li>Car hire</li>*@
                     </ul>
                 </div>
 
                 @*<h2>Activities</h2>
-                <div class="text-wrap">
-                    <p>Tennis court, Sauna, Fitness centre, Massage </p>
-                </div>
+                    <div class="text-wrap">
+                        <p>Tennis court, Sauna, Fitness centre, Massage </p>
+                    </div>
 
-                <h2>Internet</h2>
-                <div class="text-wrap">
-                    <p><strong>Free!</strong> WiFi is available in all areas and is free of charge. </p>
-                </div>
+                    <h2>Internet</h2>
+                    <div class="text-wrap">
+                        <p><strong>Free!</strong> WiFi is available in all areas and is free of charge. </p>
+                    </div>
 
-                <h2>Parking</h2>
-                <div class="text-wrap">
-                    <p>Private parking is possible at a location nearby (reservation is not needed) and costs USD 28.80 per day.</p>
-                </div>*@
+                    <h2>Parking</h2>
+                    <div class="text-wrap">
+                        <p>Private parking is possible at a location nearby (reservation is not needed) and costs USD 28.80 per day.</p>
+                    </div>*@
             </article>
         </section>
         <!--//facilities-->
@@ -237,149 +290,71 @@
     </section>
     <!--//hotel content-->
     <!--sidebar-->
-    @*<aside class="one-fourth right-sidebar">
+    <aside class="one-fourth right-sidebar">
         <!--hotel details-->
         <article class="hotel-details">
             <h1>
-                Best ipsum hotel
-                <span class="stars">
-                    <i class="material-icons">&#xE838;</i>
-                    <i class="material-icons">&#xE838;</i>
-                    <i class="material-icons">&#xE838;</i>
-                </span>
+                @Model.Name
+               
             </h1>
-            <span class="address">Marylebone, London</span>
-            <span class="rating"> 8 /10</span>
+            <span class="address">@Model.Address</span>
+            
             <div class="description">
-                <p>The Best Ipsum hotel  features over 1,000 luxuriously appointed, individually styled rooms, suites and apartments, each containing unique works of art. </p>
+                <p>@Model.Feature</p>
             </div>
             <div class="tags">
-                <ul>
+                @*<ul>
                     <li><a href="#" title="Wellness">Wellness</a></li>
                     <li><a href="#" title="Last minute">Last minute</a></li>
                     <li><a href="#" title="Thailand">Thailand</a></li>
                     <li><a href="#" title="SPA">SPA</a></li>
                     <li><a href="#" title="Romantic">Romantic</a></li>
-                </ul>
+                </ul>*@
             </div>
         </article>
         <!--//hotel details-->
-        <!--testimonials-->
-        <article class="testimonials">
-            <blockquote>Loved the staff and the location was just amazing... Perfect!” </blockquote>
-            <span class="name">- Jane Doe, Solo Traveller</span>
-        </article>
-        <!--//testimonials-->
+
         <!--Need Help Booking?-->
         <article class="widget">
-            <h4>Need Help Booking?</h4>
-            <p>Call our customer services team on the number below to speak to one of our advisors who will help you with all of your holiday needs.</p>
-            <p class="number">1- 555 - 555 - 555</p>
+            
+            <p class="number">@Model.Tel</p>
         </article>
-        <!--//Need Help Booking?-->
-        <!--Why Book with us?-->
-        <article class="widget">
-            <h4>Why Book with us?</h4>
-            <h5>Low rates</h5>
-            <p>Get the best rates, or get a refund.No booking fees. Save money!</p>
-            <h5>Largest Selection</h5>
-            <p>140,000+ hotels worldwide130+ airlinesOver 3 million guest reviews</p>
-            <h5>We’re Always Here</h5>
-            <p>Call or email us, anytimeGet 24-hour support before, during, and after your trip</p>
-        </article>
-        <!--//Why Book with us?-->
-        <!--Popular hotels in the area-->
-        <article class="widget">
-            <h4>Popular hotels in the area</h4>
-            <ul class="popular-hotels small-list">
-                <li>
-                    <a href="#">
+       
+       @if (ViewBag.NearHotels !=null &&
+           ((List<WGHotel.Models.HotelDetail>)ViewBag.NearHotels).Count > 0) { 
+            <article class="widget">
+                <h4 data-localize="Neighboring">neighboring</h4>
+                @foreach (var item in (List<WGHotel.Models.HotelDetail>)ViewBag.NearHotels)
+                {
+                    <div class="deal-of-the-day">
+                        <figure>
+                            <a href="@Url.Action("Detail", new { id= item.ID })" title="">
+                                @if (item.Images.Count > 0)
+                                {
+                                    <img src="@Url.Action("HotelFirstImage", "Home", new { id = item.Images.ToList()[0].ID })" alt="" />
+                                }
+                                else
+                                {
+                                    <img src="~/images/uploads/img.jpg" />
+                                }
+                            </a>
+
+                        </figure>
                         <h3>
-                            Plaza Resort Hotel &amp; SPA
-                            <span class="stars">
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                            </span>
+                            <a href="@Url.Action("Detail", new { id= item.ID })">
+                                @item.Name
+
+                            </a>
                         </h3>
-                        <p>From <span class="price">$ 100 <small>/ per night</small></span></p>
-                        <span class="rating"> 8 /10</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <h3>
-                            Lorem Ipsum Inn
-                            <span class="stars">
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                            </span>
-                        </h3>
-                        <p>From <span class="price">$ 110 <small>/ per night</small></span></p>
-                        <span class="rating"> 7 /10</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <h3>
-                            Best Eastern London
-                            <span class="stars">
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                            </span>
-                        </h3>
-                        <p>From <span class="price">$ 125 <small>/ per night</small></span></p>
-                        <span class="rating"> 8 /10</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <h3>
-                            Plaza Resort Hotel &amp; SPA
-                            <span class="stars">
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                                <i class="material-icons">&#xE838;</i>
-                            </span>
-                        </h3>
-                        <p>From <span class="price">$ 100 <small>/ per night</small></span></p>
-                        <span class="rating"> 8 /10</span>
-                    </a>
-                </li>
-            </ul>
-            <a href="#" title="Show all" class="show-all">Show all</a>
-        </article>
-        <!--//Popular hotels in the area-->
-        <!--Deal of the day-->
-        <article class="widget">
-            <h4>Deal of the day</h4>
-            <div class="deal-of-the-day">
-                <figure><a href="hotel.html"><img src="images/uploads/img.jpg" alt="" /></a></figure>
-                <h3>
-                    <a href="hotel.html">
-                        Plaza Resort Hotel &amp; SPA
-                        <span class="stars">
-                            <i class="material-icons">&#xE838;</i>
-                            <i class="material-icons">&#xE838;</i>
-                            <i class="material-icons">&#xE838;</i>
-                            <i class="material-icons">&#xE838;</i>
-                        </span>
-                    </a>
-                </h3>
-                <p>From <span class="price">$ 100 <small>/ per night</small></span></p>
-                <span class="rating"> 8 /10</span>
-            </div>
-        </article>
-        <!--//Deal of the day-->
-    </aside>*@
+                        @*<p> 只要 <span class="price">@Model.Rooms.ToList().Min(o => o.DayPrice).ToString("#,##0")<small> 起</small></span></p>*@
+                        @*<p class="number">@Model.Tel</p>*@
+                    </div>
+                }
+
+            </article>
+      
+      }
+    </aside>
     <!--//sidebar-->
 </div>
 </div>

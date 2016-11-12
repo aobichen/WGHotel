@@ -2,8 +2,8 @@
     "myaccount": "Hotel Manage",
     "english": "English",
     "zhtw": "traditional Chinese",
-    "viewall": "View All",
-    "forward": "Forward",
+    "viewall": "Select your room",
+    "forward": "Booking",
     "hasbreakfast": "Has-breakfast",
     "nonbreakfast": "Non-Breakfast",
     "roomtype1": "Room Type:",
@@ -12,5 +12,13 @@
     "rooms": "Rooms",
     "facilities": "Facilities",
     "location": "Location",
-    "hotelfeature": "Feature"
+    "hotelfeature": "Feature",
+    "Keelung": "Keelung",
+    "Taipei": "Taipei",
+    "NewTaipei": "New Taipei",
+    "Taoyuan": "Taoyuan",
+    "HsinchuCity": "HsinchuCity",
+    "HsinchuCountry": "HsinchuCountry",
+    "Neighboring": "Neighboring",
+    "BookNow" : "Book Now"
 }

@@ -31,7 +31,6 @@
   <EntityContainer Name="WGHotelBaseEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ImageStore" EntityType="Self.ImageStore" />
     <EntitySet Name="SysSetting" EntityType="Self.SysSetting" />
-    <EntitySet Name="RoomPrice" EntityType="WGHotelBaseModel.RoomPrice" />
     <EntitySet Name="Area" EntityType="WGHotelBaseModel.Area" />
     <EntitySet Name="City" EntityType="WGHotelBaseModel.City" />
     <AssociationSet Name="FK__Area__CID__239E4DCF" Association="WGHotelBaseModel.FK__Area__CID__239E4DCF">
@@ -41,19 +40,8 @@
     <EntitySet Name="Country" EntityType="WGHotelBaseModel.Country" />
     <EntitySet Name="Banner" EntityType="WGHotelBaseModel.Banner" />
     <EntitySet Name="Report" EntityType="WGHotelBaseModel.Report" />
+    <EntitySet Name="RoomPrice" EntityType="WGHotelBaseModel.RoomPrice" />
   </EntityContainer>
-  <EntityType Name="RoomPrice">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ROOMID" Type="Int32" Nullable="false" />
-    <Property Name="ROOMIDOFUS" Type="Int32" />
-    <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="SaleOff" Type="Boolean" Nullable="false" />
-    <Property Name="Quantity" Type="Int32" Nullable="false" />
-  </EntityType>
   <EntityType Name="Area">
     <Key>
       <PropertyRef Name="ID" />
@@ -131,5 +119,17 @@
     <Property Name="OtherCost" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="Food" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
     <Property Name="UserType" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="RoomPrice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ROOMID" Type="Int32" Nullable="false" />
+    <Property Name="ROOMIDOFUS" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SaleOff" Type="Boolean" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

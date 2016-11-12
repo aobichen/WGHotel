@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WGHotel.Models.HotelViewModel>
 
-
-@foreach (var item in Model)
+@if (Model != null && Model.ToList().Count > 0) { 
+foreach (var item in Model)
 {
     <article class="one-fourth">
         <figure>
@@ -10,15 +10,20 @@
             </a>
         </figure>
         <div class="details">
-            <a href="@Url.Action("Detail","Home",new{id = item.ID})" title="View all" class="gradient-button" data-localize="viewall">瀏覽</a>
+            <a href="@Url.Action("Detail","Home",new{id = item.ID})" title="View all" class="gradient-button" data-localize="viewall">選擇客房</a>
             <h4>@item.Name</h4>
-            <span class="count">@item.Tel</span>
+            <span>
+                <i class="fa fa-phone-square" aria-hidden="true"></i>
+                @item.Tel
+            </span>
             <div class="ribbon">
-                <div class="half flight">
 
-                    <a href="@item.LinkUrl" title="View all">
-                        <span class="small"></span>
-                        <span class="price" style="font-size:14px;" data-localize="forward">訂房</span>
+                <div class="half">
+
+                    <a href="@item.LinkUrl" title="View all" style="padding-top:12px;">
+
+                        <span class="fa fa-globe fa-2x" aria-hidden="true" style="width:40%;text-align:left;"></span>
+                        <span class="price" style="width:50%;font-size:14px;" data-localize="forward">選擇客房</span>
                     </a>
 
                 </div>
@@ -29,9 +34,11 @@
                         {
                             <span class="price" style="font-size:14px;">&#36; @item.Sell.Value.ToString("#,##0")</span>
                         }
-                            </a>
+                    </a>
                 </div>
             </div>
+
         </div>
     </article>
+}
 }
