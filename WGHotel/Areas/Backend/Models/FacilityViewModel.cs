@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using WGHotel.Models;
 
 namespace WGHotel.Areas.Backend.Models
@@ -57,6 +58,40 @@ namespace WGHotel.Areas.Backend.Models
                 FactitlyUS.Enabled = Enabled;
                 us.SaveChanges();
             }
+        }
+
+       
+    }
+
+    public class Facilities
+    {
+        public List<SelectListItem> Facility(string lang = "zh", List<int> Selected = null)
+        {
+            var model = new List<Facility>();
+            var SelectList = new List<SelectListItem>();
+
+            var db = new WGHotelZHEntities();
+            if (lang.Equals("us"))
+            {
+                db = new WGHotelZHEntities("WGHotelUSEntities");
+            }
+          
+                model = db.Facility.ToList();
+                SelectList = new List<SelectListItem>();
+                foreach (var i in model)
+                {
+                    SelectList.Add(item: new SelectListItem
+                    {
+                        Text = i.Name,
+                        Value = i.ID.ToString(),
+                        Selected = Selected == null
+                           ? false
+                           : Selected.Contains(i.ID)
+                    });
+                }
+                
+            return SelectList;
+            
         }
     }
 }

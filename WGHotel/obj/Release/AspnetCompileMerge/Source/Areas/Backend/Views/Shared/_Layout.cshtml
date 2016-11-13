@@ -105,28 +105,34 @@
                             <span>飯店回報</span>
                         </a>
                     </li>
-                    
-                    <li class="sub-menu" id="System">
-                        <a href="javascript:void(0);" class="">
-                            <i class="fa fa-cogs"></i>
-                            <span>系統</span>
-                            <span class="menu-arrow arrow_carrot-right"></span>
-                        </a>
-                        <ul class="sub">
-                            <li id="RoomPriceDate">
-                                <a class="" href="@Url.Action("RoomPriceDate", "System")">房價起訖日</a>
-                            </li>
-                            <li id="GameSite">
-                                <a class="" href="@Url.Action("","GameSite")">場次管理</a>
-                            </li>
-                            <li id="Country">
-                                <a class="" href="@Url.Action("","Country")">參賽國家</a>
-                            </li>
-                            <li id="Facility">
-                                <a class="" href="@Url.Action("","Facility")">飯店設施</a>
-                            </li>
-                        </ul>
-                    </li>
+                    @if (User.IsInRole("Admin") || User.IsInRole("System"))
+                    {
+                        <li class="sub-menu" id="System">
+                            <a href="javascript:void(0);" class="">
+                                <i class="fa fa-cogs"></i>
+                                <span>系統</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li id="RoomPriceDate">
+                                    <a class="" href="@Url.Action("RoomPriceDate", "System")">房價起訖日</a>
+                                </li>
+                                <li id="GameSite">
+                                    <a class="" href="@Url.Action("","GameSite")">場次管理</a>
+                                </li>
+                                <li id="Country">
+                                    <a class="" href="@Url.Action("","Country")">參賽國家</a>
+                                </li>
+                                <li id="Facility">
+                                    <a class="" href="@Url.Action("","Facility")">飯店設施</a>
+                                </li>
+                                <li id="Banner">
+                                    <a class="" href="@Url.Action("","Banner")">看板設定</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+
                     @*<li class="sub-menu">
                         <a href="javascript:;" class="">
                             <i class="fa fa-desktop"></i>

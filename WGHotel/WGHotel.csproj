@@ -1117,6 +1117,9 @@
     <Content Include="Areas\Backend\Views\Report\_List.cshtml" />
     <Content Include="Areas\Backend\Views\Report\_Create.cshtml" />
     <Content Include="Areas\Backend\Views\Report\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Shared\_BannerUpload.cshtml" />
+    <Content Include="Areas\Backend\Views\Banner\_List.cshtml" />
+    <Content Include="Areas\Backend\Views\Banner\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />
@@ -1175,9 +1178,6 @@
     <Content Include="Views\Shared\_SliderCarousel.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Home\_List.cshtml" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Home\_RoomTypes.cshtml" />
     <Content Include="Views\Shared\_GamesDropDown.cshtml" />
@@ -1187,6 +1187,9 @@
     <Content Include="Views\Home\_ListTaoyuan.cshtml" />
     <Content Include="Views\Home\_ListHsinchuCity.cshtml" />
     <Content Include="Views\Home\_ListHsinchuCountry.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

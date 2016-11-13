@@ -68,7 +68,10 @@
                 <td>
                     <div class="btn-group">
 
-                        <a class="btn btn-success" href="@Url.Action("Price","Room", new { id = item.ID})">
+                        <a class="btn btn-danger" href="@Url.Action("Price","Room", new { id = item.ID})">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn-success" href="@Url.Action("Edit","Room", new { id = item.ID})">
                             <i class="fa fa-pencil-square-o"></i>
                         </a>
                         

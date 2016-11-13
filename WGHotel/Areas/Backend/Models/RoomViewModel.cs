@@ -98,7 +98,7 @@ namespace WGHotel.Areas.Backend.Models
                 Room.Enabled = true;
                 Room.HasBreakfast = HasBreakfast;
                 Room.HOTELID = HOTELID;
-                Room.Facilities = Facilities;
+                Room.Facilities = string.Empty;
                 Room.Quantiy = Quantiy;
                 db.Room.Add(Room);
                 db.SaveChanges();
@@ -118,7 +118,7 @@ namespace WGHotel.Areas.Backend.Models
                 Room.Enabled = true;
                 Room.HasBreakfast = HasBreakfast;
                 Room.HOTELID = HOTELID;
-                Room.Facilities = Facilities;
+                Room.Facilities = string.Empty;
                 Room.Quantiy = Quantiy;
                 Room.ParentId = ZHID;
                 db.Room.Add(Room);
@@ -155,9 +155,9 @@ namespace WGHotel.Areas.Backend.Models
             ZHModel.Enabled = true;
             ZHModel.HasBreakfast = HasBreakfast;
             ZHModel.HOTELID = HOTELID;
-            ZHModel.Facilities = Facilities;
+            ZHModel.Facilities = string.Empty;
             ZHModel.Quantiy = Quantiy;
-            _db.Room.Add(ZHModel);
+            //_db.Room.Add(ZHModel);
             _db.SaveChanges();
 
             USModel.BedType = BedType;
@@ -166,9 +166,9 @@ namespace WGHotel.Areas.Backend.Models
             USModel.Enabled = true;
             USModel.HasBreakfast = HasBreakfast;
             USModel.HOTELID = HOTELID;
-            USModel.Facilities = Facilities;
+            USModel.Facilities = string.Empty; 
             USModel.Quantiy = Quantiy;
-            db.Room.Add(USModel);
+            //db.Room.Add(USModel);
             db.SaveChanges();
 
             SaveImageStore(ZHModel.ID, USModel.ID);
@@ -183,24 +183,28 @@ namespace WGHotel.Areas.Backend.Models
                 var Basedb = new WGHotelBaseEntities();
                 var Now = DateTime.Now;
                 var images = (List<ImageViewModel>)Session[ImgKey];
+                var dbimages = Basedb.ImageStore.Where(o => o.ReferIdZH == ZHID && o.ReferIdUS == USID).ToList();
                 foreach (var img in images)
                 {
-                    var fileName = Guid.NewGuid().GetHashCode().ToString("x");
-                    //var file = string.Format("/UserFolder/{0}{1}",fileName, img.Extension);
-                    //var path = HttpContext.Current.Server.MapPath(file);
-                    //File.WriteAllBytes(path, img.Image);
-                    Basedb.ImageStore.Add(new ImageStore
-                    {
-                        // Path = file,
-                        Created = Now,
-                        Extension = img.Extension,
-                        Deleted = false,
-                        ReferIdUS = ZHID,
-                        ReferIdZH = USID,
-                        Type = "Room",
-                        Name = fileName,
-                        Image = img.Image
-                    });
+                    if(!dbimages.Any(o=>o.Name==img.Name)){
+                                           
+                        var fileName = Guid.NewGuid().GetHashCode().ToString("x");
+                        //var file = string.Format("/UserFolder/{0}{1}",fileName, img.Extension);
+                        //var path = HttpContext.Current.Server.MapPath(file);
+                        //File.WriteAllBytes(path, img.Image);
+                        Basedb.ImageStore.Add(new ImageStore
+                        {
+                            // Path = file,
+                            Created = Now,
+                            Extension = img.Extension,
+                            Deleted = false,
+                            ReferIdUS = ZHID,
+                            ReferIdZH = USID,
+                            Type = "Room",
+                            Name = fileName,
+                            Image = img.Image
+                        });
+                     }
                 }
                 Basedb.SaveChanges();
             }

@@ -1,5 +1,4 @@
-﻿@model IEnumerable<WGHotel.Models.Banner>
-
+﻿
 @{
     ViewBag.Title = "Banner";
 }
@@ -15,7 +14,7 @@
                     </h3>
                     <ol class="breadcrumb">
                         <li><i class="fa fa-home"></i><a href="@Url.Action("/", "Hotel")">Home</a></li>
-                        <li><i class="fa fa-list"></i>看板</li>
+                        <li><i class="fa fa-list"></i>設施</li>
 
                     </ol>
                 </div>
@@ -24,11 +23,18 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    @Html.Partial("_List", Model)
+                    @Html.Partial("_BannerUpload")
                 </div>
             </div>
-
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="key" value="@ViewBag.ImgKey" />
+                <button type="submit" class="btn btn-primary">
+                    確定
+                </button>
+            }
         </div>
     </div>
 
 </section>
+

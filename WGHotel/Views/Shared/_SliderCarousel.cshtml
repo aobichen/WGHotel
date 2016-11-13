@@ -1,12 +1,20 @@
 ﻿
 <div class="slider">
     <ul id="hero-gallery" class="cS-hidden">
-        <li data-thumb="~/images/banners/banner1.jpg">
+        @if (ViewBag.Banners != null && ((List<string>)ViewBag.Banners).Count > 0)
+        {
+            foreach (var banner in ((List<string>)ViewBag.Banners)) { 
+                <li data-thumb="@banner">
+                    <img src="@banner" alt="" />
+                </li>
+            }
+        }
+        @*<li data-thumb="~/images/banners/banner1.jpg">
             <img src="~/images/banners/banner1.jpg" alt="" />
         </li>
         <li data-thumb="~/images/banners/banner2.jpg">
             <img src="~/images/banners/banner2.jpg" alt="" />
-        </li>
+        </li>*@
         @*<li data-thumb="Content/images/slider7.jpg">
             <img src="Content/images/slider7.jpg" alt="" />
         </li>*@

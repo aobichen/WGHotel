@@ -48,6 +48,7 @@ namespace WGHotel.Controllers
 
         public ActionResult Index(SearchModel search=null)
         {
+            ViewBag.Banners = _basedb.Banner.Where(o => o.Enabled == true).Select(o => o.Path).ToList();
             var model = new List<HotelViewModel>();
             ViewBag.GameSite = new GameSiteModel().SelectList();
             #region
@@ -225,7 +226,7 @@ namespace WGHotel.Controllers
             detail.Address = model.Address;
             detail.Feature = model.Features;
             var Facilities = model.Facilities.Split(',').Select(Int32.Parse).ToList();
-            detail.Facilities = _db.CodeFile.Where(o => Facilities.Contains(o.ID)).Select(p=>p.ItemDescription).ToList();
+            detail.Facilities = _db.Facility.Where(o => Facilities.Contains(o.ID)).Select(p=>p.Name).ToList();
             detail.City = _db.City.Where(o => o.ID == model.City).FirstOrDefault().Name;
             var rooms = model.Room.Select(o => o.ID).ToList();
             detail.Rooms = (from r in _db.Room

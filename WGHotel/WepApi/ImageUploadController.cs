@@ -57,6 +57,31 @@ namespace WGHotel.WepApi
         }
 
 
+        [HttpPost]
+        [Route("BannerUpload")]
+        public object BannerUpload(ImageModel model)
+        {
+            var key = model.key;
+            var Images = new List<ImageViewModel>();
+
+            var Current = HttpContext.Current;
+            if (Current.Session[key] != null)
+            {
+
+                Images = (List<ImageViewModel>)Current.Session[key];
+                //Images = Images.Select(o => { o.Hotel = null; return o; }).ToList();
+            }
+            //Images = (List<ImageViewModel>)Current.Session[key];
+            //var a = "";
+            byte[] bytes = Convert.FromBase64String(model.image);
+            var Extension = Path.GetExtension(model.name);
+            Images.Add(new ImageViewModel { Image = bytes, Name = model.name, Extension = Extension });
+            Current.Session[key] = Images;
+            List<ImageViewModel> mm = (List<ImageViewModel>)Current.Session[key];
+            return Json(new {message = "OK" });
+        }
+
+
         public class ImageModel
         {
             public string image { get; set; }

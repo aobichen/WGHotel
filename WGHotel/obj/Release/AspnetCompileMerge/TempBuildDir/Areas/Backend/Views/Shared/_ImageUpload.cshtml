@@ -35,7 +35,7 @@
                     {
                         var base64 = Convert.ToBase64String(img.Image);
                         var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                        <div class="col-md-3">
+                        <div class="col-md-3 img-container">
                             <img class="img-responsive" src="@imgSrc" />
                             <i class="glyphicon glyphicon-remove remove" data-name="@img.Name"></i>
                         </div>
@@ -52,7 +52,7 @@
         let file = $('#file','#image-upload');
         let imgPanel = $('#image-panel', '#image-upload');
         let key = $('#imgkey', '#image-upload').val();
-        console.log(key);
+
         let maxSize = 4050000;
         var size = 0;
         let MaxWidth = 900;
@@ -175,12 +175,7 @@
         };
         
 
-        var UploadPost = function (model) {
-            //arr = [{image:'aaa',name:'bbb'}];
-            //console.log(arr);
-            // console.log(model);
-
-            //let model = { 'model': arr };
+        var UploadPost = function (model) {           
             $.ajax({
                 type: "POST",
                 url: '/ImageUpload1',
@@ -188,8 +183,6 @@
                 cache: false,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                //contentType: false,
-                //processData: false,
                 success: function (xhr) {
                     //preview(file);
                     //var d = xhr.data;
@@ -216,6 +209,7 @@
                 data: {name:name,SessionKey : key},
               
                 success: function (xhr) {
+                    //console.log(self.closest('.img-container').length);
                     self.closest('.img-container').remove();
                 },
                 error: function (xhr) {

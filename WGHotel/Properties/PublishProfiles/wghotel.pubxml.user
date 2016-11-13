@@ -66,8 +66,14 @@
     <File Include="Areas/Backend/Views/Admin/_Table.cshtml">
       <publishTime>10/21/2016 08:34:13</publishTime>
     </File>
+    <File Include="Areas/Backend/Views/Banner/Edit.cshtml">
+      <publishTime>11/12/2016 21:23:04</publishTime>
+    </File>
     <File Include="Areas/Backend/Views/Banner/Index.cshtml">
-      <publishTime>11/08/2016 20:31:20</publishTime>
+      <publishTime>11/12/2016 20:55:00</publishTime>
+    </File>
+    <File Include="Areas/Backend/Views/Banner/_List.cshtml">
+      <publishTime>11/13/2016 22:17:19</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Country/Edit.cshtml">
       <publishTime>10/31/2016 11:10:23</publishTime>
@@ -127,7 +133,7 @@
       <publishTime>11/08/2016 19:05:56</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Hotel/_Table.cshtml">
-      <publishTime>11/06/2016 20:33:42</publishTime>
+      <publishTime>11/12/2016 20:31:48</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Profile/ChangePassword.cshtml">
       <publishTime>11/08/2016 20:10:55</publishTime>
@@ -145,7 +151,7 @@
       <publishTime>11/10/2016 21:07:45</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Report/_List.cshtml">
-      <publishTime>11/08/2016 22:48:28</publishTime>
+      <publishTime>11/12/2016 20:39:36</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Room/Create.cshtml">
       <publishTime>10/27/2016 18:36:40</publishTime>
@@ -160,13 +166,16 @@
       <publishTime>10/27/2016 21:58:54</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Room/_Create.cshtml">
-      <publishTime>10/30/2016 20:53:53</publishTime>
+      <publishTime>11/13/2016 21:17:58</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Room/_FullCalendar.cshtml">
       <publishTime>10/30/2016 22:00:16</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Room/_List.cshtml">
-      <publishTime>11/10/2016 21:36:16</publishTime>
+      <publishTime>11/13/2016 20:02:46</publishTime>
+    </File>
+    <File Include="Areas/Backend/Views/Shared/_BannerUpload.cshtml">
+      <publishTime>11/12/2016 20:52:37</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Shared/_GameSite.cshtml">
       <publishTime>11/02/2016 19:04:14</publishTime>
@@ -175,10 +184,10 @@
       <publishTime>11/02/2016 19:04:14</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Shared/_ImageUpload.cshtml">
-      <publishTime>11/07/2016 20:42:25</publishTime>
+      <publishTime>11/13/2016 20:52:01</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Shared/_Layout.cshtml">
-      <publishTime>11/08/2016 23:02:38</publishTime>
+      <publishTime>11/12/2016 20:56:05</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Shared/_RoomFacility.cshtml">
       <publishTime>10/27/2016 18:36:40</publishTime>
@@ -2005,16 +2014,16 @@
       <publishTime>10/11/2016 08:59:29</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>11/12/2016 18:12:54</publishTime>
+      <publishTime>11/13/2016 22:18:07</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>11/12/2016 18:12:54</publishTime>
+      <publishTime>11/13/2016 22:18:07</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.compiled">
-      <publishTime>11/12/2016 18:12:53</publishTime>
+      <publishTime>11/13/2016 22:18:06</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.dll">
-      <publishTime>11/12/2016 18:12:53</publishTime>
+      <publishTime>11/13/2016 22:18:06</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/11/2016 08:59:38</publishTime>
@@ -2107,7 +2116,7 @@
       <publishTime>10/11/2016 08:59:29</publishTime>
     </File>
     <File Include="bin/WGHotel.dll">
-      <publishTime>11/12/2016 18:12:21</publishTime>
+      <publishTime>11/13/2016 22:17:53</publishTime>
     </File>
     <File Include="bin/zh-Hant/EntityFramework.resources.dll">
       <publishTime>10/11/2016 08:59:45</publishTime>
@@ -4417,7 +4426,7 @@
       <publishTime>10/20/2016 18:50:01</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/12/2016 18:12:35</publishTime>
+      <publishTime>11/13/2016 22:18:04</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>10/11/2016 08:59:19</publishTime>
@@ -4540,7 +4549,7 @@
       <publishTime>10/11/2016 08:59:16</publishTime>
     </File>
     <File Include="Views/Home/Detail.cshtml">
-      <publishTime>11/12/2016 16:59:41</publishTime>
+      <publishTime>11/12/2016 20:25:30</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>11/12/2016 13:05:04</publishTime>
@@ -4606,7 +4615,7 @@
       <publishTime>10/11/2016 08:59:37</publishTime>
     </File>
     <File Include="Views/Shared/_SliderCarousel.cshtml">
-      <publishTime>11/12/2016 17:15:59</publishTime>
+      <publishTime>11/13/2016 21:34:45</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>10/20/2016 19:16:27</publishTime>
@@ -4615,7 +4624,7 @@
       <publishTime>10/11/2016 08:59:16</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/12/2016 18:12:25</publishTime>
+      <publishTime>11/13/2016 22:18:00</publishTime>
     </File>
   </ItemGroup>
 </Project>

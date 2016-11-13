@@ -3,55 +3,81 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using WGHotel.Controllers;
+using PagedList;
+using WGHotel.Models;
+using System.IO;
+using System.Drawing;
 namespace WGHotel.Areas.Backend.Controllers
 {
-    public class BannerController : Controller
+    public class BannerController : BaseController
     {
         // GET: Backend/Banner
-        public ActionResult Index()
+        public ActionResult Index(int Page=1)
         {
-            return View();
+            var model = _basedb.Banner.ToList();
+            var currentPage = Page < 1 ? 1 : Page;
+            var PageSize = 15;
+            //currentPage = !string.IsNullOrEmpty(SearchString) ? 1 : currentPage;
+            // var model = _basedb.Country.Where(o => string.IsNullOrEmpty(SearchString) || o.Name.Contains(SearchString)).ToList();
+
+            var PageModel = model.ToPagedList(currentPage, PageSize);
+            return View(PageModel);
         }
 
-        // GET: Backend/Banner/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Backend/Banner/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+       
 
         // POST: Backend/Banner/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
 
         // GET: Backend/Banner/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
+            ViewBag.ImgKey = Guid.NewGuid().GetHashCode().ToString("x");
             return View();
         }
 
         // POST: Backend/Banner/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string key)
         {
+            var models = (List<ImageViewModel>)Session[key];
+
+            using (WGHotelBaseEntities db = new WGHotelBaseEntities())
+            {
+                
+                var Now = DateTime.Now;
+                foreach (var img in models)
+                {
+                    var Folder = "/images/banners";
+                    if (!Directory.Exists(Server.MapPath(Folder)))
+                    {
+                        Directory.CreateDirectory(Server.MapPath(Folder));
+                    }
+                    
+                    var FileName = Guid.NewGuid().GetHashCode().ToString("x").ToUpper();
+
+                    var Path = string.Format("{0}/{1}{2}", Folder, FileName, img.Extension);
+                       
+                         MemoryStream ms = new MemoryStream(img.Image);
+                         Image returnImage = Image.FromStream(ms);
+                         returnImage.Save(Server.MapPath(Path));
+
+                     db.Banner.Add(new Banner
+                    {
+
+                        Image = img.Image,
+                        Extension = img.Extension,
+                        Enabled = true,
+                        Path = Path,
+                        Name = img.Name,
+                       
+                    });
+
+                    
+                }
+                db.SaveChanges();
+            }
             try
             {
                 // TODO: Add update logic here
@@ -64,26 +90,32 @@ namespace WGHotel.Areas.Backend.Controllers
             }
         }
 
-        // GET: Backend/Banner/Delete/5
-        public ActionResult Delete(int id)
+        public class BannerEnabled
         {
-            return View();
+            public int id { get; set; }
+            public bool enabled { get; set; }
+        }
+        // GET: Backend/Banner/Delete/5
+        [HttpPost]
+        public ActionResult Delete(BannerEnabled model)
+        {
+            if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("System")))
+            {
+                if (_basedb.Banner.Any(o => o.ID == model.id))
+                {
+                    var Banner = _basedb.Banner.Find(model.id);
+                    Banner.Enabled = model.enabled;
+                    _basedb.SaveChanges();
+                }
+
+                return Json(new { success=true });
+            }
+           
+
+            return Json(new { success=false });
         }
 
         // POST: Backend/Banner/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

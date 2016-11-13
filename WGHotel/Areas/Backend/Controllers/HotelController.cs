@@ -74,7 +74,7 @@ namespace WGHotel.Areas.Backend.Controllers
             var AccountAndImgKey = Guid.NewGuid().GetHashCode().ToString("x");
             model.Account = AccountAndImgKey.ToUpper();
             model.Password = Guid.NewGuid().GetHashCode().ToString("x");
-            ViewBag.HotelFacility = new CodeFiles().GetHotelFacility();
+            ViewBag.HotelFacility = new Facilities().Facility();
             ViewBag.ImgKey = AccountAndImgKey;
             Session[AccountAndImgKey] = new List<ImageViewModel>();
             //model.ImgKey = AccountAndImgKey;
@@ -119,8 +119,8 @@ namespace WGHotel.Areas.Backend.Controllers
                 return RedirectToAction("Create");
             }
 
-          
-            ViewBag.HotelFacility = new CodeFiles().GetHotelFacility();
+
+           ViewBag.HotelFacility = new Facilities().Facility();
             ViewBag.ImgKey = model.ImgKey;
             Session[model.ImgKey] = new List<ImageViewModel>();
             //model.ImgKey = AccountAndImgKey;
@@ -170,7 +170,7 @@ namespace WGHotel.Areas.Backend.Controllers
             //model.Facilies = 
             var Facilies = ZHmodel.Facilities.Split(',').Select(int.Parse).ToList();
             var GameSite = ZHmodel.Game.Split(',').Select(int.Parse).ToList();
-            ViewBag.HotelFacility = new CodeFiles().GetHotelFacility(Facilies);
+            ViewBag.HotelFacility = new Facilities().Facility("zh",Facilies);
             ViewBag.GameSites = new GameSiteModel().SelectList(GameSite);
             ViewBag.City = new GameSiteModel().Citys(ZHmodel.City);
             return View(model);
@@ -217,7 +217,7 @@ namespace WGHotel.Areas.Backend.Controllers
             //model.Facilies = 
             var Facilies = ZHmodel.Facilities.Split(',').Select(int.Parse).ToList();
             var GameSite = ZHmodel.Game.Split(',').Select(int.Parse).ToList();
-            ViewBag.HotelFacility = new CodeFiles().GetHotelFacility(Facilies);
+            ViewBag.HotelFacility = new Facilities().Facility("zh",Facilies);
             ViewBag.GameSites = new GameSiteModel().SelectList(GameSite);
             ViewBag.City = new GameSiteModel().Citys(ZHmodel.City);
             return View(model);
@@ -268,7 +268,7 @@ namespace WGHotel.Areas.Backend.Controllers
             //model.Facilies = 
             var Facilies = ZHmodel.Facilities.Split(',').Select(int.Parse).ToList();
             var GameSite = ZHmodel.Game.Split(',').Select(int.Parse).ToList();
-            ViewBag.HotelFacility = new CodeFiles().GetHotelFacility(Facilies);
+            ViewBag.HotelFacility = new Facilities().Facility("zh",Facilies);
             ViewBag.GameSites = new GameSiteModel().SelectList(GameSite);
             ViewBag.City = new GameSiteModel().Citys(ZHmodel.City);
             return View(model);

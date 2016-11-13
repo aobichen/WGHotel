@@ -121,6 +121,7 @@ namespace WGHotel.Areas.Backend.Controllers
         public ActionResult Edit(int id)
         {
             var modelzh = _dbzh.Room.Find(id);
+            var key = Guid.NewGuid().GetHashCode().ToString("x");
             var modelus = _dbus.Room.Where(o => o.ParentId == modelzh.ID).FirstOrDefault();
             var model = new RoomViewModel { 
                 Sell = modelzh.Sell.Value,
@@ -134,12 +135,29 @@ namespace WGHotel.Areas.Backend.Controllers
                  NoticeZh = modelzh.Notice,
                  Quantiy = modelzh.Quantiy.Value,
                  RoomType = modelzh.RoomType,
-                 NameZh = modelzh.Name
+                 NameZh = modelzh.Name,
+                FeatureUs = modelus.Feature,
+                FeatureZh = modelzh.Feature,
+                ID = modelzh.ID,
+                ImgKey = key
             };
             var RoomModel = new RoomViewModel();
             ViewBag.RoomTypes = RoomModel.RoomTypeSelectList;
             ViewBag.BedTypes = RoomModel.BedTypeSelectList;
             ViewBag.RoomFacility = RoomModel.FacilityList;
+
+            var Images = _basedb.ImageStore.Where(o => o.ReferIdZH == model.ID && o.Type == "Room").Select(p =>
+                new ImageViewModel
+                {
+                    Image = p.Image,
+                    Extension = p.Extension,
+                    Name = p.Name,
+                    Type = p.Type
+                }).ToList();
+
+            
+            ViewBag.ImgKey = key;
+            Session[key] = Images;
 
             return View(model);
         }
@@ -149,9 +167,9 @@ namespace WGHotel.Areas.Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.HOTELID = 11;
-                model.Create();
-                return View("Edit");
+               // model.HOTELID = 11;
+                model.Edit();
+                return RedirectToAction("Edit", new {id=model.ID });
             }
             return View();
         }

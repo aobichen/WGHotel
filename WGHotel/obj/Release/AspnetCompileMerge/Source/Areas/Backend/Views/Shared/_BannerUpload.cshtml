@@ -1,4 +1,5 @@
-﻿<style type="text/css">
+﻿
+<style type="text/css">
     .remove {
         right: 20px;
         top: 2px;
@@ -8,9 +9,9 @@
         cursor: pointer;
     }
 
-     .remove:hover {      
-       text-shadow:2px 2px 2px #8E8E8E;
-    }
+        .remove:hover {
+            text-shadow: 2px 2px 2px #8E8E8E;
+        }
 </style>
 <div class="row" id="image-upload">
     <input type="hidden" name="ImgKey" id="imgkey" value="@ViewBag.ImgKey" />
@@ -20,7 +21,7 @@
                 上傳
             </button>
             <div style="width:0;height:0;overflow:hidden">
-                <input type="file" name="file[]" id="file" multiple />
+                <input type="file" name="file[]" id="file" />
             </div>
         </div>
         <div class="panel-body" style="background-color:#fff;border:none;">
@@ -35,7 +36,7 @@
                     {
                         var base64 = Convert.ToBase64String(img.Image);
                         var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                        <div class="col-md-3 img-container">
+                        <div class="col-md-3">
                             <img class="img-responsive" src="@imgSrc" />
                             <i class="glyphicon glyphicon-remove remove" data-name="@img.Name"></i>
                         </div>
@@ -52,11 +53,11 @@
         let file = $('#file','#image-upload');
         let imgPanel = $('#image-panel', '#image-upload');
         let key = $('#imgkey', '#image-upload').val();
-
+        console.log(key);
         let maxSize = 4050000;
         var size = 0;
-        let MaxWidth = 900;
-        let MaxHeight = 600;
+        let MaxWidth = 1920;
+        let MaxHeight = 1275;
         let arr = [];
 
         btnupload.on('click', function () {
@@ -65,7 +66,7 @@
             file.trigger('click');
         });
 
-        file.on('change', function (e) {        
+        file.on('change', function (e) {
             $('#message').html('').hide();
             //filesUpload(this);
             preview(this);
@@ -77,8 +78,8 @@
             var size = Math.pow(10, pos);
             return Math.round(num * size) / size;
         }
- 
-      
+
+
         function preview(input) {
             if (input.files && input.files[0]) {
                 var files = input.files;
@@ -109,7 +110,7 @@
                         col.append(imageTemp);
                         col.append(DeleteIcon);
                         imgPanel.append(col);
-                        
+
                     }
 
                     reader.readAsDataURL(file);
@@ -119,15 +120,15 @@
             //callback();
         };
 
-       
+
 
         function filesUpload(file) {
             var canvas = document.createElement("canvas");
             var ctx = canvas.getContext("2d");
             var model = {};
-          
+
             let files = file.files;
-            for (var i = 0, max = files.length; i < max; i++) {                    
+            for (var i = 0, max = files.length; i < max; i++) {
                 if (!files[i].type.match(/^image/)) { //去除非圖片檔
                     console.log('file ' + (i + 1) + ' is not an image');
                     continue;
@@ -135,15 +136,15 @@
 
                 let Myfile = files[i];
                 var name = Myfile.name;
-                
+
                 var src = window.URL.createObjectURL(Myfile);
                 var img = document.createElement("img");
                 var image = new Image();
-                
+
                 image.src = window.URL.createObjectURL(Myfile);
-                
+
                 image.onload = function () {
-                   
+
                         var width = 200;
                         var height = 100;
                         canvas.width = 200;
@@ -160,29 +161,29 @@
                         model.image = base64;
                         model.name = name;
                         model.url = dataurl;
-                        //img.src = dataurl;
-                        //imgPanel.append(img);
+                       
                         SelfPost(model);
-                    
-                };
-                
-                //img.src = canvas.toDataURL("image/jpeg");
-                //image.src = src;
-            }
-            
-            //SelfPost(model);
-            
-        };
-        
 
-        var UploadPost = function (model) {           
+                };
+
+            }
+
+          
+
+        };
+
+
+        var UploadPost = function (model) {
+           
             $.ajax({
                 type: "POST",
-                url: '/ImageUpload1',
+                url: '/BannerUpload',
                 data: JSON.stringify(model),
                 cache: false,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+                //contentType: false,
+                //processData: false,
                 success: function (xhr) {
                     //preview(file);
                     //var d = xhr.data;
@@ -207,9 +208,8 @@
                 type: "POST",
                 url: '/ImageDelete',
                 data: {name:name,SessionKey : key},
-              
+
                 success: function (xhr) {
-                    //console.log(self.closest('.img-container').length);
                     self.closest('.img-container').remove();
                 },
                 error: function (xhr) {
@@ -219,8 +219,8 @@
             });
         });
 
-           
+
     })
-    
+
 
 </script>

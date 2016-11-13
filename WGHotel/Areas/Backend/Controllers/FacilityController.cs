@@ -66,6 +66,11 @@ namespace WGHotel.Areas.Backend.Controllers
         {
             if (model.ID <= 0)
             {
+                if (_dbzh.Facility.Any(o => o.Name == model.NameZH))
+                {
+                    ModelState.AddModelError("","資料重複");
+                    return View();
+                }
                 model.Create();
                 return RedirectToAction("","Facility");
             }
