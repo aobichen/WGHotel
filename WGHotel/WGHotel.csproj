@@ -256,6 +256,9 @@
     <Compile Include="Models\Report.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReportRooms.cs">
+      <DependentUpon>WGHotelBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Room.cs">
       <DependentUpon>WGHotelZH.tt</DependentUpon>
     </Compile>
@@ -322,6 +325,8 @@
     <Compile Include="WepApi\RoomController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\uploads\error.jpg" />
+    <Content Include="Xss.html" />
     <Content Include="404.html" />
     <Content Include="Content\Admin\css\bootstrap-switch.css" />
     <Content Include="Content\Admin\css\bootstrap-switch.min.css" />

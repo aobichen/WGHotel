@@ -37,6 +37,8 @@ namespace WGHotel.Areas.Backend.Models
         public string Food { get; set; }
         public string UserType { get; set; }
 
+        public List<ReportRooms> RoomOfReport { get; set; }
+
         public void Create(){
             var db = new WGHotelBaseEntities();
             var Model = new Report();
@@ -60,9 +62,28 @@ namespace WGHotel.Areas.Backend.Models
             Model.Other = Other;
             Model.OtherCost = OtherCost;
             Model.UserType = UserType;
+
+            var ReportRooms = new List<ReportRooms>();
+
+            var RoomString = Room;
+            var RoomSpilt = RoomString.Split(',');
+            foreach (var ro in RoomSpilt)
+            {
+                var room = ro.Split('^');
+                var id = int.Parse(room[0]);
+                var amt = int.Parse(room[1]);
+                var name = room[2];
+                ReportRooms.Add(new ReportRooms { RoomID = id, Amount = amt, RoomName = name });
+            }
+
+            Model.ReportRooms = ReportRooms;
+
             db.Report.Add(Model);
             db.SaveChanges();
         }
+
+
+        
 
         public void Edit()
         {
@@ -88,6 +109,20 @@ namespace WGHotel.Areas.Backend.Models
             Model.Other = Other;
             Model.OtherCost = OtherCost;
             Model.UserType = UserType;
+            var ReportRooms = new List<ReportRooms>();
+
+            var RoomString = Room;
+            var RoomSpilt = RoomString.Split(',');
+            foreach (var ro in RoomSpilt)
+            {
+                var room = ro.Split('^');
+                var id = int.Parse(room[0]);
+                var amt = int.Parse(room[1]);
+                var name = room[2];
+                ReportRooms.Add(new ReportRooms { RoomID = id, Amount = amt, RoomName = name });
+            }
+
+            Model.ReportRooms = ReportRooms;
             //db.Report.Add(Model);
             db.SaveChanges();
         }

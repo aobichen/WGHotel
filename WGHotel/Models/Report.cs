@@ -14,6 +14,12 @@ namespace WGHotel.Models
     
     public partial class Report
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Report()
+        {
+            this.ReportRooms = new HashSet<ReportRooms>();
+        }
+    
         public int ID { get; set; }
         public string Country { get; set; }
         public int CountryID { get; set; }
@@ -34,5 +40,8 @@ namespace WGHotel.Models
         public Nullable<decimal> OtherCost { get; set; }
         public string Food { get; set; }
         public string UserType { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReportRooms> ReportRooms { get; set; }
     }
 }

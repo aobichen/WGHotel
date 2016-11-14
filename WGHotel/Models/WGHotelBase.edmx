@@ -86,6 +86,16 @@
           <Property Name="Food" Type="nvarchar" MaxLength="1500" />
           <Property Name="UserType" Type="nvarchar" MaxLength="5" />
         </EntityType>
+        <EntityType Name="ReportRooms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportID" Type="int" Nullable="false" />
+          <Property Name="RoomName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="RoomID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="RoomPrice">
           <Key>
             <PropertyRef Name="ID" />
@@ -94,7 +104,7 @@
           <Property Name="ROOMID" Type="int" Nullable="false" />
           <Property Name="ROOMIDOFUS" Type="int" />
           <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="SaleOff" Type="bit" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
@@ -121,6 +131,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ReportRooms_Report">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="ReportRooms" Type="Self.ReportRooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReportRooms">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="WGHotelBaseModelStoreContainer">
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
@@ -128,11 +150,16 @@
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImageStore" EntityType="Self.ImageStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportRooms" EntityType="Self.ReportRooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoomPrice" EntityType="Self.RoomPrice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysSetting" EntityType="Self.SysSetting" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Area__CID__239E4DCF" Association="Self.FK__Area__CID__239E4DCF">
             <End Role="City" EntitySet="City" />
             <End Role="Area" EntitySet="Area" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportRooms_Report" Association="Self.FK_ReportRooms_Report">
+            <End Role="Report" EntitySet="Report" />
+            <End Role="ReportRooms" EntitySet="ReportRooms" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -180,6 +207,11 @@
           <EntitySet Name="Banner" EntityType="WGHotelBaseModel.Banner" />
           <EntitySet Name="Report" EntityType="WGHotelBaseModel.Report" />
           <EntitySet Name="RoomPrice" EntityType="WGHotelBaseModel.RoomPrice" />
+          <EntitySet Name="ReportRooms" EntityType="WGHotelBaseModel.ReportRooms" />
+          <AssociationSet Name="FK_ReportRooms_Report" Association="WGHotelBaseModel.FK_ReportRooms_Report">
+            <End Role="Report" EntitySet="Report" />
+            <End Role="ReportRooms" EntitySet="ReportRooms" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Area">
           <Key>
@@ -258,6 +290,7 @@
           <Property Name="OtherCost" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Food" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
           <Property Name="UserType" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReportRooms" Relationship="WGHotelBaseModel.FK_ReportRooms_Report" FromRole="Report" ToRole="ReportRooms" />
         </EntityType>
         <EntityType Name="RoomPrice">
           <Key>
@@ -267,10 +300,33 @@
           <Property Name="ROOMID" Type="Int32" Nullable="false" />
           <Property Name="ROOMIDOFUS" Type="Int32" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="SaleOff" Type="Boolean" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="ReportRooms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportID" Type="Int32" Nullable="false" />
+          <Property Name="RoomName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="RoomID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Report" Relationship="WGHotelBaseModel.FK_ReportRooms_Report" FromRole="ReportRooms" ToRole="Report" />
+        </EntityType>
+        <Association Name="FK_ReportRooms_Report">
+          <End Type="WGHotelBaseModel.Report" Role="Report" Multiplicity="1" />
+          <End Type="WGHotelBaseModel.ReportRooms" Role="ReportRooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReportRooms">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -385,6 +441,17 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ROOMIDOFUS" ColumnName="ROOMIDOFUS" />
                 <ScalarProperty Name="ROOMID" ColumnName="ROOMID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportRooms">
+            <EntityTypeMapping TypeName="WGHotelBaseModel.ReportRooms">
+              <MappingFragment StoreEntitySet="ReportRooms">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -23,7 +23,7 @@ namespace WGHotel.Areas.Backend.Controllers
                          select new ReportViewModel
                              {
                                  CheckInDate = report.CheckInDate,
-                                 Price = report.Price,
+                                 Price = report.Price==null?0:report.Price,
                                  Country = report.Country,
                                  ID = report.ID,
                                  NumOfPeople = report.NumOfPeople,
@@ -66,8 +66,9 @@ namespace WGHotel.Areas.Backend.Controllers
                      }).FirstOrDefault();
                     
                 var Hotel = _dbzh.Hotel.Where(o => o.UserId == CurrentUser.Id).FirstOrDefault();
-                
-                
+                model.HotelID = Hotel.ID;
+
+                model.RoomOfReport = _basedb.ReportRooms.Where(o => o.ID == model.ID).ToList();
                 
                 var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
                 ViewBag.RoomId = new SelectList(Rooms, "ID", "Name",model.RoomID);
@@ -83,26 +84,75 @@ namespace WGHotel.Areas.Backend.Controllers
                 ViewBag.RoomId = new SelectList(Rooms, "ID", "Name");
                 var Country = _basedb.Country.ToList();
                 ViewBag.Country = new SelectList(Country, "ID", "Name");
+                var model = new ReportViewModel();
+
+                model.HotelID = Hotel.ID;
+                return View(model);
             }
 
             
 
-            return View();
+            //return View();
         }
 
         // POST: Backend/Report/Edit/5
         [HttpPost]
         public ActionResult Edit(ReportViewModel model)
         {
-            model.HotelID = _dbzh.Room.Find(model.RoomID).Hotel.ID;
+
+            //#region
+            //if (model.Price == null || model.CheckInDate == DateTime.MinValue || string.IsNullOrEmpty(model.Room))
+            //{
+            //    var result = new ReportViewModel();
+            //    var model1 = _basedb.Report.Where(o => o.ID == model.ID).Select(o =>
+            //         new ReportViewModel
+            //         {
+            //             CheckInDate = o.CheckInDate,
+            //             Price = o.Price,
+            //             OtherCost = o.OtherCost,
+            //             Other = o.Other,
+            //             FoodCost = o.FoodCost,
+            //             Food = o.Food,
+            //             Country = o.Country,
+            //             CountryID = o.CountryID,
+            //             HotelID = o.HotelID,
+            //             ID = o.ID,
+            //             NumOfPeople = o.NumOfPeople,
+            //             Remark = o.Remark,
+            //             Room = o.Room,
+            //             RoomID = o.RoomID,
+            //             UserType = o.UserType
+            //         }).FirstOrDefault();
+
+            //    var Hotel = _dbzh.Hotel.Where(o => o.UserId == CurrentUser.Id).FirstOrDefault();
+            //    model.HotelID = Hotel.ID;
+
+            //    model.RoomOfReport = _basedb.ReportRooms.Where(o => o.ID == model.ID).ToList();
+
+            //    var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
+            //    ViewBag.RoomId = new SelectList(Rooms, "ID", "Name", model.RoomID);
+            //    var Country = _basedb.Country.ToList();
+            //    ViewBag.Country = new SelectList(Country, "ID", "Name", model.CountryID);
+            //    ViewBag.UserType = model.UserType;
+            //    return View(model1);
+            //}
+            //#endregion
+
+            //model.HotelID = _dbzh.Room.Find(model.HotelID).Hotel.ID;
+            if (!_dbzh.Hotel.Any(o => o.ID == model.HotelID && o.UserId == CurrentUser.Id))
+            {
+                return View();
+            }
             var Now = DateTime.Now;
             var UserId = CurrentUser.Id;
             model.Created = Now;
             model.Creator = UserId;
             model.Modified = Now;
             model.Modify = UserId;
-            model.CheckInDate = Now;
-            model.Room = _dbzh.Room.Find(model.RoomID).Name;
+            //model.CheckInDate = Now;
+        
+           
+            //model.Room = _dbzh.Room.Find(model.RoomID).Name;
             try
             {
                 if (model.ID <= 0)

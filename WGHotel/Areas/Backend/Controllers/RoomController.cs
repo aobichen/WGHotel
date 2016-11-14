@@ -177,6 +177,7 @@ namespace WGHotel.Areas.Backend.Controllers
         public ActionResult Price(int id)
         {
             ViewBag.RoomId = id;
+            ViewBag.Name = _dbzh.Room.Find(id).Name;
             return View();
         }
     }

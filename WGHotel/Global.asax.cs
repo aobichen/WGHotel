@@ -42,5 +42,38 @@ namespace WGHotel
             HttpCookie langCookie = Request.Cookies["lang"];
            
         }
+
+        void Application_Error(object sender, EventArgs e) 
+    { 
+        // 發生未處理錯誤時執行的程式碼
+        // At this point we have information about the error
+        HttpContext ctx = HttpContext.Current;
+
+        Exception exception = ctx.Server.GetLastError();
+
+        string errorInfo =
+           "Offending URL: " + ctx.Request.Url.ToString() +
+           "Source: " + exception.Source +
+           "Message: " + exception.Message +
+           "Stack trace: " + exception.StackTrace;
+
+
+        if (exception.StackTrace.Contains("ValidateString"))
+        {   
+     //因為我所要攔截的訊息會有「ValidateString」字眼，所以我將這事件另外導到其他頁面
+            ctx.Response.Redirect("~/Xss.html");            
+        }
+        else
+        {
+            ctx.Response.Write(errorInfo);
+        }
+
+        // --------------------------------------------------
+        // To let the page finish running we clear the error
+        // --------------------------------------------------
+        ctx.Server.ClearError();
+       
+
+    }
     }
 }

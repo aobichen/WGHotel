@@ -21,20 +21,20 @@
 
             
             @Html.HiddenFor(model=>model.ID)
-
+            @Html.HiddenFor(model => model.HotelID)
             <div class="row">
                 <div class="col-lg-12">
                             
                      <section class="panel panel-success">
                         <header class="panel-heading">
-                            @Html.HiddenFor(model => model.ID)
+                            
                             <input type="hidden" id="UserType" value="@ViewBag.UserType" />
                         </header>
                         <div class="panel-body">
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <div class="col-lg-10">
-                                        <select id="SelectUser" name="UserType" multiple="" class="form-control">
+                                        <select id="SelectUser" name="UserType" class="form-control">
                                             <option value="媒體">媒體</option>
                                             <option value="親友">親友</option>
                                             <option value="工作人員">工作人員</option>
@@ -43,11 +43,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <script type="text/javascript">
-                                    jQuery(function () {
-                                        $('#SelectUser').val($('#UserType').val());
-                                    });
-                                </script>
+                                
 
 
                                
@@ -71,7 +67,81 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">房型</label>
                                     <div class="col-sm-10 col-lg-6 col-md-8">
-                                        @Html.DropDownList("RoomID", null, null, new { @class = "form-control" })
+                                        @Html.CheckBoxList("RoomId", (SelectList)ViewBag.RoomId, null, WGHotel.Helpers.Position.Vertical, 5)
+                                        <table id="room-table" class="table">
+                                            @foreach (var item in (SelectList)ViewBag.RoomId)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @if (Model.RoomOfReport.Any(o => o.RoomID == int.Parse(item.Value)))
+                                                        {
+                                                            <input type="checkbox" checked value="@item.Value" />
+                                                        }
+                                                        else { 
+                                                        <input type="checkbox" value="@item.Value" />
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (Model.RoomOfReport.Any(o => o.RoomID == int.Parse(item.Value)))
+                                                        {
+                                                            <input type="number" min="1" value="@Model.RoomOfReport.Where(o => o.RoomID == int.Parse(item.Value)).First().Amount" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="number" min="1" />
+                                                        }
+                                                       
+                                                    </td>
+                                                    <td>
+                                                        @item.Text
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </table>
+                                        <input type="hidden" name="Room" id="Rooms"/>
+                                        <script type="text/javascript">
+                                            jQuery(function () {
+
+                                                $('#room-table').delegate('input[type=checkbox]', 'change', function () {
+                                                    let self = $(this);
+                                                    var input = $(this).closest('tr').find("td:eq(1) > input[type=number]")
+                                                    if (self.prop('checked')) {
+                                                        input.val(1);
+                                                    } else {
+                                                        input.val('');
+                                                    }
+                                                    Render();
+                                                });
+
+                                                function Render() {
+                                                    let input = $('#Rooms');
+                                                    let tr = $('#room-table tr');
+                                                    let arr = [];
+                                                    for (let i = 0, max = tr.length; i < max; i++) {
+                                                        var checked = $(tr[i]).find('td:eq(0) > input').prop('checked');
+                                                        if (checked) {
+                                                            var id = $(tr[i]).find('td:eq(0) > input').val();
+                                                            var amt = $(tr[i]).find('td:eq(1) > input').val();
+                                                            var name = $(tr[i]).find('td:eq(2)').text().trim();
+                                                            var Text = id + '^' + amt + '^' + name;
+                                                            arr.push(Text);
+                                                        }
+                                                    }
+
+                                                    input.val(arr.join(','));
+                                                    
+                                                }
+
+                                                if ($('#UserType').val() != '') {
+
+                                                    $("#SelectUser option:first").prop('checked');
+                                                } else {
+                                                    $('#SelectUser').val($('#UserType').val());
+                                                }
+
+                                            });
+                                        </script>
+
                                     </div>
                                 </div>
 
@@ -83,13 +153,13 @@
                                     </div>
                                 </div>
 
-                                @*<div class="form-group">
+                                <div class="form-group">
                                     <label class="col-sm-2 control-label">日期</label>
                                     <div class="col-sm-10">
                                         @Html.EditorFor(model => model.CheckInDate, new { htmlAttributes = new { @class = "form-control",@type="date" } })
 
                                     </div>
-                                </div>*@
+                                </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">餐飲</label>
