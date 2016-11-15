@@ -22,9 +22,12 @@ namespace WGHotel.Areas.Backend.Models
 
         public int Modify { get; set; }
         public System.DateTime Created { get; set; }
+
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString="{0:yyyy/MM/dd}", ApplyFormatInEditMode=true)]
         public System.DateTime CheckInDate { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
+        
         public Nullable<decimal> Price { get; set; }
         public Nullable<int> NumOfPeople { get; set; }
         public string Remark { get; set; }
@@ -110,19 +113,29 @@ namespace WGHotel.Areas.Backend.Models
             Model.OtherCost = OtherCost;
             Model.UserType = UserType;
             var ReportRooms = new List<ReportRooms>();
-
-            var RoomString = Room;
-            var RoomSpilt = RoomString.Split(',');
-            foreach (var ro in RoomSpilt)
+            var ReportRoomsOf = new List<ReportRooms>();
+            if (!string.IsNullOrEmpty(Room))
             {
-                var room = ro.Split('^');
-                var id = int.Parse(room[0]);
-                var amt = int.Parse(room[1]);
-                var name = room[2];
-                ReportRooms.Add(new ReportRooms { RoomID = id, Amount = amt, RoomName = name });
-            }
+                var RoomString = Room;
+                var RoomSpilt = RoomString.Split(',');
+                foreach (var ro in RoomSpilt)
+                {
+                    var room = ro.Split('^');
+                    var id = int.Parse(room[0]);
+                    var amt = int.Parse(room[1]);
+                    var name = room[2];
+                    ReportRoomsOf.Add(new ReportRooms { ID =ID, RoomID = id, Amount = amt, RoomName = name });
+                    if (!db.ReportRooms.Any(o => o.ReportID == ID && o.RoomID == id && o.Amount == amt))
+                    {
+                        ReportRooms.Add(new ReportRooms { RoomID = id, Amount = amt, RoomName = name });
+                    }
+                }
 
-            Model.ReportRooms = ReportRooms;
+                var rrIDs = ReportRoomsOf.Select(o=>o.RoomID).ToList();
+                var remove = db.ReportRooms.Where(o => !rrIDs.Contains(o.RoomID)).ToList();
+                db.ReportRooms.RemoveRange(remove);
+                Model.ReportRooms = ReportRooms;
+            }
             //db.Report.Add(Model);
             db.SaveChanges();
         }

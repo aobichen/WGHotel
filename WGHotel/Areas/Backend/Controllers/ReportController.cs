@@ -42,6 +42,10 @@ namespace WGHotel.Areas.Backend.Controllers
         // GET: Backend/Report/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"].ToString();
+            }
             if (id.HasValue)
             {
                 var result = new ReportViewModel();
@@ -62,15 +66,28 @@ namespace WGHotel.Areas.Backend.Controllers
                          Remark = o.Remark,
                          Room = o.Room,
                          RoomID = o.RoomID,
-                         UserType = o.UserType
+                         UserType = o.UserType,
                      }).FirstOrDefault();
                     
                 var Hotel = _dbzh.Hotel.Where(o => o.UserId == CurrentUser.Id).FirstOrDefault();
-                model.HotelID = Hotel.ID;
-
-                model.RoomOfReport = _basedb.ReportRooms.Where(o => o.ID == model.ID).ToList();
+                var Rooms = new List<Room>();
+                if (User.IsInRole("Admin") || User.IsInRole("System"))
+                {
+                    model.HotelID = model.HotelID;
+                    var Room = _dbzh.Room.Where(o => o.HOTELID == model.HotelID).ToList() ;
+                    Rooms = Room;
+                    var IDs = Room.Select(o => o.ID).ToList();
+                    model.RoomOfReport = _basedb.ReportRooms.Where(o => IDs.Contains(o.RoomID)).ToList();
                 
-                var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
+                }else {
+                    model.HotelID = Hotel.ID;
+                    model.RoomOfReport = _basedb.ReportRooms.Where(o => o.ID == model.ID).ToList();
+                }
+               
+
+                //model.RoomOfReport = _basedb.ReportRooms.Where(o => o.ID == model.ID).ToList();
+                
+                //var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
                 ViewBag.RoomId = new SelectList(Rooms, "ID", "Name",model.RoomID);
                 var Country = _basedb.Country.ToList();
                 ViewBag.Country = new SelectList(Country, "ID", "Name",model.CountryID);
@@ -85,8 +102,8 @@ namespace WGHotel.Areas.Backend.Controllers
                 var Country = _basedb.Country.ToList();
                 ViewBag.Country = new SelectList(Country, "ID", "Name");
                 var model = new ReportViewModel();
-
-                model.HotelID = Hotel.ID;
+                model.CheckInDate = DateTime.Now;
+                //model.HotelID = Hotel.ID;
                 return View(model);
             }
 
@@ -99,7 +116,19 @@ namespace WGHotel.Areas.Backend.Controllers
         [HttpPost]
         public ActionResult Edit(ReportViewModel model)
         {
+            if (string.IsNullOrEmpty(model.Room)||model.CheckInDate == DateTime.MinValue || model.Price==null )
+            {
+                TempData["Message"] = "回報資訊不完整";
+                if (model.ID != 0)
+                {
+                    return RedirectToAction("Edit", new { id = model.ID });
+                }
+                else
+                {
 
+                    return RedirectToAction("Edit");
+                }
+            }
             //#region
             //if (model.Price == null || model.CheckInDate == DateTime.MinValue || string.IsNullOrEmpty(model.Room))
             //{
@@ -139,7 +168,8 @@ namespace WGHotel.Areas.Backend.Controllers
             //#endregion
 
             //model.HotelID = _dbzh.Room.Find(model.HotelID).Hotel.ID;
-            if (!_dbzh.Hotel.Any(o => o.ID == model.HotelID && o.UserId == CurrentUser.Id))
+            if (!(User.IsInRole("Admin") || (User.IsInRole("System")) 
+                && !(_dbzh.Hotel.Any(o => o.ID == model.HotelID && o.UserId == CurrentUser.Id))))
             {
                 return View();
             }
