@@ -326,3 +326,6 @@ C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.pdb
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.dll.config
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\WGHotel.dll.config
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\ClosedXML.dll
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\DocumentFormat.OpenXml.dll
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\ClosedXML.xml

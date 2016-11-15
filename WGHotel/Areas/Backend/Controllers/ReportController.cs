@@ -7,6 +7,13 @@ using WGHotel.Areas.Backend.Models;
 using WGHotel.Controllers;
 using PagedList;
 using WGHotel.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Data;
+using System.IO;
+using ClosedXML.Excel;
+using System.Reflection;
+
 
 namespace WGHotel.Areas.Backend.Controllers
 
@@ -77,7 +84,8 @@ namespace WGHotel.Areas.Backend.Controllers
                     var Room = _dbzh.Room.Where(o => o.HOTELID == model.HotelID).ToList() ;
                     Rooms = Room;
                     var IDs = Room.Select(o => o.ID).ToList();
-                    model.RoomOfReport = _basedb.ReportRooms.Where(o => IDs.Contains(o.RoomID)).ToList();
+                   
+                    model.RoomOfReport = _basedb.ReportRooms.Where(o => o.ReportID == id).ToList();
                 
                 }else {
                     model.HotelID = Hotel.ID;
@@ -211,25 +219,164 @@ namespace WGHotel.Areas.Backend.Controllers
         }
 
         // GET: Backend/Report/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Export(ReportModel search = null)
         {
-            return View();
+            var key = Guid.NewGuid().GetHashCode().ToString("x");
+            ViewBag.key = key;
+            var Country = _basedb.Country.ToList();
+            ViewBag.Nation = new SelectList(Country, "ID", "Name");
+            var ReportModel = new ReportModel();
+            if(search==null || (search.Nation==0 &&
+                search.Begin == DateTime.MinValue && search.End == DateTime.MinValue))
+            {
+                var Now = DateTime.Now;
+                ReportModel.Begin = Now;
+                ReportModel.End = Now.AddDays(1);
+                return View(ReportModel);
+            }
+
+            search.Begin = DateTime.Parse(search.Begin.ToShortDateString() + " 00:00:00");
+            search.End = DateTime.Parse(search.End.ToShortDateString() + " 23:59:59");
+            var result = (from r in _basedb.Report 
+                        where (search.Nation==0 ||
+                        r.CountryID == search.Nation) &&
+                        (r.CheckInDate >= search.Begin && r.CheckInDate <= search.End)
+                         select new ReportListModel
+            {
+                 //Amount = r.Amount,
+                 ID = r.ID,
+                  CheckInDate = r.CheckInDate,
+                   Country = r.Country,
+                    HotelID = r.HotelID,
+                 Rooms = r.Room,
+                  Price = r.Price,
+                  Amount = r.NumOfPeople.Value
+            }).ToList();
+
+            var model = new List<ReportListModel>();
+            var dtExcel = new List<ReportExcelModel>();
+            foreach (var m in result)
+            {
+                //var list = m.Rooms.Split(',').Select(int.Parse).ToList();
+                var room_list =_basedb.ReportRooms.Where(o=> o.ReportID == m.ID).ToList();
+                var room = new List<string>();
+                foreach(var item in room_list){
+                    room.Add(string.Format("{0}/{1}",item.RoomName,item.Amount));
+                }
+                
+                var hotel = _dbzh.Hotel.Where(o=>o.ID == m.HotelID).FirstOrDefault();
+                var Name = hotel != null ? hotel.Name : string.Empty;
+                model.Add(new ReportListModel {
+                    Rooms = string.Join(",", room),
+                     Price = m.Price,
+                    Hotel = Name,
+                     CheckInDate = m.CheckInDate,
+                     Country = m.Country,
+                     Amount = m.Amount
+                });
+
+                dtExcel.Add(new ReportExcelModel {
+                    國籍 = m.Country,
+                    飯店 = Name,
+                    房型數量 = string.Join(",", room),
+                    人數 = m.Amount,          
+                    金額 = m.Price.Value.ToString("#,##0"),
+                    入住日期 = m.CheckInDate.ToShortDateString()
+                   
+                });
+            }
+            ViewBag.ReportList = model;
+
+            var dt = ConvertListToDataTable(dtExcel);
+            Session[key] = dt;
+            ReportModel.Begin = search.Begin;
+            ReportModel.End = search.End;
+            
+            return View(ReportModel);
         }
 
-        // POST: Backend/Report/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+
+
+
+
+        private DataTable ConvertListToDataTable<T>(List<T> items)
+        {
+            // New table.
+            DataTable dataTable = new DataTable(typeof(T).Name);
+
+            //Get all the properties
+            PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in Props)
+            {
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name);
+            }
+            foreach (T item in items)
+            {
+                var values = new object[Props.Length];
+                for (int i = 0; i < Props.Length; i++)
+                {
+                    //inserting property values to datatable rows
+                    values[i] = Props[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+            //put a breakpoint here and check datatable
+            return dataTable;
+        }
+
+        public ActionResult ExportData(string key)
+        {
+            if (Session[key] != null)
+            {
+                //var list = _basedb.ReportRooms.ToList();
+                //DataTable dt = ConvertListToDataTable(list);
+                DataTable dt = (DataTable)Session[key];
+                using (XLWorkbook wb = new XLWorkbook())
+                {
+                    wb.Worksheets.Add(dt);
+                    wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    wb.Style.Font.Bold = true;
+
+                    Response.Clear();
+                    Response.Buffer = true;
+                    Response.Charset = "";
+                    var FileName = Guid.NewGuid().GetHashCode().ToString("x");
+                    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    Response.AddHeader("content-disposition", "attachment;filename= " + FileName + ".xlsx");
+
+                    using (MemoryStream MyMemoryStream = new MemoryStream())
+                    {
+                        wb.SaveAs(MyMemoryStream);
+                        MyMemoryStream.WriteTo(Response.OutputStream);
+                        Response.Flush();
+                        Response.End();
+                    }
+                }
+                
+            }
+            return RedirectToAction("Export", "Report");
+        }
+
+        private void releaseObject(object obj)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
             }
             catch
             {
-                return View();
+                obj = null;
             }
-        }
+            finally
+            {
+                GC.Collect();
+            }
+        }  
+
+
+        
+
     }
 }

@@ -140,4 +140,43 @@ namespace WGHotel.Areas.Backend.Models
             db.SaveChanges();
         }
     }
+
+    public class ReportListModel
+    {
+        public int ID { get; set; }
+        public string Country { get; set; }
+        public string Hotel { get; set; }
+        public string Rooms { get; set; }
+        public int Amount { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public decimal? Price { get; set; }
+
+        public int HotelID { get; set; }
+
+        
+    }
+
+    public class ReportExcelModel
+    {
+        //public int ID { get; set; }
+        public string 國籍 { get; set; }
+        public string 飯店 { get; set; }
+        public string 房型數量 { get; set; }
+        //public int Amount { get; set; }
+        public string 入住日期 { get; set; }
+        public string 金額 { get; set; }
+
+        public int 人數 { get; set; }
+        //public int HotelID { get; set; }
+
+
+    }
+
+    public class ReportModel
+    {
+        public DateTime Begin { get; set; }
+        public DateTime End { get; set; }
+
+        public int Nation { get; set; }
+    }
 }
