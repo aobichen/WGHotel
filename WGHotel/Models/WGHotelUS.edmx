@@ -34,6 +34,8 @@
           <Property Name="Creator" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" Nullable="false" />
           <Property Name="Modify" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
         </EntityType>
         <EntityType Name="Facility">
           <Key>
@@ -60,7 +62,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Game" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="City" Type="int" Nullable="false" />
           <Property Name="Area" Type="nvarchar" MaxLength="10" />
@@ -166,6 +168,8 @@
           <Property Name="Creator" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Modify" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -266,7 +270,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Game" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="Int32" Nullable="false" />
           <Property Name="Area" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -310,6 +314,8 @@
           <EntitySetMapping Name="CodeFile">
             <EntityTypeMapping TypeName="USModel.CodeFile">
               <MappingFragment StoreEntitySet="CodeFile">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ItemType" ColumnName="ItemType" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />

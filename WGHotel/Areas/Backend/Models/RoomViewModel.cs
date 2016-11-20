@@ -43,6 +43,7 @@ namespace WGHotel.Areas.Backend.Models
 
         public string RoomType { get; set; }
         public string BedType { get; set; }
+        public List<string> Beds { get; set; }
         public string Facilities { get; set; }
         public bool HasBreakfast { get; set; }
 
@@ -80,7 +81,7 @@ namespace WGHotel.Areas.Backend.Models
 
         private void BedTypes()
         {
-            var types = _db.CodeFile.Where(o => o.ItemType == "Bed").ToList();
+            var types = _db.CodeFile.Where(o => o.ItemType == "Bed" && o.Deleted == false).ToList();
             BedTypeSelectList = new SelectList(types, "ID", "ItemDescription", BedType);            
         }
 
@@ -95,7 +96,8 @@ namespace WGHotel.Areas.Backend.Models
                 Room.Name = NameZh;
                 Room.Notice = NoticeZh;
                 Room.Feature = FeatureZh;
-                Room.BedType = BedType;
+                //Room.BedType = BedType;
+                Room.BedType = string.Join(",", Beds);
                 Room.RoomType = RoomType;
                 Room.Sell = Sell;
                 Room.Enabled = true;
@@ -108,6 +110,22 @@ namespace WGHotel.Areas.Backend.Models
                 ZHID = Room.ID;
             }
 
+
+            var ENBeds = new List<string>();
+            foreach (var b in Beds)
+            {
+                var id = int.Parse(b);
+                using (var dbEN = new WGHotelUSEntities())
+                {
+                    var bed = dbEN.CodeFile.Where(o => o.ItemType == "Bed" && o.ParentId == id ).FirstOrDefault();
+                    if (bed != null)
+                    {
+                        ENBeds.Add(bed.ID.ToString());
+                    }
+                    
+                }
+            }
+
             using (var db = new WGHotelUSEntities())
             {
 
@@ -115,7 +133,8 @@ namespace WGHotel.Areas.Backend.Models
                 Room.Name = NameUs;
                 Room.Feature = FeatureUs;
                 Room.Notice = NoticeUs;
-                Room.BedType = BedType;
+                //Room.BedType = BedType;
+                Room.BedType = string.Join(",", ENBeds);
                 Room.RoomType = RoomType;
                 Room.Sell = Sell;
                 Room.Enabled = true;

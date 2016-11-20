@@ -23,5 +23,7 @@ namespace WGHotel.Models
         public int Creator { get; set; }
         public System.DateTime Modified { get; set; }
         public int Modify { get; set; }
+        public bool Deleted { get; set; }
+        public Nullable<int> ParentId { get; set; }
     }
 }

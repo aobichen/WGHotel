@@ -29,6 +29,8 @@
     <Property Name="Creator" Type="int" Nullable="false" />
     <Property Name="Modified" Type="datetime" Nullable="false" />
     <Property Name="Modify" Type="int" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="ParentId" Type="int" />
   </EntityType>
   <EntityType Name="Facility">
     <Key>

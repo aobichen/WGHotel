@@ -34,6 +34,8 @@
           <Property Name="Creator" Type="int" Nullable="false" />
           <Property Name="Modified" Type="datetime" Nullable="false" />
           <Property Name="Modify" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
         </EntityType>
         <EntityType Name="Facility">
           <Key>
@@ -166,6 +168,8 @@
           <Property Name="Creator" Type="Int32" Nullable="false" />
           <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Modify" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -310,6 +314,8 @@
           <EntitySetMapping Name="CodeFile">
             <EntityTypeMapping TypeName="ZHModel.CodeFile">
               <MappingFragment StoreEntitySet="CodeFile">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ItemType" ColumnName="ItemType" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />

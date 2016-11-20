@@ -86,7 +86,7 @@ namespace WGHotel.Areas.Backend.Controllers
             RoomModel.HOTELID = id;
             //ViewBag.HotelID = id;
             ViewBag.RoomTypes = RoomModel.RoomTypeSelectList;
-            ViewBag.BedTypes = RoomModel.BedTypeSelectList;
+            ViewBag.BedTypes = new BedModel().SelectList();
             
             ViewBag.RoomFacility = RoomModel.FacilityList;
 
@@ -113,7 +113,7 @@ namespace WGHotel.Areas.Backend.Controllers
 
             var RoomModel = new RoomViewModel();
             ViewBag.RoomTypes = RoomModel.RoomTypeSelectList;
-            ViewBag.BedTypes = RoomModel.BedTypeSelectList;
+            ViewBag.BedTypes = new BedModel().SelectList();
             ViewBag.RoomFacility = RoomModel.FacilityList;
             return View();
         }
@@ -143,7 +143,8 @@ namespace WGHotel.Areas.Backend.Controllers
             };
             var RoomModel = new RoomViewModel();
             ViewBag.RoomTypes = RoomModel.RoomTypeSelectList;
-            ViewBag.BedTypes = RoomModel.BedTypeSelectList;
+            var Beds = model.BedType.Split(',').Select(int.Parse).ToList();
+            ViewBag.BedTypes = new BedModel().SelectList(Beds);
             ViewBag.RoomFacility = RoomModel.FacilityList;
 
             var Images = _basedb.ImageStore.Where(o => o.ReferIdZH == model.ID && o.Type == "Room").Select(p =>

@@ -13,6 +13,8 @@
     <Property Name="Creator" Type="Int32" Nullable="false" />
     <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Modify" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
   </EntityType>
   <EntityType Name="Order">
     <Key>

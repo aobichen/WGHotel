@@ -13,6 +13,8 @@
     <Property Name="Creator" Type="Int32" Nullable="false" />
     <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Modify" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -113,7 +115,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Game" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="City" Type="Int32" Nullable="false" />
     <Property Name="Area" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />

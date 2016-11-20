@@ -186,9 +186,11 @@ namespace WGHotel.Controllers
                 foreach (var m in model)
                 {
 
-                    m.Image = _basedb.ImageStore.Where(o => o.ReferIdUS == m.ID).FirstOrDefault().ID;
-                
-                
+                    var Image = _basedb.ImageStore.Where(o => o.ReferIdUS == m.ID).FirstOrDefault();
+                    if (Image != null)
+                    {
+                        m.Image = Image.ID;
+                    }
                 }
             }
             else

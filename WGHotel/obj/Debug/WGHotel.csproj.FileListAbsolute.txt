@@ -329,3 +329,4 @@ C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.App_Globa
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.csproj.GenerateResource.Cache
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.pdb
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.csprojResolveAssemblyReference.cache

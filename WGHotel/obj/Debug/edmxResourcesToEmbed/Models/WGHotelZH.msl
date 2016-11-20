@@ -4,6 +4,8 @@
     <EntitySetMapping Name="CodeFile">
       <EntityTypeMapping TypeName="ZHModel.CodeFile">
         <MappingFragment StoreEntitySet="CodeFile">
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ItemType" ColumnName="ItemType" />
           <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
