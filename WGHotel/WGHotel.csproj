@@ -333,6 +333,7 @@
     <Compile Include="WepApi\RoomController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bed.txt" />
     <Content Include="Content\Admin\assets\ckeditor\lang\en.js" />
     <Content Include="Content\Admin\assets\ckeditor\lang\zh.js" />
     <Content Include="images\uploads\error.jpg" />
