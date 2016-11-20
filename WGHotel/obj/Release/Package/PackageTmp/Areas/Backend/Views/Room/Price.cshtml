@@ -1,4 +1,7 @@
-﻿<section class="wrapper">
+﻿@{
+    ViewBag.title = "Room";
+}
+<section class="wrapper">
     <div class="row">
         <div class="col-lg-10">
             <h3 class="page-header">
@@ -6,13 +9,14 @@
                 </i>Hotel
             </h3>
             <ol class="breadcrumb">
-                <li><i class="fa fa-home"></i><a href="@Url.Action("/", "Admin")">Home</a></li>
-                <li><i class="icon_house_alt"></i>Hotel</li>
-
+                <li><i class="fa fa-home"></i><a href="@Url.Action("/", "Hotel")">Home</a></li>
+                <li><i class="fa fa-calendar" aria-hidden="true"></i>Room</li>
+                <li style="color:#FF9224;font-weight:bold;">@ViewBag.Name</li>
             </ol>
         </div>
     </div>
     <div class="row">
+        
         <div class="col-md-12">
 
             

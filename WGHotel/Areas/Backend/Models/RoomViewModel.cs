@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -44,6 +45,8 @@ namespace WGHotel.Areas.Backend.Models
         public string BedType { get; set; }
         public string Facilities { get; set; }
         public bool HasBreakfast { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:0.###}", ApplyFormatInEditMode = true)]
         public decimal Sell { get; set; }
         public int Quantiy { get; set; }
         public bool Enabled { get; set; }

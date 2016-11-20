@@ -16,6 +16,8 @@ namespace WGHotel.Models
         public string BedType { get; set; }
         public List<string> Facilities { get; set; }
         public bool HasBreakfast { get; set; }
+
+        
         public Nullable<decimal> Sell { get; set; }
 
         public string Feature { get; set; }

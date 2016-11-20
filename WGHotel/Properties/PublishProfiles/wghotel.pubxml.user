@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="404.html">
-      <publishTime>10/15/2016 11:40:23</publishTime>
+      <publishTime>11/14/2016 17:59:30</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Admin/app/fonts/glyphicons-halflings-regular.woff">
       <publishTime>10/15/2016 10:01:14</publishTime>
@@ -133,7 +133,7 @@
       <publishTime>11/08/2016 19:05:56</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Hotel/_Table.cshtml">
-      <publishTime>11/12/2016 20:31:48</publishTime>
+      <publishTime>11/14/2016 19:18:38</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Profile/ChangePassword.cshtml">
       <publishTime>11/08/2016 20:10:55</publishTime>
@@ -144,14 +144,20 @@
     <File Include="Areas/Backend/Views/Report/Edit.cshtml">
       <publishTime>11/08/2016 21:34:57</publishTime>
     </File>
+    <File Include="Areas/Backend/Views/Report/Export.cshtml">
+      <publishTime>11/15/2016 23:10:39</publishTime>
+    </File>
     <File Include="Areas/Backend/Views/Report/Index.cshtml">
       <publishTime>11/08/2016 23:02:36</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Report/_Create.cshtml">
-      <publishTime>11/10/2016 21:07:45</publishTime>
+      <publishTime>11/15/2016 18:58:54</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Report/_List.cshtml">
-      <publishTime>11/12/2016 20:39:36</publishTime>
+      <publishTime>11/14/2016 21:00:27</publishTime>
+    </File>
+    <File Include="Areas/Backend/Views/Report/_Table.cshtml">
+      <publishTime>11/15/2016 23:00:08</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Room/Create.cshtml">
       <publishTime>10/27/2016 18:36:40</publishTime>
@@ -163,10 +169,10 @@
       <publishTime>11/10/2016 21:41:14</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Room/Price.cshtml">
-      <publishTime>10/27/2016 21:58:54</publishTime>
+      <publishTime>11/14/2016 19:17:42</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Room/_Create.cshtml">
-      <publishTime>11/13/2016 21:17:58</publishTime>
+      <publishTime>11/14/2016 18:00:54</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Room/_FullCalendar.cshtml">
       <publishTime>10/30/2016 22:00:16</publishTime>
@@ -175,7 +181,7 @@
       <publishTime>11/13/2016 20:02:46</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Shared/_BannerUpload.cshtml">
-      <publishTime>11/12/2016 20:52:37</publishTime>
+      <publishTime>11/14/2016 17:50:36</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Shared/_GameSite.cshtml">
       <publishTime>11/02/2016 19:04:14</publishTime>
@@ -184,10 +190,10 @@
       <publishTime>11/02/2016 19:04:14</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Shared/_ImageUpload.cshtml">
-      <publishTime>11/13/2016 20:52:01</publishTime>
+      <publishTime>11/14/2016 17:50:36</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Shared/_Layout.cshtml">
-      <publishTime>11/12/2016 20:56:05</publishTime>
+      <publishTime>11/15/2016 23:05:45</publishTime>
     </File>
     <File Include="Areas/Backend/Views/Shared/_RoomFacility.cshtml">
       <publishTime>10/27/2016 18:36:40</publishTime>
@@ -2014,16 +2020,22 @@
       <publishTime>10/11/2016 08:59:29</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>11/13/2016 22:18:07</publishTime>
+      <publishTime>11/20/2016 14:52:07</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>11/13/2016 22:18:07</publishTime>
+      <publishTime>11/20/2016 14:52:07</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.compiled">
-      <publishTime>11/13/2016 22:18:06</publishTime>
+      <publishTime>11/20/2016 14:52:07</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.dll">
-      <publishTime>11/13/2016 22:18:06</publishTime>
+      <publishTime>11/20/2016 14:52:06</publishTime>
+    </File>
+    <File Include="bin/ClosedXML.dll">
+      <publishTime>11/15/2016 19:02:46</publishTime>
+    </File>
+    <File Include="bin/DocumentFormat.OpenXml.dll">
+      <publishTime>11/15/2016 19:02:46</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/11/2016 08:59:38</publishTime>
@@ -2116,7 +2128,7 @@
       <publishTime>10/11/2016 08:59:29</publishTime>
     </File>
     <File Include="bin/WGHotel.dll">
-      <publishTime>11/13/2016 22:17:53</publishTime>
+      <publishTime>11/20/2016 14:52:00</publishTime>
     </File>
     <File Include="bin/zh-Hant/EntityFramework.resources.dll">
       <publishTime>10/11/2016 08:59:45</publishTime>
@@ -2329,7 +2341,7 @@
       <publishTime>10/15/2016 10:05:55</publishTime>
     </File>
     <File Include="Content/Admin/assets/ckeditor/lang/en.js">
-      <publishTime>10/15/2016 10:05:55</publishTime>
+      <publishTime>11/20/2016 14:33:26</publishTime>
     </File>
     <File Include="Content/Admin/assets/ckeditor/lang/eo.js">
       <publishTime>10/15/2016 10:05:55</publishTime>
@@ -2470,7 +2482,7 @@
       <publishTime>10/15/2016 10:05:55</publishTime>
     </File>
     <File Include="Content/Admin/assets/ckeditor/lang/zh.js">
-      <publishTime>10/15/2016 10:05:55</publishTime>
+      <publishTime>11/20/2016 14:33:26</publishTime>
     </File>
     <File Include="Content/Admin/assets/ckeditor/LICENSE.md">
       <publishTime>10/15/2016 10:05:55</publishTime>
@@ -3604,7 +3616,7 @@
       <publishTime>10/15/2016 10:06:00</publishTime>
     </File>
     <File Include="Content/Admin/css/style.css">
-      <publishTime>10/20/2016 19:40:56</publishTime>
+      <publishTime>11/14/2016 18:07:28</publishTime>
     </File>
     <File Include="Content/Admin/css/widgets.css">
       <publishTime>10/15/2016 10:06:00</publishTime>
@@ -4195,10 +4207,10 @@
       <publishTime>10/15/2016 01:56:54</publishTime>
     </File>
     <File Include="Content/lang/language-us.json">
-      <publishTime>11/12/2016 17:58:49</publishTime>
+      <publishTime>11/20/2016 13:54:08</publishTime>
     </File>
     <File Include="Content/lang/language-zh.json">
-      <publishTime>11/12/2016 17:58:49</publishTime>
+      <publishTime>11/20/2016 13:46:16</publishTime>
     </File>
     <File Include="Content/lightgallery.min.css">
       <publishTime>10/30/2016 15:13:50</publishTime>
@@ -4404,6 +4416,9 @@
     <File Include="images/uploads/avatar.jpg">
       <publishTime>10/14/2016 19:57:40</publishTime>
     </File>
+    <File Include="images/uploads/error.jpg">
+      <publishTime>11/14/2016 18:06:58</publishTime>
+    </File>
     <File Include="images/uploads/get_inspired.jpg">
       <publishTime>10/14/2016 19:57:40</publishTime>
     </File>
@@ -4414,7 +4429,7 @@
       <publishTime>10/14/2016 19:57:40</publishTime>
     </File>
     <File Include="Models/WGHotelBase.edmx.diagram">
-      <publishTime>11/12/2016 14:00:17</publishTime>
+      <publishTime>11/14/2016 19:29:44</publishTime>
     </File>
     <File Include="Models/WGHotelUS.edmx.diagram">
       <publishTime>11/07/2016 21:55:20</publishTime>
@@ -4423,10 +4438,10 @@
       <publishTime>11/07/2016 21:54:43</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>10/20/2016 18:50:01</publishTime>
+      <publishTime>11/15/2016 19:02:53</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/13/2016 22:18:04</publishTime>
+      <publishTime>11/20/2016 14:52:04</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>10/11/2016 08:59:19</publishTime>
@@ -4501,7 +4516,7 @@
       <publishTime>10/14/2016 19:57:40</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>10/27/2016 18:36:41</publishTime>
+      <publishTime>11/20/2016 14:33:28</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
       <publishTime>10/11/2016 08:59:37</publishTime>
@@ -4555,28 +4570,28 @@
       <publishTime>11/12/2016 13:05:04</publishTime>
     </File>
     <File Include="Views/Home/_KeelungList.cshtml">
-      <publishTime>11/12/2016 17:47:42</publishTime>
+      <publishTime>11/20/2016 14:22:32</publishTime>
     </File>
     <File Include="Views/Home/_List.cshtml">
-      <publishTime>11/12/2016 17:49:14</publishTime>
+      <publishTime>11/20/2016 14:29:32</publishTime>
     </File>
     <File Include="Views/Home/_ListHsinchuCity.cshtml">
-      <publishTime>11/12/2016 17:49:14</publishTime>
+      <publishTime>11/20/2016 14:29:32</publishTime>
     </File>
     <File Include="Views/Home/_ListHsinchuCountry.cshtml">
-      <publishTime>11/12/2016 17:49:14</publishTime>
+      <publishTime>11/20/2016 14:29:32</publishTime>
     </File>
     <File Include="Views/Home/_ListTaipei.cshtml">
-      <publishTime>11/12/2016 17:49:14</publishTime>
+      <publishTime>11/20/2016 14:29:32</publishTime>
     </File>
     <File Include="Views/Home/_ListTaoyuan.cshtml">
-      <publishTime>11/12/2016 17:49:14</publishTime>
+      <publishTime>11/20/2016 14:29:32</publishTime>
     </File>
     <File Include="Views/Home/_NewTaipei.cshtml">
-      <publishTime>11/12/2016 17:49:14</publishTime>
+      <publishTime>11/20/2016 14:29:30</publishTime>
     </File>
     <File Include="Views/Home/_RoomTypes.cshtml">
-      <publishTime>11/12/2016 18:10:27</publishTime>
+      <publishTime>11/20/2016 14:24:51</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>10/11/2016 08:59:37</publishTime>
@@ -4606,7 +4621,7 @@
       <publishTime>10/30/2016 23:19:25</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/12/2016 13:35:22</publishTime>
+      <publishTime>11/20/2016 14:38:10</publishTime>
     </File>
     <File Include="Views/Shared/_Layout2.cshtml">
       <publishTime>10/15/2016 11:01:42</publishTime>
@@ -4615,7 +4630,7 @@
       <publishTime>10/11/2016 08:59:37</publishTime>
     </File>
     <File Include="Views/Shared/_SliderCarousel.cshtml">
-      <publishTime>11/13/2016 21:34:45</publishTime>
+      <publishTime>11/20/2016 13:57:29</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>10/20/2016 19:16:27</publishTime>
@@ -4624,7 +4639,10 @@
       <publishTime>10/11/2016 08:59:16</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/13/2016 22:18:00</publishTime>
+      <publishTime>11/20/2016 14:39:42</publishTime>
+    </File>
+    <File Include="Xss.html">
+      <publishTime>11/14/2016 18:09:25</publishTime>
     </File>
   </ItemGroup>
 </Project>

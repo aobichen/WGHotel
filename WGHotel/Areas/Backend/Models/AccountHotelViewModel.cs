@@ -68,51 +68,66 @@ namespace WGHotel.Areas.Backend.Models
             ZHdb.Hotel.Add(zhHotel);           
             ZHdb.SaveChanges();
             var ReferIdZH = zhHotel.ID;
-
-            var USdb = new WGHotelUSEntities();
-            var HotelUs = new Hotel
+            var ReferIdUS = 0;
+            try
             {
-                Name = Nameus,
-                Address = Addressus,
-                Area = Area,
-                City = City,
-                Facilities = Facilies,
-                Features = Featureus,
-                Enabled = true,
-                LinkUrl = LinkUrl,
-                Game = Game,
-                UserId = UserId,
-                Tel = Tel,
-                ParentId = zhHotel.ID
-            };
-            USdb.Hotel.Add(HotelUs);
-
-            USdb.SaveChanges();
-             var ReferIdUS = HotelUs.ID;
-            var Session = HttpContext.Current.Session;
-
-            if (Session[ImgKey] != null)
-            {
-                var Basedb = new WGHotelBaseEntities();
-                var Now = DateTime.Now;
-                var images = (List<ImageViewModel>)Session[ImgKey];
-                foreach(var img in images)
+                var USdb = new WGHotelUSEntities();
+                var HotelUs = new Hotel
                 {
-                    var fileName = Guid.NewGuid().GetHashCode().ToString("x");
-                    Basedb.ImageStore.Add(new ImageStore
-                    { 
-                         Created = Now,
-                         Extension = img.Extension,
-                         Deleted = false,
-                         ReferIdUS = ReferIdUS,
-                         ReferIdZH = ReferIdZH,
-                         Type = "Hotel",
-                         Name = fileName,
-                        Image = img.Image
-                    });
+                    Name = Nameus,
+                    Address = Addressus,
+                    Area = Area,
+                    City = City,
+                    Facilities = Facilies,
+                    Features = Featureus,
+                    Enabled = true,
+                    LinkUrl = LinkUrl,
+                    Game = Game,
+                    UserId = UserId,
+                    Tel = Tel,
+                    ParentId = zhHotel.ID
+                };
+                USdb.Hotel.Add(HotelUs);
+
+                USdb.SaveChanges();
+                ReferIdUS = HotelUs.ID;
+
+                var Session = HttpContext.Current.Session;
+
+                if (Session[ImgKey] != null)
+                {
+                    var Basedb = new WGHotelBaseEntities();
+                    var Now = DateTime.Now;
+                    var images = (List<ImageViewModel>)Session[ImgKey];
+                    foreach (var img in images)
+                    {
+                        var fileName = Guid.NewGuid().GetHashCode().ToString("x");
+                        Basedb.ImageStore.Add(new ImageStore
+                        {
+                            Created = Now,
+                            Extension = img.Extension,
+                            Deleted = false,
+                            ReferIdUS = ReferIdUS,
+                            ReferIdZH = ReferIdZH,
+                            Type = "Hotel",
+                            Name = fileName,
+                            Image = img.Image
+                        });
+                    }
+                    Basedb.SaveChanges();
                 }
-                Basedb.SaveChanges();
             }
+            catch (Exception ex)
+            {
+                var ZH = ZHdb.Hotel.Find(zhHotel.ID);
+                if (ZH != null)
+                {
+                    ZHdb.Hotel.Remove(ZH);
+                    ZHdb.SaveChanges();
+                }
+            }
+             
+        
            
         }
 

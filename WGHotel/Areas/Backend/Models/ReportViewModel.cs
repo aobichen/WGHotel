@@ -152,7 +152,10 @@ namespace WGHotel.Areas.Backend.Models
         public decimal? Price { get; set; }
 
         public int HotelID { get; set; }
-
+        public string Food { get; set; }
+        public decimal? FoodCost { get; set; }
+        public string Other { get; set; }
+        public decimal? OtherCost { get; set; }
         
     }
 
@@ -167,6 +170,12 @@ namespace WGHotel.Areas.Backend.Models
         public string 金額 { get; set; }
 
         public int 人數 { get; set; }
+
+        public string 餐飲 { get; set; }
+        public string 餐飲金額 { get; set; }
+
+        public string 其他 { get; set; }
+        public string 其他金額 { get; set; }
         //public int HotelID { get; set; }
 
 

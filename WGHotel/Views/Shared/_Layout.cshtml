@@ -49,13 +49,18 @@
                 
                 <nav>
                     <ul class="profile-nav">
-                        <li class="active"><a href="@Url.Action("", "Hotel", new {area="Backend" })" title="My Account" data-localize="myaccount">飯店管理</a></li>
+                        <li class="active" style="text-align:center;"><a href="@Url.Action("", "Hotel", new {area="Backend" })" title="My Account" data-localize="myaccount">飯店管理</a></li>
                         @*<li><a href="login.html" title="Login">Login</a></li>
                         <li><a href="my_account.html" title="Settings">Settings</a></li>*@
                     </ul>
                     <ul class="lang-nav">
-                        <li class="active" id="zh"><a href="javascript:void(0);" data-localize="zhtw"  title="繁體中文 (zh-tw)">zh-tw</a></li>
-                        <li id="us"><a href="javascript:void(0);" data-localize="english" title="English">English</a></li>
+                        @if (ViewBag.lang == "us") { 
+                        <li id="zh" class="active" style="text-align:center;"><a href="javascript:void(0);" data-localize="zhtw"  title="繁中">繁中</a></li>
+                        }
+                        else
+                        {
+                            <li id="us" class="active" style=" text-align:center;"><a href="javascript:void(0);" data-localize="english" title="EN">EN</a></li>
+                        }
                     </ul>
                     @*<ul class="currency-nav">
                         <li class="active"><a href="#" title="$US Dollar">$US Dollar</a></li>
@@ -91,53 +96,7 @@
     </main>
     <footer class="footer">
         <div class="wrap">
-            @*<div class="row">
-                <!--column-->
-                <article class="one-fourth">
-                    <h6>Book Your Travel</h6>
-                    <p>1400 PennsylSUVia Ave. Washington, DC</p>
-                    <p><em>P:</em> 24/7 customer support: 1-555-555-5555</p>
-                    <p><em>E:</em> <a href="#" title="booking@mail.com">booking@mail.com</a></p>
-                </article>
-                <!--//column-->
-                <!--column-->
-                <article class="one-fourth">
-                    <h6>Customer support</h6>
-                    <ul>
-                        <li><a href="#" title="Faq">Faq</a></li>
-                        <li><a href="#" title="How do I make a reservation?">How do I make a reservation?</a></li>
-                        <li><a href="#" title="Payment options">Payment options</a></li>
-                        <li><a href="#" title="Booking tips">Booking tips</a></li>
-                    </ul>
-                </article>
-                <!--//column-->
-                <!--column-->
-                <article class="one-fourth">
-                    <h6>Follow us</h6>
-                    <ul class="social">
-                        <li><a href="#" title="facebook"><i class="fa fa-fw fa-facebook"></i></a></li>
-                        <li><a href="#" title="youtube"><i class="fa  fa-fw fa-youtube"></i></a></li>
-                        <li><a href="#" title="rss"><i class="fa  fa-fw fa-rss"></i></a></li>
-                        <li><a href="#" title="gplus"><i class="fa fa-fw fa-google-plus"></i></a></li>
-                        <li><a href="#" title="linkedin"><i class="fa fa-fw fa-linkedin"></i></a></li>
-                        <li><a href="#" title="twitter"><i class="fa fa-fw fa-twitter"></i></a></li>
-                        <li><a href="#" title="pinterest"><i class="fa fa-fw fa-pinterest-p"></i></a></li>
-                        <li><a href="#" title="vimeo"><i class="fa fa-fw fa-vimeo"></i></a></li>
-                    </ul>
-                </article>
-                <!--//column-->
-                <!--column-->
-                <article class="one-fourth">
-                    <h6>Don’t miss our exclusive offers</h6>
-                    <form id="newsletter" action="newsletter.php" method="post">
-                        <fieldset>
-                            <input type="email" id="newsletter_signup" name="newsletter_signup" placeholder="Enter your email here" />
-                            <input type="submit" id="newsletter_submit" name="newsletter_submit" value="Signup" class="gradient-button" />
-                        </fieldset>
-                    </form>
-                </article>*@
-                <!--//column-->
-
+           
                 <div class="bottom full-width">
                     <p class="copy">Copyright Summer Universiade 2017. All rights reserved</p>
                     <nav>
@@ -204,7 +163,15 @@
             //$("[data-localize]").localize("test", opts)
             //$.cookie("test");
             var lang = $.cookie("lang");
+            //var langnav = $('.lang-nav');
             console.log(lang);
+            //if (lang == "us") {
+            //    langnav.find('#us').removeClass('active').hide();
+            //    langnav.find('#zh').addClass('active').show();
+            //} else {
+            //    langnav.find('#zh').removeClass('active').hide();
+            //    langnav.find('#us').addClass('active').show();
+            //}
             $("[data-localize]").localize("/Content/lang/language", { language: lang });
 
             $('.lang-nav').delegate('li', 'click', function (e) {
@@ -212,7 +179,7 @@
                 let mylang = $self.attr('id');
                 $.cookie("lang", mylang);
                 if (mylang != lang) {
-                   
+                    $('main').css({'opacity':'0.2'});
                     $("[data-localize]").localize("/Content/lang/language", { language: mylang });
                     lang = mylang;
                     location.reload();

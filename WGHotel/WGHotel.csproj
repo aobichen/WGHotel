@@ -227,29 +227,29 @@
     <Compile Include="Helpers\Position.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Area.cs">
-      <DependentUpon>WGHotelBase.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Banner.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\City.cs">
-      <DependentUpon>WGHotelBase.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CodeFile.cs">
-      <DependentUpon>WGHotelZH.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CodeFileModel.cs" />
     <Compile Include="Models\Country.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facility.cs">
-      <DependentUpon>WGHotelZH.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GameSite.cs">
-      <DependentUpon>WGHotelZH.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hotel.cs">
-      <DependentUpon>WGHotelZH.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HotelViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -259,7 +259,7 @@
     <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs">
-      <DependentUpon>WGHotelZH.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Report.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>
@@ -268,7 +268,7 @@
       <DependentUpon>WGHotelBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Room.cs">
-      <DependentUpon>WGHotelZH.tt</DependentUpon>
+      <DependentUpon>WGHotelUS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoomPrice.cs">
       <DependentUpon>WGHotelBase.tt</DependentUpon>
@@ -333,6 +333,8 @@
     <Compile Include="WepApi\RoomController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Admin\assets\ckeditor\lang\en.js" />
+    <Content Include="Content\Admin\assets\ckeditor\lang\zh.js" />
     <Content Include="images\uploads\error.jpg" />
     <Content Include="Xss.html" />
     <Content Include="404.html" />
@@ -440,68 +442,6 @@
     <Content Include="Content\Admin\assets\ckeditor\ckeditor.js" />
     <Content Include="Content\Admin\assets\ckeditor\config.js" />
     <Content Include="Content\Admin\assets\ckeditor\contents.css" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\af.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\ar.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\bg.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\bn.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\bs.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\ca.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\cs.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\cy.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\da.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\de.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\el.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\en-au.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\en-ca.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\en-gb.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\en.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\eo.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\es.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\et.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\eu.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\fa.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\fi.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\fo.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\fr-ca.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\fr.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\gl.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\gu.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\he.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\hi.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\hr.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\hu.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\is.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\it.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\ja.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\ka.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\km.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\ko.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\ku.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\lt.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\lv.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\mk.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\mn.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\ms.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\nb.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\nl.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\no.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\pl.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\pt-br.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\pt.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\ro.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\ru.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\sk.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\sl.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\sr-latn.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\sr.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\sv.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\th.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\tr.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\ug.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\uk.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\vi.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\zh-cn.js" />
-    <Content Include="Content\Admin\assets\ckeditor\lang\zh.js" />
     <Content Include="Content\Admin\assets\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
     <Content Include="Content\Admin\assets\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
     <Content Include="Content\Admin\assets\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />

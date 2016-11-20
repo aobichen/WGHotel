@@ -49,13 +49,18 @@
                 
                 <nav>
                     <ul class="profile-nav">
-                        <li class="active"><a href="@Url.Action("", "Hotel", new {area="Backend" })" title="My Account" data-localize="myaccount">飯店管理</a></li>
+                        <li class="active" style="text-align:center;"><a href="@Url.Action("", "Hotel", new {area="Backend" })" title="My Account" data-localize="myaccount">飯店管理</a></li>
                         @*<li><a href="login.html" title="Login">Login</a></li>
                         <li><a href="my_account.html" title="Settings">Settings</a></li>*@
                     </ul>
                     <ul class="lang-nav">
-                        <li class="active" id="zh"><a href="javascript:void(0);" data-localize="zhtw"  title="繁體中文 (zh-tw)">zh-tw</a></li>
-                        <li id="us"><a href="javascript:void(0);" data-localize="english" title="English">English</a></li>
+                        @if (ViewBag.lang == "us") { 
+                        <li id="zh" class="active" style="text-align:center;"><a href="javascript:void(0);" data-localize="zhtw"  title="繁中">繁中</a></li>
+                        }
+                        else
+                        {
+                            <li id="us" class="active" style=" text-align:center;"><a href="javascript:void(0);" data-localize="english" title="EN">EN</a></li>
+                        }
                     </ul>
                     @*<ul class="currency-nav">
                         <li class="active"><a href="#" title="$US Dollar">$US Dollar</a></li>
@@ -79,105 +84,7 @@
         </div>
 
         <!--main navigation-->
-        <nav class="main-nav">
-            <div class="wrap">
-                @*<ul class="slimmenu" id="nav">
-                    <li>
-                        <a href="hotels.html" title="Hotels">Hotels</a>
-                        <ul>
-                            <li><a href="#">Secondary navigation</a></li>
-                            <li>
-                                <a href="#">Example links</a>
-                                <ul>
-                                    <li><a href="#">Third level navigation</a></li>
-                                    <li>
-                                        <a href="#">Example links</a>
-                                        <ul>
-                                            <li><a href="#">Fourth level navigation</a></li>
-                                            <li><a href="#">Example links</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="flights.html" title="Flights">Flights</a></li>
-                    <li><a href="flight_and_hotels.html" title="Flight + Hotel">Flight + Hotel</a></li>
-                    <li><a href="self_caterings.html" title="Self catering">Self catering</a></li>
-                    <li><a href="cruises.html" title="Cruises">Cruises</a></li>
-                    <li><a href="car_rentals.html" title="Car rental">Car rental</a></li>
-                    <li>
-                        <a href="locations.html" title="Locations">Locations</a>
-                        <ul>
-                            <li><a href="location.html" title="Single Location">Single Location</a>
-                        </ul>
-                    </li>
-                    <li><a href="hot_deals.html" title="Hot deals">Hot deals</a></li>
-                    <li class="has-mega">
-                        <a href="#" title="Pages">Pages</a>
-                        <ul class="mega">
-                            <li>
-                                <div class="row">
-                                    <div class="one-fifth">
-                                        <p>COMMON PAGES</p>
-                                        <ul>
-                                            <li><a href="page_left_sidebar.html" title="Page with left sidebar">Page with left sidebar</a></li>
-                                            <li><a href="page_right_sidebar.html" title="Page with right sidebar">Page with right sidebar</a></li>
-                                            <li><a href="page_both_sidebars.html" title="Page with both sidebars">Page with both sidebars</a></li>
-                                            <li><a href="page_no_sidebars.html" title="Page with no sidebars">Page with no sidebars</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="one-fifth">
-                                        <p>LISTING LAYOUTS</p>
-                                        <ul>
-                                            <li><a href="hotels_2col.html" title="Listing 2 columns">Listing 2 columns</a></li>
-                                            <li><a href="hotels_3col.html" title="Listing 3 columns">Listing 3 columns</a></li>
-                                            <li><a href="hotels.html" title="Listing 4 columns">Listing 4 columns</a></li>
-                                            <li><a href="hotel.html" title="Single listing">Single listing</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="one-fifth">
-                                        <p>USER PAGES</p>
-                                        <ul>
-                                            <li><a href="login.html" title="Login">Login</a></li>
-                                            <li><a href="register.html" title="Register">Register</a></li>
-                                            <li><a href="my_account.html" title="My Account">My account</a></li>
-                                            <li><a href="error.html" title="Error 404">Error 404</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="one-fifth">
-                                        <p>SPECIALTY PAGES</p>
-                                        <ul>
-                                            <li><a href="search_results.html" title="Search results hotels">Search results hotels</a></li>
-                                            <li><a href="search_results_flights.html" title="Search results flights">Search results flights</a></li>
-                                            <li><a href="get_inspired.html" title="Get inspired">Get inspired</a></li>
-                                            <li><a href="get_inspired_results.html" title="Get inspired results">Get inspired results</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="one-fifth">
-                                        <p>&nbsp;</p>
-                                        <ul>
-                                            <li><a href="booking-step1html" title="Booking step 1">Booking step 1</a></li>
-                                            <li><a href="booking-step2.html" title="Booking step 2">Booking step 2</a></li>
-                                            <li><a href="booking-step3.html" title="Booking step 3">Booking step 3</a></li>
-                                            <li><a href="loading.html" title="Loading">Loading</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html" title="Contact">Contact</a></li>
-                    <li>
-                        <a href="blog.html" title="Blog">Blog</a>
-                        <ul>
-                            <li><a href="blog_single.html" title="Single Post">Single Post</a>
-                        </ul>
-                    </li>
-                    <li><a href="http://themeforest.net/item/book-your-travel-online-booking-html-template/3813953?ref=themeenergy" title="Purchase">Purchase</a></li>
-                </ul>*@
-            </div>
-        </nav>
+       
         <!--//main navigation-->
     </header>
 @if (ViewContext.RouteData.Values["controller"] == "Home")
@@ -189,53 +96,7 @@
     </main>
     <footer class="footer">
         <div class="wrap">
-            @*<div class="row">
-                <!--column-->
-                <article class="one-fourth">
-                    <h6>Book Your Travel</h6>
-                    <p>1400 PennsylSUVia Ave. Washington, DC</p>
-                    <p><em>P:</em> 24/7 customer support: 1-555-555-5555</p>
-                    <p><em>E:</em> <a href="#" title="booking@mail.com">booking@mail.com</a></p>
-                </article>
-                <!--//column-->
-                <!--column-->
-                <article class="one-fourth">
-                    <h6>Customer support</h6>
-                    <ul>
-                        <li><a href="#" title="Faq">Faq</a></li>
-                        <li><a href="#" title="How do I make a reservation?">How do I make a reservation?</a></li>
-                        <li><a href="#" title="Payment options">Payment options</a></li>
-                        <li><a href="#" title="Booking tips">Booking tips</a></li>
-                    </ul>
-                </article>
-                <!--//column-->
-                <!--column-->
-                <article class="one-fourth">
-                    <h6>Follow us</h6>
-                    <ul class="social">
-                        <li><a href="#" title="facebook"><i class="fa fa-fw fa-facebook"></i></a></li>
-                        <li><a href="#" title="youtube"><i class="fa  fa-fw fa-youtube"></i></a></li>
-                        <li><a href="#" title="rss"><i class="fa  fa-fw fa-rss"></i></a></li>
-                        <li><a href="#" title="gplus"><i class="fa fa-fw fa-google-plus"></i></a></li>
-                        <li><a href="#" title="linkedin"><i class="fa fa-fw fa-linkedin"></i></a></li>
-                        <li><a href="#" title="twitter"><i class="fa fa-fw fa-twitter"></i></a></li>
-                        <li><a href="#" title="pinterest"><i class="fa fa-fw fa-pinterest-p"></i></a></li>
-                        <li><a href="#" title="vimeo"><i class="fa fa-fw fa-vimeo"></i></a></li>
-                    </ul>
-                </article>
-                <!--//column-->
-                <!--column-->
-                <article class="one-fourth">
-                    <h6>Don’t miss our exclusive offers</h6>
-                    <form id="newsletter" action="newsletter.php" method="post">
-                        <fieldset>
-                            <input type="email" id="newsletter_signup" name="newsletter_signup" placeholder="Enter your email here" />
-                            <input type="submit" id="newsletter_submit" name="newsletter_submit" value="Signup" class="gradient-button" />
-                        </fieldset>
-                    </form>
-                </article>*@
-                <!--//column-->
-
+           
                 <div class="bottom full-width">
                     <p class="copy">Copyright Summer Universiade 2017. All rights reserved</p>
                     <nav>
@@ -302,7 +163,15 @@
             //$("[data-localize]").localize("test", opts)
             //$.cookie("test");
             var lang = $.cookie("lang");
+            //var langnav = $('.lang-nav');
             console.log(lang);
+            //if (lang == "us") {
+            //    langnav.find('#us').removeClass('active').hide();
+            //    langnav.find('#zh').addClass('active').show();
+            //} else {
+            //    langnav.find('#zh').removeClass('active').hide();
+            //    langnav.find('#us').addClass('active').show();
+            //}
             $("[data-localize]").localize("/Content/lang/language", { language: lang });
 
             $('.lang-nav').delegate('li', 'click', function (e) {
@@ -310,7 +179,7 @@
                 let mylang = $self.attr('id');
                 $.cookie("lang", mylang);
                 if (mylang != lang) {
-                   
+                    $('main').css({'opacity':'0.2'});
                     $("[data-localize]").localize("/Content/lang/language", { language: mylang });
                     lang = mylang;
                     location.reload();

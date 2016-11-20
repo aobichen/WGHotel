@@ -246,9 +246,13 @@ C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.csproj.Gen
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.dll
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.pdb
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.csprojResolveAssemblyReference.cache
+C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\WGHotel.dll.config
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.dll.config
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.pdb
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\Antlr3.Runtime.dll
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\ClosedXML.dll
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\DocumentFormat.OpenXml.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\EntityFramework.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\EntityFramework.SqlServer.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\Microsoft.Owin.dll
@@ -276,6 +280,7 @@ C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\System.Web.WebPages.Dep
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\System.Web.WebPages.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\System.Web.WebPages.Razor.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WebGrease.dll
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\ClosedXML.xml
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\PagedList.xml
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\PagedList.Mvc.xml
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\System.Web.Helpers.xml
@@ -324,8 +329,3 @@ C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.App_Globa
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.csproj.GenerateResource.Cache
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.pdb
-C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.dll.config
-C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\WGHotel.dll.config
-C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\ClosedXML.dll
-C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\DocumentFormat.OpenXml.dll
-C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\ClosedXML.xml

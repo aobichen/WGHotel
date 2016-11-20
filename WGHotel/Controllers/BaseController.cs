@@ -20,13 +20,24 @@ namespace WGHotel.Controllers
             {
                  _db = new WGHotelZHEntities("WGHotelUSEntities");
                  CurrentLanguage = Request.Cookies["lang"].Value.ToLower();
+                
             }
             else
             {
                  _db = new WGHotelZHEntities("WGHotelZHEntities");
                  CurrentLanguage = "zh";
+                 if (Request.Cookies["lang"] == null)
+                 {
+                     HttpCookie cookie = new HttpCookie("lang","zh");
+                     Request.Cookies.Add(cookie);
+                 }
+                 else
+                 {
+                     Request.Cookies["lang"].Value = "zh";
+                 }
+                 
             }
-
+            ViewBag.lang = CurrentLanguage;
             
         }
 

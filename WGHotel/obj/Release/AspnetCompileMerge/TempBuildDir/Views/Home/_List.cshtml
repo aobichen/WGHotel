@@ -1,5 +1,15 @@
 ﻿@model IEnumerable<WGHotel.Models.HotelViewModel>
 
+<style type="text/css">
+    .destinations article .gradient-button {
+        top: 50px;
+    }
+
+    
+</style>
+
+
+
 @if (Model != null && Model.ToList().Count > 0) { 
 foreach (var item in Model)
 {
@@ -22,8 +32,8 @@ foreach (var item in Model)
 
                     <a href="@item.LinkUrl" title="View all" style="padding-top:12px;">
 
-                        <span class="fa fa-globe fa-2x" aria-hidden="true" style="width:40%;text-align:left;"></span>
-                        <span class="price" style="width:50%;font-size:14px;" data-localize="forward">選擇客房</span>
+                        <span class="fa fa-globe fa-2x" aria-hidden="true" style="width:25%;text-align:left;left:0px;"></span>
+                        <span class="price" style="width:70%;font-size:14px;text-align:right" data-localize="forward">訂房</span>
                     </a>
 
                 </div>

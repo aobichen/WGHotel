@@ -36,7 +36,7 @@
                                         人數
                                     </th>
 
-                                    <th>房型</th>
+                                    @*<th>房型</th>*@
                                     <th>房價</th>
                                     <th></th>
                                 </tr>
@@ -60,9 +60,9 @@
                                     @Html.DisplayFor(modelItem => item.NumOfPeople)
                                 </td>
 
-                                <td>
+                                @*<td>
                                     @Html.DisplayFor(modelItem => item.Room)
-                                </td>
+                                </td>*@
                                 <td>
                                     @item.Price.Value.ToString("#,##0")
                                 </td>

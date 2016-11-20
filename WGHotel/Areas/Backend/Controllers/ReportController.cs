@@ -237,21 +237,26 @@ namespace WGHotel.Areas.Backend.Controllers
 
             search.Begin = DateTime.Parse(search.Begin.ToShortDateString() + " 00:00:00");
             search.End = DateTime.Parse(search.End.ToShortDateString() + " 23:59:59");
-            var result = (from r in _basedb.Report 
-                        where (search.Nation==0 ||
-                        r.CountryID == search.Nation) &&
-                        (r.CheckInDate >= search.Begin && r.CheckInDate <= search.End)
-                         select new ReportListModel
-            {
+            var result = (from r in _basedb.Report
+                          where (search.Nation == 0 ||
+                          r.CountryID == search.Nation) &&
+                          (r.CheckInDate >= search.Begin && r.CheckInDate <= search.End)
+                          select new ReportListModel
+             {
                  //Amount = r.Amount,
                  ID = r.ID,
-                  CheckInDate = r.CheckInDate,
-                   Country = r.Country,
-                    HotelID = r.HotelID,
+                 CheckInDate = r.CheckInDate,
+                 Country = r.Country,
+                 HotelID = r.HotelID,
                  Rooms = r.Room,
-                  Price = r.Price,
-                  Amount = r.NumOfPeople.Value
-            }).ToList();
+                 Price = r.Price,
+                 Amount = r.NumOfPeople.Value,
+                 Food = r.Food,
+                 FoodCost = r.FoodCost,
+                 Other = r.Other,
+                 OtherCost = r.OtherCost
+
+             }).ToList();
 
             var model = new List<ReportListModel>();
             var dtExcel = new List<ReportExcelModel>();
@@ -266,23 +271,32 @@ namespace WGHotel.Areas.Backend.Controllers
                 
                 var hotel = _dbzh.Hotel.Where(o=>o.ID == m.HotelID).FirstOrDefault();
                 var Name = hotel != null ? hotel.Name : string.Empty;
-                model.Add(new ReportListModel {
+                model.Add(new ReportListModel
+                {
                     Rooms = string.Join(",", room),
-                     Price = m.Price,
+                    Price = m.Price,
                     Hotel = Name,
-                     CheckInDate = m.CheckInDate,
-                     Country = m.Country,
-                     Amount = m.Amount
+                    CheckInDate = m.CheckInDate,
+                    Country = m.Country,
+                    Amount = m.Amount,
+                    Food = m.Food,
+                    FoodCost = m.FoodCost,
+                    Other = m.Other,
+                    OtherCost = m.OtherCost
                 });
 
-                dtExcel.Add(new ReportExcelModel {
+                dtExcel.Add(new ReportExcelModel
+                {
                     國籍 = m.Country,
                     飯店 = Name,
                     房型數量 = string.Join(",", room),
-                    人數 = m.Amount,          
-                    金額 = m.Price.Value.ToString("#,##0"),
-                    入住日期 = m.CheckInDate.ToShortDateString()
-                   
+                    人數 = m.Amount,
+                    金額 = m.Price.Value.ToString(),
+                    入住日期 = m.CheckInDate.ToShortDateString(),
+                    餐飲 = m.Food,
+                    餐飲金額 = m.FoodCost == null ? string.Empty : m.FoodCost.Value.ToString(),
+                    其他 = m.Other,
+                    其他金額 = m.OtherCost == null ? string.Empty : m.OtherCost.Value.ToString()
                 });
             }
             ViewBag.ReportList = model;

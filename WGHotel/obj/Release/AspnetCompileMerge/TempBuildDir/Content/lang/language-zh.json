@@ -1,8 +1,8 @@
 ﻿{
     "myaccount": "飯店管理",
-    "english": "英文",
-    "zhtw": "繁體中文",
-    "viewall": "選擇客房",
+    "english": "EN",
+    "zhtw": "繁中",
+    "viewall": "房型",
     "forward": "訂房",
     "hasbreakfast": "含早餐",
     "nonbreakfast": "不含早餐",
@@ -22,5 +22,10 @@
     "HsinchuCity": "新竹市",
     "HsinchuCountry": "新竹縣",
     "Neighboring": "鄰近",
-    "BookNow" : "訂房"
+    "BookNow" : "訂房",
+	"Sport" : "競賽總類",
+	"CheckIn" : "入房",
+	"CheckOut" : "退房",
+	"KeyWord" : "關鍵字",
+	"Search" : "搜尋"
 }

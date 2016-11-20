@@ -116,7 +116,7 @@ namespace WGHotel.Areas.Backend.Controllers
                var id = UserManager.FindByName(model.Account).Id;
                 model.UserId = id;
                 model.Create();
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
 
 
@@ -127,7 +127,7 @@ namespace WGHotel.Areas.Backend.Controllers
             ViewBag.GameSites = new GameSiteModel().SelectList();
             ViewBag.City = new GameSiteModel().Citys();
             ModelState.AddModelError("", "錯誤!請檢查資料");
-            return View(model);
+            return View();
         }
 
         [Authorize(Roles = "Admin,System")]
@@ -137,6 +137,11 @@ namespace WGHotel.Areas.Backend.Controllers
             //var us = _dbus.Hotel.Find()
             var ZHmodel = _dbzh.Hotel.Find(id);
             var USmodel = _dbus.Hotel.Find(id);
+
+            if (ZHmodel == null || USmodel==null)
+            {
+                return View("Index");
+            }
 
             var Manager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var u = Manager.FindById(ZHmodel.UserId).UserName;

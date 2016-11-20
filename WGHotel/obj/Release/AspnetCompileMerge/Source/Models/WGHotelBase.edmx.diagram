@@ -14,6 +14,8 @@
         <EntityTypeShape EntityType="WGHotelBaseModel.Banner" Width="1.5" PointX="5.375" PointY="3.75" />
         <EntityTypeShape EntityType="WGHotelBaseModel.Report" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="WGHotelBaseModel.RoomPrice" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="WGHotelBaseModel.ReportRooms" Width="1.5" PointX="7.625" PointY="8.25" />
+        <AssociationConnector Association="WGHotelBaseModel.FK_ReportRooms_Report" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

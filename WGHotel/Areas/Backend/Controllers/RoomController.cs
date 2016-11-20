@@ -23,7 +23,7 @@ namespace WGHotel.Areas.Backend.Controllers
         {
            
 
-            if (User.IsInRole("Admin") || User.IsInRole("Admin"))
+            if (User.IsInRole("Admin") || User.IsInRole("System"))
             {
                 var result = (from room in _dbzh.Room
                              join hotel in _dbzh.Hotel
@@ -40,7 +40,7 @@ namespace WGHotel.Areas.Backend.Controllers
                                  Sell = room.Sell.Value,
                                  BedType = room.BedType
                              }).ToList();
-                var currentPage = Page.Page < 1 ? 1 : Page.Page;
+                var currentPage = Page == null ? 1 : (Page.Page < 1 ? 1 : Page.Page);
                 var PageSize = 15;
 
                 var PageModel = result.ToPagedList(currentPage, PageSize);

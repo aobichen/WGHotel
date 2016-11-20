@@ -1,8 +1,8 @@
 ﻿{
     "myaccount": "Hotel Manage",
-    "english": "English",
-    "zhtw": "traditional Chinese",
-    "viewall": "Select your room",
+    "english": "EN",
+    "zhtw": "繁中",
+    "viewall": "Rooms",
     "forward": "Booking",
     "hasbreakfast": "Has-breakfast",
     "nonbreakfast": "Non-Breakfast",
@@ -20,5 +20,10 @@
     "HsinchuCity": "HsinchuCity",
     "HsinchuCountry": "HsinchuCountry",
     "Neighboring": "Neighboring",
-    "BookNow" : "Book Now"
+    "BookNow" : "Book Now",
+	"Sport" : "Sport",
+	"CheckIn" : "Check In",
+	"CheckOut" : "Check Out",
+	"KeyWord" : "Keyword",
+	"Search" : "Search"
 }

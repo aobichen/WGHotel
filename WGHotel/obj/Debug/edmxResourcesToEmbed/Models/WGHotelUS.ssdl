@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="USModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="USModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Area">
     <Key>
       <PropertyRef Name="ID" />
@@ -56,11 +56,11 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Game" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Game" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="City" Type="int" Nullable="false" />
     <Property Name="Area" Type="nvarchar" MaxLength="10" />
     <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Features" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Features" Type="nvarchar" MaxLength="1500" Nullable="false" />
     <Property Name="LinkUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="Facilities" Type="nvarchar" MaxLength="200" />
     <Property Name="Enabled" Type="bit" Nullable="false" />

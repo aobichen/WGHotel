@@ -328,3 +328,6 @@ C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Release\WGHotel.App_Glo
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Release\WGHotel.csproj.GenerateResource.Cache
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Release\WGHotel.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Release\WGHotel.pdb
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\ClosedXML.dll
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\DocumentFormat.OpenXml.dll
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\ClosedXML.xml

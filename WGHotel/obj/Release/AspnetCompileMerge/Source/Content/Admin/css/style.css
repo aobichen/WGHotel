@@ -3249,7 +3249,7 @@ ul.inbox-pagination li {
 .text-404{    
   font-size:138px;
   background:#e9e3dd;
-  background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQTdWeWNteABnbzguiXSBxmfc8Z8nh_HHoWoK35QL81x4HnpVmgvQ');
+  background-image: url('../../../images/uploads/error.jpg');
   background-repeat: no-repeat;
   background-size: 200% 200%;
   background-position: 100% 100%;

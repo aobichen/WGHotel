@@ -26,21 +26,21 @@
         @*<form id="main-search" method="post" action="search_results.html">*@
             <div class="row">
                 <!--column-->
-                <div class="column one-fourth">
+                <div class="column one-third">
                     @*<h5><span>01</span> What?</h5>*@
-                    <h5>場次</h5>
+                    <h5 data-localize="Sport">競賽總類</h5>
                     <div class="row">
                         @Html.DropDownList("Game", (List<SelectListItem>)ViewBag.GameSite)
                     </div>
                 </div>
                 <!--//column-->
 
-                <div class="three-fourth">
+                <div class="two-third">
                     <!--form hotel-->
                     <div class="form row" id="form1">
                         <!--column-->
-                        <div class="column one-half">
-                            <h5>關鍵字</h5>
+                        <div class="column one-fourth">
+                            <h5 data-localize="KeyWord">關鍵字</h5>
                             <div class="row">
                                 <div class="f-item full-width">
                                     @*<label for="destination1">Your destination</label>*@
@@ -50,8 +50,8 @@
                         </div>
                         <!--//column-->
                         <!--column-->
-                        <div class="column  one-half">
-                            <h5>日期</h5>
+                        <div class="column three-fourth">
+                            <h5><span style="color:#555;font-size:16px;font-weight:400;" data-localize="CheckIn">入房</span>\<span style="color:#555;font-size:16px;font-weight:400;" data-localize="CheckOut">退房</span></h5>
                             <div class="row">
                                 <div class="f-item one-half datepicker">
                                     @*<label for="datepicker1">Check-in date</label>*@
@@ -64,11 +64,13 @@
                             </div>
                         </div>
                         <!--//column-->
-                       
+
                     </div>
-                   
+
                 </div>
-                <input type="submit" value="搜尋" class="gradient-button search-submit" id="search-submit" />
+                <button type="submit" data-localize="Search" class="gradient-button search-submit" id="search-submit">
+                    搜尋
+                </button>
             </div>
         @*</form>*@
         }

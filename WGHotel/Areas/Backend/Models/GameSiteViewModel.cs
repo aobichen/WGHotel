@@ -137,10 +137,15 @@ namespace WGHotel.Areas.Backend.Models
 
         public List<SelectListItem> SelectList(List<int> Selected = null)
         {
+            var lang = HttpContext.Current.Request.Cookies["lang"].Value.ToLower();
+            var _db = new WGHotelZHEntities();
+            if(lang=="us"){
+                _db = new WGHotelZHEntities("WGHotelUSEntities");
+            }
             var Items = new List<GameSiteViewModel>();
 
 
-            var Games = db.GameSite.ToList();
+            var Games = _db.GameSite.ToList();
             var SelectList = new List<SelectListItem>();
             foreach (var i in Games)
             {
