@@ -9,7 +9,7 @@
     <div class="form-group ">
        
         <div class="col-sm-offset-10 col-lg-offset-10">
-            @Html.ActionLink("Create New", "Create", new { id = ViewBag.HotelID }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("新增房型", "Create", new { id = ViewBag.HotelID }, new { @class = "btn btn-primary" })
         </div>
     </div>
 </div>
@@ -23,9 +23,7 @@
             <th>
                 房名
             </th>
-            <th>
-                房型
-            </th>
+          
             <th>
                 床型
             </th>
@@ -48,17 +46,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
+              
                 <td>
-                    @WGHotel.Helpers.CodeFiles.GetCodeFileDescription(item.RoomType)
-                    @*@Html.DisplayFor(modelItem => item.RoomType)*@
-                </td>
-                <td>
-                    @WGHotel.Helpers.CodeFiles.GetCodeFileDescription(item.BedType)
+                    @WGHotel.Helpers.CodeFiles.GetCodeFileForBed(item.BedType)
                   
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sell)
+                   @item.Sell.ToString("#.##")
                 </td>
 
                 <td>

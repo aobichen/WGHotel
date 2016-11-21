@@ -10,6 +10,7 @@ using System.IO;
 using System.Drawing;
 namespace WGHotel.Areas.Backend.Controllers
 {
+    [Authorize(Roles = "Admin,System")]
     public class BannerController : BaseController
     {
         // GET: Backend/Banner

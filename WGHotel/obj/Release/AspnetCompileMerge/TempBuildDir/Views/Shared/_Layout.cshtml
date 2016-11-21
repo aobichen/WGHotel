@@ -56,6 +56,7 @@
                     <ul class="lang-nav">
                         @if (ViewBag.lang == "us") { 
                         <li id="zh" class="active" style="text-align:center;"><a href="javascript:void(0);" data-localize="zhtw"  title="繁中">繁中</a></li>
+                            
                         }
                         else
                         {
@@ -101,11 +102,11 @@
                     <p class="copy">Copyright Summer Universiade 2017. All rights reserved</p>
                     <nav>
                         <ul>
-                            <li><a href="javascript:void(0)" title="About us">About us</a></li>
-                            <li><a href="javascript:void(0)" title="Contact">Contact</a></li>
+                            @*<li><a href="javascript:void(0)" title="About us">About us</a></li>*@
+                            @*<li><a href="javascript:void(0)" title="Contact">Contact</a></li>*@
                             @*<li><a href="#" title="Partners">Partners</a></li>
                             <li><a href="#" title="Customer service">Customer service</a></li>*@
-                            <li><a href="javascript:void(0)" title="FAQ">FAQ</a></li>
+                            @*<li><a href="javascript:void(0)" title="FAQ">FAQ</a></li>*@
                             @*<li><a href="#" title="Careers">Careers</a></li>
                             <li><a href="#" title="Terms & Conditions">Terms &amp; Conditions</a></li>
                             <li><a href="#" title="Privacy statement">Privacy statement</a></li>*@
@@ -159,19 +160,9 @@
 
     <script type="text/javascript">
         jQuery(function () {
-            //var opts = { language: "ja", pathPrefix: "Content/jquery-localize-master/test/lang", skipLanguage: "en-US" };
-            //$("[data-localize]").localize("test", opts)
-            //$.cookie("test");
+           
             var lang = $.cookie("lang");
-            //var langnav = $('.lang-nav');
-            console.log(lang);
-            //if (lang == "us") {
-            //    langnav.find('#us').removeClass('active').hide();
-            //    langnav.find('#zh').addClass('active').show();
-            //} else {
-            //    langnav.find('#zh').removeClass('active').hide();
-            //    langnav.find('#us').addClass('active').show();
-            //}
+           
             $("[data-localize]").localize("/Content/lang/language", { language: lang });
 
             $('.lang-nav').delegate('li', 'click', function (e) {
@@ -182,17 +173,14 @@
                     $('main').css({'opacity':'0.2'});
                     $("[data-localize]").localize("/Content/lang/language", { language: mylang });
                     lang = mylang;
+                    //let currentURL = window.location.href;
+                    //location.href = currentURL;
                     location.reload();
+                  
                 }
                 e.preventDefault();
             });
 
-            //$('#syslang').on('change', function () {
-            //    var lang = $(this).val();
-            //    $("[data-localize]").localize("Content/lang/language", { language: lang });
-            //});
-            
-            //$.cookie("lang","foo");
         });
     </script>
     

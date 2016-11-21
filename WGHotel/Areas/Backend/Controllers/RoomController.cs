@@ -143,10 +143,17 @@ namespace WGHotel.Areas.Backend.Controllers
             };
             var RoomModel = new RoomViewModel();
             ViewBag.RoomTypes = RoomModel.RoomTypeSelectList;
-            var Beds = model.BedType.Split(',').Select(int.Parse).ToList();
-            ViewBag.BedTypes = new BedModel().SelectList(Beds);
-            ViewBag.RoomFacility = RoomModel.FacilityList;
+            if (string.IsNullOrEmpty(model.BedType)) {
+                ViewBag.BedTypes = new BedModel().SelectList();
+            }
+            else
+            {
+                var Beds = model.BedType.Split(',').Select(int.Parse).ToList();
+                ViewBag.BedTypes = new BedModel().SelectList(Beds);
+              
+            }
 
+            ViewBag.RoomFacility = RoomModel.FacilityList;
             var Images = _basedb.ImageStore.Where(o => o.ReferIdZH == model.ID && o.Type == "Room").Select(p =>
                 new ImageViewModel
                 {

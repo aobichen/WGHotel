@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="USModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="USModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="ID" />
@@ -68,7 +68,7 @@
           <Property Name="Area" Type="nvarchar" MaxLength="10" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Features" Type="nvarchar" MaxLength="1500" Nullable="false" />
-          <Property Name="LinkUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="LinkUrl" Type="nvarchar" MaxLength="1500" Nullable="false" />
           <Property Name="Facilities" Type="nvarchar" MaxLength="200" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
@@ -155,22 +155,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="USModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CodeFile">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ItemType" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ItemCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ItemDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Creator" Type="Int32" Nullable="false" />
-          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modify" Type="Int32" Nullable="false" />
-          <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <Property Name="ParentId" Type="Int32" />
-        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="ID" />
@@ -187,29 +171,8 @@
           <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Modify" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Room">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HOTELID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RoomType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BedType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Facilities" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="HasBreakfast" Type="Boolean" />
-          <Property Name="Sell" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Notice" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="Quantiy" Type="Int32" />
-          <Property Name="Enabled" Type="Boolean" />
-          <Property Name="ParentId" Type="Int32" />
-          <Property Name="Feature" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Hotel" Relationship="USModel.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
-        </EntityType>
         <EntityContainer Name="WGHotelUSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CodeFile" EntityType="Self.CodeFile" />
           <EntitySet Name="Order" EntityType="Self.Order" />
-          <EntitySet Name="Room" EntityType="Self.Room" />
           <EntitySet Name="GameSite" EntityType="USModel.GameSite" />
           <EntitySet Name="City" EntityType="USModel.City" />
           <EntitySet Name="Area" EntityType="USModel.Area" />
@@ -218,11 +181,13 @@
             <End Role="Area" EntitySet="Area" />
           </AssociationSet>
           <EntitySet Name="Hotel" EntityType="USModel.Hotel" />
+          <EntitySet Name="Facility" EntityType="USModel.Facility" />
+          <EntitySet Name="CodeFile" EntityType="USModel.CodeFile" />
+          <EntitySet Name="Room" EntityType="USModel.Room" />
           <AssociationSet Name="FK_Room_Hotel" Association="USModel.FK_Room_Hotel">
             <End Role="Hotel" EntitySet="Hotel" />
             <End Role="Room" EntitySet="Room" />
           </AssociationSet>
-          <EntitySet Name="Facility" EntityType="USModel.Facility" />
         </EntityContainer>
         <EntityType Name="GameSite">
           <Key>
@@ -276,13 +241,57 @@
           <Property Name="Area" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Features" Type="String" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="true" />
           <Property Name="Facilities" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Enabled" Type="Boolean" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Tel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ParentId" Type="Int32" />
           <NavigationProperty Name="Room" Relationship="USModel.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Facility">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CodeFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemType" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ItemDescription" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creator" Type="Int32" Nullable="false" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modify" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HOTELID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RoomType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BedType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Facilities" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HasBreakfast" Type="Boolean" />
+          <Property Name="Sell" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Notice" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Quantiy" Type="Int32" />
+          <Property Name="Enabled" Type="Boolean" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Feature" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Hotel" Relationship="USModel.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
         </EntityType>
         <Association Name="FK_Room_Hotel">
           <End Type="USModel.Hotel" Role="Hotel" Multiplicity="1" />
@@ -296,38 +305,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Facility">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Enabled" Type="Boolean" Nullable="false" />
-          <Property Name="ParentId" Type="Int32" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="USModelStoreContainer" CdmEntityContainer="WGHotelUSEntities">
-          <EntitySetMapping Name="CodeFile">
-            <EntityTypeMapping TypeName="USModel.CodeFile">
-              <MappingFragment StoreEntitySet="CodeFile">
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Creator" ColumnName="Creator" />
-                <ScalarProperty Name="Modified" ColumnName="Modified" />
-                <ScalarProperty Name="Modify" ColumnName="Modify" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="USModel.Order">
               <MappingFragment StoreEntitySet="Order">
@@ -342,25 +325,6 @@
                 <ScalarProperty Name="Creator" ColumnName="Creator" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="Modify" ColumnName="Modify" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Room">
-            <EntityTypeMapping TypeName="USModel.Room">
-              <MappingFragment StoreEntitySet="Room">
-                <ScalarProperty Name="Feature" ColumnName="Feature" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="HOTELID" ColumnName="HOTELID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
-                <ScalarProperty Name="BedType" ColumnName="BedType" />
-                <ScalarProperty Name="Facilities" ColumnName="Facilities" />
-                <ScalarProperty Name="HasBreakfast" ColumnName="HasBreakfast" />
-                <ScalarProperty Name="Sell" ColumnName="Sell" />
-                <ScalarProperty Name="Notice" ColumnName="Notice" />
-                <ScalarProperty Name="Quantiy" ColumnName="Quantiy" />
-                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -419,6 +383,42 @@
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CodeFile">
+            <EntityTypeMapping TypeName="USModel.CodeFile">
+              <MappingFragment StoreEntitySet="CodeFile">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Modify" ColumnName="Modify" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Room">
+            <EntityTypeMapping TypeName="USModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="Feature" ColumnName="Feature" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Quantiy" ColumnName="Quantiy" />
+                <ScalarProperty Name="Notice" ColumnName="Notice" />
+                <ScalarProperty Name="Sell" ColumnName="Sell" />
+                <ScalarProperty Name="HasBreakfast" ColumnName="HasBreakfast" />
+                <ScalarProperty Name="Facilities" ColumnName="Facilities" />
+                <ScalarProperty Name="BedType" ColumnName="BedType" />
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HOTELID" ColumnName="HOTELID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

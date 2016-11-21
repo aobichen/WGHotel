@@ -5,16 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="836e7d6a3d9e4cf2b284021f5e67dbce" Name="Diagram1">
-        <EntityTypeShape EntityType="ZHModel.CodeFile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ZHModel.Order" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZHModel.Room" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ZHModel.GameSite" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="ZHModel.City" Width="1.5" PointX="7.375" PointY="0.875" />
         <EntityTypeShape EntityType="ZHModel.Area" Width="1.5" PointX="9.625" PointY="0.875" />
         <AssociationConnector Association="ZHModel.FK__Area__CID__1CF15040" />
         <EntityTypeShape EntityType="ZHModel.Hotel" Width="1.5" PointX="0.75" PointY="1" />
-        <AssociationConnector Association="ZHModel.FK_Room_Hotel" />
         <EntityTypeShape EntityType="ZHModel.Facility" Width="1.5" PointX="8.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ZHModel.CodeFile" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ZHModel.Room" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="ZHModel.FK_Room_Hotel" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

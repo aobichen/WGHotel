@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ZHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="CodeFile">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ItemType" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ItemCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ItemDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Creator" Type="Int32" Nullable="false" />
-    <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Modify" Type="Int32" Nullable="false" />
-  </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="ID" />
@@ -30,29 +16,8 @@
     <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Modify" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="Room">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="HOTELID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="RoomType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BedType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Facilities" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="HasBreakfast" Type="Boolean" />
-    <Property Name="Sell" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Notice" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-    <Property Name="Quantiy" Type="Int32" />
-    <Property Name="Enabled" Type="Boolean" />
-    <Property Name="ParentId" Type="Int32" />
-    <Property Name="Feature" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Hotel" Relationship="ZHModel.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
-  </EntityType>
   <EntityContainer Name="WGHotelZHEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="CodeFile" EntityType="Self.CodeFile" />
     <EntitySet Name="Order" EntityType="Self.Order" />
-    <EntitySet Name="Room" EntityType="Self.Room" />
     <EntitySet Name="GameSite" EntityType="ZHModel.GameSite" />
     <EntitySet Name="City" EntityType="ZHModel.City" />
     <EntitySet Name="Area" EntityType="ZHModel.Area" />
@@ -61,11 +26,13 @@
       <End Role="Area" EntitySet="Area" />
     </AssociationSet>
     <EntitySet Name="Hotel" EntityType="ZHModel.Hotel" />
+    <EntitySet Name="Facility" EntityType="ZHModel.Facility" />
+    <EntitySet Name="CodeFile" EntityType="ZHModel.CodeFile" />
+    <EntitySet Name="Room" EntityType="ZHModel.Room" />
     <AssociationSet Name="FK_Room_Hotel" Association="ZHModel.FK_Room_Hotel">
       <End Role="Hotel" EntitySet="Hotel" />
       <End Role="Room" EntitySet="Room" />
     </AssociationSet>
-    <EntitySet Name="Facility" EntityType="ZHModel.Facility" />
   </EntityContainer>
   <EntityType Name="GameSite">
     <Key>
@@ -119,13 +86,57 @@
     <Property Name="Area" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Features" Type="String" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="true" />
-    <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="true" />
     <Property Name="Facilities" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Enabled" Type="Boolean" Nullable="false" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="Tel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="ParentId" Type="Int32" />
     <NavigationProperty Name="Room" Relationship="ZHModel.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CodeFile">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemType" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ItemDescription" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Creator" Type="Int32" Nullable="false" />
+    <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modify" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HOTELID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="RoomType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BedType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Facilities" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HasBreakfast" Type="Boolean" />
+    <Property Name="Sell" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Notice" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+    <Property Name="Quantiy" Type="Int32" />
+    <Property Name="Enabled" Type="Boolean" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="Feature" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Hotel" Relationship="ZHModel.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
   </EntityType>
   <Association Name="FK_Room_Hotel">
     <End Type="ZHModel.Hotel" Role="Hotel" Multiplicity="1" />
@@ -139,13 +150,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Facility">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Enabled" Type="Boolean" Nullable="false" />
-    <Property Name="ParentId" Type="Int32" />
-  </EntityType>
 </Schema>

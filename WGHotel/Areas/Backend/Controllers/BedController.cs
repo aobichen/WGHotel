@@ -8,6 +8,7 @@ using WGHotel.Controllers;
 using PagedList;
 namespace WGHotel.Areas.Backend.Controllers
 {
+    [Authorize(Roles = "Admin,System")]
     public class BedController : BaseController
     {
         //

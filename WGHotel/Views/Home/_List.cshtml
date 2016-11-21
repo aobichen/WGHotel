@@ -20,7 +20,7 @@ foreach (var item in Model)
             </a>
         </figure>
         <div class="details">
-            <a href="@Url.Action("Detail","Home",new{id = item.ID})" title="View all" class="gradient-button" data-localize="viewall">選擇客房</a>
+            <a href="@Url.Action("Detail",null,new{id = item.ID})" title="View all" class="gradient-button" data-localize="viewall">選擇客房</a>
             <h4>@item.Name</h4>
             <span>
                 <i class="fa fa-phone-square" aria-hidden="true"></i>

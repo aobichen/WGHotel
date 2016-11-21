@@ -26,6 +26,10 @@ namespace WGHotel.Helpers
 
         public static string GetCodeFileForBed(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                return string.Empty;
+            }
             var IDs = id.Split(',').Select(int.Parse).ToList();
             
             var Bed = string.Empty;
