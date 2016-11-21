@@ -328,7 +328,7 @@ C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.App_Globa
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.csproj.GenerateResource.Cache
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.pdb
-C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.csprojResolveAssemblyReference.cache
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\ClosedXML.dll
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\DocumentFormat.OpenXml.dll
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\ClosedXML.xml
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.csprojResolveAssemblyReference.cache

@@ -29,7 +29,7 @@ namespace WGHotel.Models
         public string Features { get; set; }
         public string LinkUrl { get; set; }
         public string Facilities { get; set; }
-        public bool Enabled { get; set; }
+        public Nullable<bool> Enabled { get; set; }
         public int UserId { get; set; }
         public string Tel { get; set; }
         public Nullable<int> ParentId { get; set; }

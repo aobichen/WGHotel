@@ -29,9 +29,9 @@ namespace WGHotel.Models
         public virtual DbSet<GameSite> GameSite { get; set; }
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Area> Area { get; set; }
-        public virtual DbSet<Hotel> Hotel { get; set; }
         public virtual DbSet<Facility> Facility { get; set; }
         public virtual DbSet<CodeFile> CodeFile { get; set; }
         public virtual DbSet<Room> Room { get; set; }
+        public virtual DbSet<Hotel> Hotel { get; set; }
     }
 }

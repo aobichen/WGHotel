@@ -10,10 +10,10 @@
         <EntityTypeShape EntityType="USModel.City" Width="1.5" PointX="7.375" PointY="0.875" />
         <EntityTypeShape EntityType="USModel.Area" Width="1.5" PointX="9.625" PointY="0.875" />
         <AssociationConnector Association="USModel.FK__Area__CID__267ABA7A" />
-        <EntityTypeShape EntityType="USModel.Hotel" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="USModel.Facility" Width="1.5" PointX="5.375" PointY="3.75" />
         <EntityTypeShape EntityType="USModel.CodeFile" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="USModel.Room" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="USModel.Hotel" Width="1.5" PointX="0.75" PointY="1" />
         <AssociationConnector Association="USModel.FK_Room_Hotel" />
       </Diagram>
     </edmx:Diagrams>

@@ -12,6 +12,18 @@ namespace WGHotel
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        //protected void Application_BeginRequest(object sender, EventArgs e)
+        //{
+        //    RouteData routeData = RouteTable.Routes.GetRouteData(
+        //        new HttpContextWrapper(HttpContext.Current));
+        //    var action = routeData.GetRequiredString("action");
+        //    var controller = routeData.GetRequiredString("controller");
+        //    if (action == "Home" && controller == "Home")
+        //    {
+        //        HttpContext ctx = HttpContext.Current;
+        //        ctx.Response.Redirect("/"); 
+        //    }
+        //}
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

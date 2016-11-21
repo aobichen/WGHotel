@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WGHotel.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using WGHotel.Areas.Backend.Models;
 namespace WGHotel.Controllers
 {
     public class BaseController : Controller
@@ -58,6 +59,7 @@ namespace WGHotel.Controllers
             _dbzh = new WGHotelZHEntities();
             _dbus = new WGHotelUSEntities();
             _basedb = new WGHotelBaseEntities();
+            //ViewBag.GameSite = new GameSiteModel().SelectList();
         }
 
         protected ApplicationDbContext Account_db

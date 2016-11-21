@@ -104,6 +104,9 @@ namespace WGHotel.Areas.Backend.Controllers
 
             model.Game = GameSite;
 
+
+           
+
            if (ModelState.IsValid)
             {
                 var UserManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();

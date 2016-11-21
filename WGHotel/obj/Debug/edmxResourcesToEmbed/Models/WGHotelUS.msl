@@ -48,25 +48,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Hotel">
-      <EntityTypeMapping TypeName="USModel.Hotel">
-        <MappingFragment StoreEntitySet="Hotel">
-          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-          <ScalarProperty Name="Tel" ColumnName="Tel" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
-          <ScalarProperty Name="Facilities" ColumnName="Facilities" />
-          <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
-          <ScalarProperty Name="Features" ColumnName="Features" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Area" ColumnName="Area" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Game" ColumnName="Game" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Facility">
       <EntityTypeMapping TypeName="USModel.Facility">
         <MappingFragment StoreEntitySet="Facility">
@@ -109,6 +90,25 @@
           <ScalarProperty Name="RoomType" ColumnName="RoomType" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="HOTELID" ColumnName="HOTELID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hotel">
+      <EntityTypeMapping TypeName="USModel.Hotel">
+        <MappingFragment StoreEntitySet="Hotel">
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="Facilities" ColumnName="Facilities" />
+          <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+          <ScalarProperty Name="Features" ColumnName="Features" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Game" ColumnName="Game" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

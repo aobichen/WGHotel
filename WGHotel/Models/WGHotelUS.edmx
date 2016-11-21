@@ -62,17 +62,17 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Game" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Game" Type="nvarchar" MaxLength="150" />
           <Property Name="City" Type="int" Nullable="false" />
           <Property Name="Area" Type="nvarchar" MaxLength="10" />
-          <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Features" Type="nvarchar" MaxLength="1500" Nullable="false" />
-          <Property Name="LinkUrl" Type="nvarchar" MaxLength="1500" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="Features" Type="nvarchar" MaxLength="1500" />
+          <Property Name="LinkUrl" Type="nvarchar" MaxLength="1500" />
           <Property Name="Facilities" Type="nvarchar" MaxLength="200" />
-          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Tel" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="20" />
           <Property Name="ParentId" Type="int" />
         </EntityType>
         <EntityType Name="Order">
@@ -180,10 +180,10 @@
             <End Role="City" EntitySet="City" />
             <End Role="Area" EntitySet="Area" />
           </AssociationSet>
-          <EntitySet Name="Hotel" EntityType="USModel.Hotel" />
           <EntitySet Name="Facility" EntityType="USModel.Facility" />
           <EntitySet Name="CodeFile" EntityType="USModel.CodeFile" />
           <EntitySet Name="Room" EntityType="USModel.Room" />
+          <EntitySet Name="Hotel" EntityType="USModel.Hotel" />
           <AssociationSet Name="FK_Room_Hotel" Association="USModel.FK_Room_Hotel">
             <End Role="Hotel" EntitySet="Hotel" />
             <End Role="Room" EntitySet="Room" />
@@ -230,25 +230,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Hotel">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Game" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="Int32" Nullable="false" />
-          <Property Name="Area" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Features" Type="String" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="Facilities" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Enabled" Type="Boolean" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Tel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ParentId" Type="Int32" />
-          <NavigationProperty Name="Room" Relationship="USModel.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
-        </EntityType>
         <EntityType Name="Facility">
           <Key>
             <PropertyRef Name="ID" />
@@ -292,6 +273,25 @@
           <Property Name="ParentId" Type="Int32" />
           <Property Name="Feature" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Hotel" Relationship="USModel.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Game" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="Int32" Nullable="false" />
+          <Property Name="Area" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Features" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="LinkUrl" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Facilities" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <NavigationProperty Name="Room" Relationship="USModel.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
         </EntityType>
         <Association Name="FK_Room_Hotel">
           <End Type="USModel.Hotel" Role="Hotel" Multiplicity="1" />
@@ -358,25 +358,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Hotel">
-            <EntityTypeMapping TypeName="USModel.Hotel">
-              <MappingFragment StoreEntitySet="Hotel">
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="Tel" ColumnName="Tel" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
-                <ScalarProperty Name="Facilities" ColumnName="Facilities" />
-                <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
-                <ScalarProperty Name="Features" ColumnName="Features" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Game" ColumnName="Game" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Facility">
             <EntityTypeMapping TypeName="USModel.Facility">
               <MappingFragment StoreEntitySet="Facility">
@@ -419,6 +400,25 @@
                 <ScalarProperty Name="RoomType" ColumnName="RoomType" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="HOTELID" ColumnName="HOTELID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotel">
+            <EntityTypeMapping TypeName="USModel.Hotel">
+              <MappingFragment StoreEntitySet="Hotel">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Facilities" ColumnName="Facilities" />
+                <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+                <ScalarProperty Name="Features" ColumnName="Features" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

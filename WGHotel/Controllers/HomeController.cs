@@ -213,11 +213,14 @@ namespace WGHotel.Controllers
             
             var model = _db.Hotel.Find(id);
 
+            
 
-            if (model == null)
+            if (CurrentLanguage.Equals("us"))
             {
-                return RedirectToAction("Home");
+                model = _dbus.Hotel.Where(o => o.ParentId == id).FirstOrDefault();
+                //return View(model);
             }
+
 
             var detail = new HotelDetail();
             detail.ID = model.ID;

@@ -57,17 +57,17 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="Game" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Game" Type="nvarchar" MaxLength="150" />
     <Property Name="City" Type="int" Nullable="false" />
     <Property Name="Area" Type="nvarchar" MaxLength="10" />
-    <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Features" Type="nvarchar" MaxLength="1500" Nullable="false" />
-    <Property Name="LinkUrl" Type="nvarchar" MaxLength="1500" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="Features" Type="nvarchar" MaxLength="1500" />
+    <Property Name="LinkUrl" Type="nvarchar" MaxLength="1500" />
     <Property Name="Facilities" Type="nvarchar" MaxLength="200" />
-    <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="Enabled" Type="bit" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Tel" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="20" />
     <Property Name="ParentId" Type="int" />
   </EntityType>
   <EntityType Name="Order">
