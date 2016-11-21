@@ -69,7 +69,7 @@ namespace WGHotel.Areas.Backend.Models
         {
             var model = new List<Facility>();
             var SelectList = new List<SelectListItem>();
-
+            
             var db = new WGHotelZHEntities();
             if (lang.Equals("us"))
             {

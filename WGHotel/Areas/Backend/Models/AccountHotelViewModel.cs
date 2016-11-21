@@ -47,6 +47,8 @@ namespace WGHotel.Areas.Backend.Models
 
         public string ImgKey { get; set; }
 
+        public List<string> HotelFacility { get; set; }
+        public List<string> GameSite { get; set; }
         public void Create()
         {
            
@@ -146,61 +148,70 @@ namespace WGHotel.Areas.Backend.Models
             zhHotel.LinkUrl = LinkUrl;
             zhHotel.Game = Game;
             zhHotel.Tel = Tel;
-            zhHotel.UserId = UserId;
+            //zhHotel.UserId = zhHotel.UserId;
 
 
-            ZHdb.Hotel.Add(zhHotel);
-            ZHdb.SaveChanges();
+            //ZHdb.Hotel.Add(zhHotel);
+           
             var ReferIdZH = zhHotel.ID;
 
-            var USdb = new WGHotelUSEntities();
-            var HotelUs = USdb.Hotel.Find(zhHotel.ParentId);
-
-            HotelUs.Name = Nameus;
-            HotelUs.Address = Addressus;
-            HotelUs.Area = Area;
-            HotelUs.City = City;
-            HotelUs.Facilities = Facilies;
-            HotelUs.Features = Featureus;
-            HotelUs.Enabled = true;
-            HotelUs.LinkUrl = LinkUrl;
-            HotelUs.Game = Game;
-            HotelUs.UserId = UserId;
-            HotelUs.Tel = Tel;
-            HotelUs.ParentId = zhHotel.ID;
-            
-            USdb.Hotel.Add(HotelUs);
-
-            USdb.SaveChanges();
-            var ReferIdUS = HotelUs.ID;
-            var Session = HttpContext.Current.Session;
-
-            if (Session[ImgKey] != null)
+            try
             {
-                var Basedb = new WGHotelBaseEntities();
-                var Now = DateTime.Now;
-                var images = (List<ImageViewModel>)Session[ImgKey];
-                var dbImg = Basedb.ImageStore.Where(o => o.ReferIdZH == zhHotel.ID);
-                var ImgNames = dbImg.Select(o=>o.Name).ToList();
-                images = images.Where(o => !ImgNames.Contains(o.Name)).ToList();
-                foreach (var img in images)
-                {
-                    var fileName = Guid.NewGuid().GetHashCode().ToString("x");
-                    Basedb.ImageStore.Add(new ImageStore
-                    {
-                        Created = Now,
-                        Extension = img.Extension,
-                        Deleted = false,
-                        ReferIdUS = ReferIdUS,
-                        ReferIdZH = ReferIdZH,
-                        Type = "Hotel",
-                        Name = fileName,
-                        Image = img.Image
-                    });
-                }
-                Basedb.SaveChanges();
-            }
+                var USdb = new WGHotelUSEntities();
+                var HotelUs = USdb.Hotel.Where(o => o.ParentId == ReferIdZH).FirstOrDefault();
 
+                HotelUs.Name = Nameus;
+                HotelUs.Address = Addressus;
+                HotelUs.Area = Area;
+                HotelUs.City = City;
+                HotelUs.Facilities = Facilies;
+                HotelUs.Features = Featureus;
+                HotelUs.Enabled = true;
+                HotelUs.LinkUrl = LinkUrl;
+                HotelUs.Game = Game;
+                //HotelUs.UserId = UserId;
+                HotelUs.Tel = Tel;
+                HotelUs.ParentId = zhHotel.ID;
+
+               // USdb.Hotel.Add(HotelUs);
+
+                USdb.SaveChanges();
+
+                ZHdb.SaveChanges();
+
+                var ReferIdUS = HotelUs.ID;
+                var Session = HttpContext.Current.Session;
+
+                if (Session[ImgKey] != null)
+                {
+                    var Basedb = new WGHotelBaseEntities();
+                    var Now = DateTime.Now;
+                    var images = (List<ImageViewModel>)Session[ImgKey];
+                    var dbImg = Basedb.ImageStore.Where(o => o.ReferIdZH == zhHotel.ID);
+                    var ImgNames = dbImg.Select(o => o.Name).ToList();
+                    images = images.Where(o => !ImgNames.Contains(o.Name)).ToList();
+                    foreach (var img in images)
+                    {
+                        var fileName = Guid.NewGuid().GetHashCode().ToString("x");
+                        Basedb.ImageStore.Add(new ImageStore
+                        {
+                            Created = Now,
+                            Extension = img.Extension,
+                            Deleted = false,
+                            ReferIdUS = ReferIdUS,
+                            ReferIdZH = ReferIdZH,
+                            Type = "Hotel",
+                            Name = fileName,
+                            Image = img.Image
+                        });
+                    }
+                    Basedb.SaveChanges();
+                }
+            }
+           catch(Exception ex)
+            {
+
+            }
         }
     }
 
