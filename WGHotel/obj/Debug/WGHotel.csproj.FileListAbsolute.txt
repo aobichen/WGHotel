@@ -246,7 +246,6 @@ C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.csproj.Gen
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.dll
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.pdb
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\WGHotel.dll.config
-C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.dll.config
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.dll
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.pdb
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\Antlr3.Runtime.dll
@@ -332,3 +331,4 @@ C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\ClosedXML.dll
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\DocumentFormat.OpenXml.dll
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\ClosedXML.xml
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.csprojResolveAssemblyReference.cache
+C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.dll.config

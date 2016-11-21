@@ -88,7 +88,7 @@
        
         <!--//main navigation-->
     </header>
-@if (ViewContext.RouteData.Values["controller"] == "Home")
+@if (ViewContext.RouteData.Values["controller"] == "Home" && ViewBag.GameSite != null && ((List<SelectListItem>)ViewBag.GameSite).Count>0)
 {
     @Html.Partial("_SliderCarousel")
 }
@@ -155,14 +155,11 @@
                     }
                 });
             });
-        })(jQuery);
-    </script>
 
-    <script type="text/javascript">
-        jQuery(function () {
-           
+
+
             var lang = $.cookie("lang");
-           
+            
             $("[data-localize]").localize("/Content/lang/language", { language: lang });
 
             $('.lang-nav').delegate('li', 'click', function (e) {
@@ -170,19 +167,25 @@
                 let mylang = $self.attr('id');
                 $.cookie("lang", mylang);
                 if (mylang != lang) {
-                    $('main').css({'opacity':'0.2'});
+                    $('main').css({ 'opacity': '0.2' });
                     $("[data-localize]").localize("/Content/lang/language", { language: mylang });
                     lang = mylang;
-                    //let currentURL = window.location.href;
+                    
                     //location.href = currentURL;
+                    //console.log($('.logo').find('a').length);
+                    //$('.logo').find('a').trigger("click");
+                    //var href = $('.logo').find('a').attr('href');
+                    //window.location.href = href;
                     location.reload();
-                  
+                    //e.stopPropagation();
                 }
-                e.preventDefault();
+                
             });
 
-        });
+        })(jQuery);
     </script>
+
+    
     
 </body>
 </html>
