@@ -21,10 +21,12 @@ namespace WGHotel.Areas.Backend.Controllers
         // GET: Backend/Room
         public ActionResult Index(PagedClientViewModel Page = null)
         {
-           
-
-            if (User.IsInRole("Admin") || User.IsInRole("System"))
+            var id = Request.QueryString["id"];
+            
+             if (User.IsInRole("Admin") || User.IsInRole("System"))
             {
+                var strPage = Request.QueryString["Page"] == null ? string.Empty : Request.QueryString["Page"];
+                var page = string.IsNullOrEmpty(strPage) ? 0 : int.Parse(Request.QueryString["Page"]);
                 var result = (from room in _dbzh.Room
                              join hotel in _dbzh.Hotel
                              on room.HOTELID equals hotel.ID
@@ -40,7 +42,7 @@ namespace WGHotel.Areas.Backend.Controllers
                                  Sell = room.Sell.Value,
                                  BedType = room.BedType
                              }).ToList();
-                var currentPage = Page == null ? 1 : (Page.Page < 1 ? 1 : Page.Page);
+                var currentPage = page < 1 ? 1 : page;
                 var PageSize = 15;
 
                 var PageModel = result.ToPagedList(currentPage, PageSize);
@@ -54,7 +56,7 @@ namespace WGHotel.Areas.Backend.Controllers
             {
                 return RedirectToAction("","Hotel");
             }
-            var hotelId = Page != null ? Page.id : Hotel.ID;
+            var hotelId = (Page != null && Page.id != 0) ? Page.id : Hotel.ID;
             ViewBag.HotelID = hotelId;
             var model = (from room in _dbzh.Room
                          join hotel in _dbzh.Hotel

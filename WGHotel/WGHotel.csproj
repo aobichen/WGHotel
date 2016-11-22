@@ -338,6 +338,7 @@
     <Content Include="Bed.txt" />
     <Content Include="Content\Admin\assets\ckeditor\lang\en.js" />
     <Content Include="Content\Admin\assets\ckeditor\lang\zh.js" />
+    <Content Include="images\ico\part_287_2546227_93910.gif" />
     <Content Include="images\uploads\error.jpg" />
     <Content Include="Xss.html" />
     <Content Include="404.html" />
@@ -1083,6 +1084,7 @@
     <Content Include="Areas\Backend\Views\Bed\_Create.cshtml" />
     <Content Include="Areas\Backend\Views\Bed\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\Shared\_BedTypes.cshtml" />
+    <Content Include="Areas\Backend\Views\System\RoomCanEditDate.cshtml" />
     <None Include="Properties\PublishProfiles\wghotel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\infobox.js" />

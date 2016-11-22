@@ -81,5 +81,7 @@
     </table>
 </div>
 <div class="panel-footer">
+    @if (Model != null && Model.Count > 0) { 
     @Html.PagedListPager(Model, Page => Url.Action("Index", new WGHotel.Areas.Backend.Controllers.RoomController.PagedClientViewModel { Page = Page, id = Model[0].ID }))
-</div>
+    }
+    </div>

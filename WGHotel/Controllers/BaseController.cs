@@ -50,6 +50,9 @@ namespace WGHotel.Controllers
 
         protected string CurrentLanguage;
 
+        protected DateTime RoomEditBeginDate { get; set; }
+        protected DateTime RoomEditEndDate { get; set; }
+
         private int UserId { get; set; }
 
         // GET: Base
@@ -59,6 +62,9 @@ namespace WGHotel.Controllers
             _dbzh = new WGHotelZHEntities();
             _dbus = new WGHotelUSEntities();
             _basedb = new WGHotelBaseEntities();
+            var RoomEditDate = new RoomCanEditDate();
+            RoomEditBeginDate = DateTime.Parse(RoomEditDate.Begin);
+            RoomEditEndDate = DateTime.Parse(RoomEditDate.End);
             //ViewBag.GameSite = new GameSiteModel().SelectList();
         }
 

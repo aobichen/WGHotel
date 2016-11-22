@@ -98,7 +98,9 @@
             }
             </div>
         <div class="panel-footer">
+            @if (Model != null && Model.Count > 0) { 
             @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+            }
         </div>
     </section>
 </div>

@@ -90,6 +90,11 @@ namespace WGHotel.Areas.Backend.Models
             var ZHID = 0;
             var USID = 0;
             var ZHHotelID = 0;
+            var BedTypes = string.Empty;
+            if (Beds != null && Beds.Count > 0)
+            {
+                BedTypes = string.Join(",", Beds);
+            }
             using (var db = new WGHotelZHEntities())
             {
 
@@ -97,7 +102,7 @@ namespace WGHotel.Areas.Backend.Models
                 Room.Name = NameZh;
                 Room.Notice = NoticeZh;
                 Room.Feature = FeatureZh;
-                Room.BedType = BedType;
+                Room.BedType = BedTypes;
                 Room.RoomType = RoomType;
                 Room.Sell = Sell;
                 Room.Enabled = true;
@@ -116,13 +121,26 @@ namespace WGHotel.Areas.Backend.Models
 
                 using (var db = new WGHotelUSEntities())
                 {
+                    var ENBed = new List<string>();
+                    if (Beds != null && Beds.Count > 0)
+                    {
 
+                        var ENBeds = Beds.Select(int.Parse).ToList();
+                        foreach (var b in ENBeds)
+                        {
+                            var data = db.CodeFile.Where(o => o.ItemType == "Bed" && o.ParentId == b).FirstOrDefault();
+                            if (data != null)
+                            {
+                                ENBed.Add(data.ID.ToString());
+                            }
+                        }
+                    }
                     var HotelID = db.Hotel.Where(o => o.ParentId == ZHHotelID).FirstOrDefault().ID;
                     var Room = new Room();
                     Room.Name = NameUs;
                     Room.Feature = FeatureUs;
                     Room.Notice = NoticeUs;
-                    Room.BedType = BedType;
+                    Room.BedType = (ENBed == null || ENBed.Count <= 0) ? string.Empty : string.Join(",", ENBed);
                     Room.RoomType = RoomType;
                     Room.Sell = Sell;
                     Room.Enabled = true;
@@ -138,7 +156,7 @@ namespace WGHotel.Areas.Backend.Models
 
                 SaveImageStore(ZHID, USID);
             }
-            catch
+            catch(Exception ex)
             {
                 using (var db = new WGHotelZHEntities())
                 {
@@ -216,7 +234,7 @@ namespace WGHotel.Areas.Backend.Models
                 USModel.Sell = Sell;
                 USModel.Enabled = true;
                 USModel.HasBreakfast = HasBreakfast;
-                USModel.HOTELID = ENHotelId;
+                //USModel.HOTELID = ENHotelId;
                 USModel.Facilities = string.Empty;
                 USModel.Quantiy = Quantiy;
                 //db.Room.Add(USModel);
@@ -224,7 +242,7 @@ namespace WGHotel.Areas.Backend.Models
                 _db.SaveChanges();
                 SaveImageStore(ZHModel.ID, USModel.ID);
             }
-            catch
+            catch(Exception ex)
             {
 
             }
@@ -256,8 +274,8 @@ namespace WGHotel.Areas.Backend.Models
                             Created = Now,
                             Extension = img.Extension,
                             Deleted = false,
-                            ReferIdUS = ZHID,
-                            ReferIdZH = USID,
+                            ReferIdUS = USID,
+                            ReferIdZH = ZHID,
                             Type = "Room",
                             Name = fileName,
                             Image = img.Image

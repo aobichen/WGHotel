@@ -27,11 +27,18 @@
     <![endif]-->
 
     @RenderSection("scripts", required: false)
+
+    <style type="text/css">
+
+    </style>
 </head>
 <body>
     <div class="loading">
-        <div class="ball"></div>
-        <div class="ball1"></div>
+        
+        <div class="ball-customer" style="margin-left:40%;">
+            <img class="img-responsive" src="~/images/ico/part_287_2546227_93910.gif" />
+        </div>
+        @*<div class="ball1"></div>*@
     </div>
     <!--- //loading animation -->
     <!--header-->
@@ -159,7 +166,7 @@
 
 
             var lang = $.cookie("lang");
-            
+            console.log(lang);
             $("[data-localize]").localize("/Content/lang/language", { language: lang });
 
             $('.lang-nav').delegate('li', 'click', function (e) {
@@ -175,7 +182,7 @@
                     //console.log($('.logo').find('a').length);
                     //$('.logo').find('a').trigger("click");
                     //var href = $('.logo').find('a').attr('href');
-                    //window.location.href = href;
+                    //window.location.href = "/";
                     location.reload();
                     //e.stopPropagation();
                 }

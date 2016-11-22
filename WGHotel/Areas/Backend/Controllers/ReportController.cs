@@ -77,7 +77,7 @@ namespace WGHotel.Areas.Backend.Controllers
                      }).FirstOrDefault();
                     
                 var Hotel = _dbzh.Hotel.Where(o => o.UserId == CurrentUser.Id).FirstOrDefault();
-                var Rooms = new List<Room>();
+                var Rooms = Hotel==null ? new List<Room>():Hotel.Room;
                 if (User.IsInRole("Admin") || User.IsInRole("System"))
                 {
                     model.HotelID = model.HotelID;
@@ -89,7 +89,7 @@ namespace WGHotel.Areas.Backend.Controllers
                 
                 }else {
                     model.HotelID = Hotel.ID;
-                    model.RoomOfReport = _basedb.ReportRooms.Where(o => o.ID == model.ID).ToList();
+                    model.RoomOfReport = _basedb.ReportRooms.Where(o => o.ReportID == id).ToList();
                 }
                
 
@@ -111,6 +111,8 @@ namespace WGHotel.Areas.Backend.Controllers
                 ViewBag.Country = new SelectList(Country, "ID", "Name");
                 var model = new ReportViewModel();
                 model.CheckInDate = DateTime.Now;
+                model.HotelID = Hotel.ID;
+                //model.RoomOfReport = _basedb.ReportRooms.Where(o => o.ID == model.ID).ToList();
                 //model.HotelID = Hotel.ID;
                 return View(model);
             }
@@ -137,47 +139,12 @@ namespace WGHotel.Areas.Backend.Controllers
                     return RedirectToAction("Edit");
                 }
             }
-            //#region
-            //if (model.Price == null || model.CheckInDate == DateTime.MinValue || string.IsNullOrEmpty(model.Room))
-            //{
-            //    var result = new ReportViewModel();
-            //    var model1 = _basedb.Report.Where(o => o.ID == model.ID).Select(o =>
-            //         new ReportViewModel
-            //         {
-            //             CheckInDate = o.CheckInDate,
-            //             Price = o.Price,
-            //             OtherCost = o.OtherCost,
-            //             Other = o.Other,
-            //             FoodCost = o.FoodCost,
-            //             Food = o.Food,
-            //             Country = o.Country,
-            //             CountryID = o.CountryID,
-            //             HotelID = o.HotelID,
-            //             ID = o.ID,
-            //             NumOfPeople = o.NumOfPeople,
-            //             Remark = o.Remark,
-            //             Room = o.Room,
-            //             RoomID = o.RoomID,
-            //             UserType = o.UserType
-            //         }).FirstOrDefault();
-
-            //    var Hotel = _dbzh.Hotel.Where(o => o.UserId == CurrentUser.Id).FirstOrDefault();
-            //    model.HotelID = Hotel.ID;
-
-            //    model.RoomOfReport = _basedb.ReportRooms.Where(o => o.ID == model.ID).ToList();
-
-            //    var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
-            //    ViewBag.RoomId = new SelectList(Rooms, "ID", "Name", model.RoomID);
-            //    var Country = _basedb.Country.ToList();
-            //    ViewBag.Country = new SelectList(Country, "ID", "Name", model.CountryID);
-            //    ViewBag.UserType = model.UserType;
-            //    return View(model1);
-            //}
-            //#endregion
+           
 
             //model.HotelID = _dbzh.Room.Find(model.HotelID).Hotel.ID;
-            if (!(User.IsInRole("Admin") || (User.IsInRole("System")) 
-                && !(_dbzh.Hotel.Any(o => o.ID == model.HotelID && o.UserId == CurrentUser.Id))))
+            var IsAdmin = (User.IsInRole("Admin") || User.IsInRole("System"))? true:false;
+            var IsMyHotel = _dbzh.Hotel.Any(o => o.ID == model.HotelID && o.UserId == CurrentUser.Id);
+            if (!IsAdmin && !IsMyHotel)      
             {
                 return View();
             }

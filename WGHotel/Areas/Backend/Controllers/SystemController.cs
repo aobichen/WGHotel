@@ -46,6 +46,32 @@ namespace WGHotel.Areas.Backend.Controllers
             return View();
         }
 
+        public ActionResult RoomCanEditDate()
+        {
+            var model = new RoomCanEditDate();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult RoomCanEditDate(RoomCanEditDate model)
+        {
+            var BeginIsDate = IsDate(model.Begin);
+            if (!BeginIsDate)
+            {
+                ModelState.AddModelError("Begin", "日期格式錯誤");
+                return View();
+            }
+
+            var EndIsDate = IsDate(model.End);
+            if (!EndIsDate)
+            {
+                ModelState.AddModelError("End", "日期格式錯誤");
+                return View();
+            }
+            model.Edit();
+            return View();
+        }
+
         private bool IsDate(string date)
         {
             try

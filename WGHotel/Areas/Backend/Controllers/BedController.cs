@@ -80,7 +80,7 @@ namespace WGHotel.Areas.Backend.Controllers
                     return RedirectToAction("Index");
                 }
             
-            return View();
+            //return View();
         }
 	}
 }

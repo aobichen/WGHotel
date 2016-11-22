@@ -147,24 +147,31 @@ namespace WGHotel.Controllers
 
             #endregion
 
+           
             var CityModel = _db.City.Where(o => o.Name.Contains(search.word)).FirstOrDefault();
             var City = CityModel == null ? 0 : CityModel.ID;
 
             var hotel = (from h in _db.Hotel
                      where
-                         //(City==0||h.City == City) ||
+                     (City==0||h.City == City) ||
                      (string.IsNullOrEmpty(search.word) || h.Name.Contains(search.word))
                      && (string.IsNullOrEmpty(search.Game) || h.Game.Contains(search.Game))
                          select h).OrderBy(x => Guid.NewGuid()).ToList();
-            var checkInDate = search.Begin;
+            var checkInDate = search.Begin == DateTime.MinValue ? DateTime.Now : search.Begin;
             foreach(var h in hotel){
                 var r = h.Room.FirstOrDefault();
                 if (r != null)
                 {
-                   
+                   //System.Data.Objects.EntityFunctions.TruncateTime(o.Date) == checkInDate
+                    //var has = _basedb.RoomPrice.Where(
+                    //    o => o.ROOMID == r.ID && (
+                    //    o.Date.Year == checkInDate.Year && 
+                    //    o.Date.Month == checkInDate.Month &&
+                    //    o.Date.Date == checkInDate.Date)
+                    //    ).FirstOrDefault();
                     var has = _basedb.RoomPrice.Where(
-                        o => o.ROOMID == r.ID &&
-                        System.Data.Objects.EntityFunctions.TruncateTime(o.Date) == checkInDate
+                        o => o.ROOMID == r.ID && (
+                         DateTime.Compare(o.Date, checkInDate) == 0)
                         ).FirstOrDefault();
                     if (has == null || has.SaleOff == true)
                     {
@@ -210,17 +217,35 @@ namespace WGHotel.Controllers
 
         public ActionResult Detail(int id)
         {
-            
-            var model = _db.Hotel.Find(id);
-
-            
+            var currentdb = new WGHotelZHEntities();
+            var lang = Request.Cookies["lang"].Value;
 
             if (CurrentLanguage.Equals("us"))
             {
-                model = _dbus.Hotel.Where(o => o.ParentId == id).FirstOrDefault();
-                //return View(model);
+                currentdb = new WGHotelZHEntities("WGHotelUSEntities");
             }
 
+            var model = currentdb.Hotel.Find(id);
+
+            
+            if (model == null && CurrentLanguage.Equals("us"))
+            {
+                model = _dbus.Hotel.Where(o => o.ID == id).FirstOrDefault();
+            }
+            else if (model == null && CurrentLanguage.Equals("zh"))
+            {
+                model = _dbzh.Hotel.Where(o => o.ID == id).FirstOrDefault();
+            }
+
+            if (model == null)
+            {
+                model = _dbus.Hotel.Where(o => o.ParentId == id).FirstOrDefault();
+            }
+
+            if (model == null)
+            {
+                return RedirectToAction("Index","Home");
+            }
 
             var detail = new HotelDetail();
             detail.ID = model.ID;
@@ -251,12 +276,20 @@ namespace WGHotel.Controllers
                                 HasBreakfast = r.HasBreakfast.Value
                             }).ToList();
 
-           
+
+            
             
             foreach (var r in detail.Rooms)
             {
+               if (CurrentLanguage.Equals("us"))
+               {
+                  r.Images = _basedb.ImageStore.Where(o => o.ReferIdUS == r.ID && o.Type == "Room").ToList();
+                }
+               else
+               {
+                   r.Images = _basedb.ImageStore.Where(o => o.ReferIdZH== r.ID && o.Type == "Room").ToList();
+               }
                
-                r.Images = _basedb.ImageStore.Where(o => o.ReferIdZH == r.ID && o.Type == "Room").ToList();
             }
 
             var gamesites = model.Game.Split(',').ToList();

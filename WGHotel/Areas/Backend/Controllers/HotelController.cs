@@ -253,7 +253,7 @@ namespace WGHotel.Areas.Backend.Controllers
                 return RedirectToAction("","Hotel");
             }
 
-            var USmodel = _dbus.Hotel.Find(id);
+            var USmodel = _dbus.Hotel.Where(o => o.ParentId == ZHmodel.ID).FirstOrDefault();
 
 
             var Manager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
