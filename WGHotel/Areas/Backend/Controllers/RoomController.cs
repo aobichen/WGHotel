@@ -18,11 +18,33 @@ namespace WGHotel.Areas.Backend.Controllers
             public int Page { get; set; }
             public int id { get; set; }
         }
+
+        private bool IsCanEdit { get; set; }
+
+        public RoomController() {
+            var EditDate = new PRDate();
+            var Begin = DateTime.Parse(EditDate.Begin);
+            var End = DateTime.Parse(EditDate.End).AddDays(1);
+            var Now = DateTime.Now;
+            if (Now > Begin && Now <= End)
+            {
+                IsCanEdit = true;
+            }
+            else
+            {
+                IsCanEdit = false;
+            }
+
+            
+
+           // ViewBag.IsCanEdit = IsAdminUser ? true : IsCanEdit;
+        }
         // GET: Backend/Room
         public ActionResult Index(PagedClientViewModel Page = null)
         {
             var id = Request.QueryString["id"];
-            
+            var IsAdminUser = (User.IsInRole("Admin") || User.IsInRole("System"))?true:false;
+            ViewBag.IsCanEdit = IsAdminUser ? true : IsCanEdit;
              if (User.IsInRole("Admin") || User.IsInRole("System"))
             {
                 var strPage = Request.QueryString["Page"] == null ? string.Empty : Request.QueryString["Page"];
@@ -84,6 +106,9 @@ namespace WGHotel.Areas.Backend.Controllers
 
         public ActionResult Create(int id)
         {
+            var IsAdminUser = (User.IsInRole("Admin") || User.IsInRole("System")) ? true : false;
+            ViewBag.IsCanEdit = IsAdminUser ? true : IsCanEdit;
+
             var RoomModel = new RoomViewModel();
             RoomModel.HOTELID = id;
             //ViewBag.HotelID = id;
@@ -106,6 +131,11 @@ namespace WGHotel.Areas.Backend.Controllers
         [HttpPost]
         public ActionResult Create(RoomViewModel model)
         {
+            var IsAdminUser = (User.IsInRole("Admin") || User.IsInRole("System")) ? true : false;
+            var RoomIsCanEdit = IsAdminUser ? true : IsCanEdit;
+            if (!RoomIsCanEdit){
+               return RedirectToAction("Index");
+            }
             if (ModelState.IsValid)
             {
                 model.HOTELID = model.HOTELID;
@@ -122,6 +152,9 @@ namespace WGHotel.Areas.Backend.Controllers
 
         public ActionResult Edit(int id)
         {
+            var IsAdminUser = (User.IsInRole("Admin") || User.IsInRole("System")) ? true : false;
+            ViewBag.IsCanEdit = IsAdminUser ? true : IsCanEdit;
+
             var modelzh = _dbzh.Room.Find(id);
             var key = Guid.NewGuid().GetHashCode().ToString("x");
             var modelus = _dbus.Room.Where(o => o.ParentId == modelzh.ID).FirstOrDefault();
@@ -175,6 +208,13 @@ namespace WGHotel.Areas.Backend.Controllers
         [HttpPost]
         public ActionResult Edit(RoomViewModel model)
         {
+            var IsAdminUser = (User.IsInRole("Admin") || User.IsInRole("System")) ? true : false;
+            var RoomIsCanEdit = IsAdminUser ? true : IsCanEdit;
+            if (!RoomIsCanEdit)
+            {
+                return RedirectToAction("Index");
+            }
+
             if (ModelState.IsValid)
             {
                // model.HOTELID = 11;

@@ -74,12 +74,13 @@
                                     <label class="col-sm-2 control-label">房型</label>
                                     <div class="col-sm-10 col-lg-6 col-md-8">
                                         @*@Html.CheckBoxList("RoomId", (SelectList)ViewBag.RoomId, null, WGHotel.Helpers.Position.Vertical, 5)*@
-                                        <table id="room-table" class="table">
+                                      
+                                          <table id="room-table" class="table">
                                             @foreach (var item in (SelectList)ViewBag.RoomId)
                                             {
                                                 <tr>
                                                     <td>
-                                                        @if (Model.RoomOfReport.Any(o => o.RoomID == int.Parse(item.Value)))
+                                                        @if (Model.RoomOfReport !=null && Model.RoomOfReport.Any(o => o.RoomID == int.Parse(item.Value)))
                                                         {
                                                             <input type="checkbox" checked value="@item.Value" />
                                                         }
@@ -88,7 +89,7 @@
                                                         }
                                                     </td>
                                                     <td>
-                                                        @if (Model.RoomOfReport.Any(o => o.RoomID == int.Parse(item.Value)))
+                                                        @if ( Model.RoomOfReport !=null && Model.RoomOfReport.Any(o => o.RoomID == int.Parse(item.Value)))
                                                         {
                                                             <input type="number" min="1" value="@Model.RoomOfReport.Where(o => o.RoomID == int.Parse(item.Value)).First().Amount" />
                                                         }
@@ -105,7 +106,7 @@
                                             }
                                         </table>
                                         <input type="hidden" name="Room" id="Rooms"/>
-                                        
+                                      
 
                                     </div>
                                 </div>

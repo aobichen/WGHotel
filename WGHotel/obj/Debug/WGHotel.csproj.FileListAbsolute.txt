@@ -332,3 +332,4 @@ C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\DocumentFormat.OpenXml.d
 C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\bin\ClosedXML.xml
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\bin\WGHotel.dll.config
 C:\Users\aobi\Documents\SOHOProjects\WGHotel\WGHotel\obj\Debug\WGHotel.csprojResolveAssemblyReference.cache
+C:\Users\Aobi\Documents\SOHOProject\WGHotel\WGHotel\obj\Debug\WGHotel.csprojResolveAssemblyReference.cache

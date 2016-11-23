@@ -13,7 +13,9 @@
             padding:5px;
         }
     </style>
-    <div class="panel">
+
+    <input type="hidden" id='iscanedit' value="@ViewBag.IsCanEdit.ToString()" />
+    <div class="panel" id="wrapper-panel">
         <div class="panel-body">
             @Html.HiddenFor(model=>model.ImgKey)
             @Html.HiddenFor(model => model.HOTELID)
@@ -168,6 +170,7 @@
 
                 </div>
             </div>
+            @if (((bool)ViewBag.IsCanEdit)) { 
             <div class="row">
                 <div class="form-group">
                     <!-- Buttons -->
@@ -177,11 +180,20 @@
                     </div>
                 </div>
             </div>
+            }
         </div>
 
     </div>
 
-
+   <script type="text/javascript">
+       jQuery(function () {
+           let Iscanedit = $('#iscanedit').val().toLowerCase();
+           console.log(Iscanedit);
+           if (Iscanedit != 'true') {
+               $('#wrapper-panel').find('*').attr('disabled', true);
+           }
+       })
+   </script>
 
 }
 

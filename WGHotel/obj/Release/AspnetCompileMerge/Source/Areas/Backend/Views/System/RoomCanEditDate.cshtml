@@ -1,7 +1,7 @@
-﻿@model WGHotel.Areas.Backend.Models.PRDate
+﻿@model WGHotel.Areas.Backend.Models.RoomCanEditDate
 
 @{
-    ViewBag.Title = "RoomPriceDate";
+    ViewBag.Title = "RoomCanEditDate";
 }
 
 
@@ -18,10 +18,11 @@
                         </i>系統
                     </h3>
                     <ol class="breadcrumb">
-                        <li><i class="fa fa-cogs"></i>
-                       系統
-                            </li>
-                        <li><i class="fa fa-calendar-o"></i>設定日期</li>
+                        <li>
+                            <i class="fa fa-cogs"></i>
+                            系統
+                        </li>
+                        <li><i class="fa fa-calendar-o"></i>房型開放編輯日期</li>
 
                     </ol>
                 </div>
@@ -29,8 +30,7 @@
 
             <div class="row">
                 <article class="well">
-                    設定旅館業者可以設定房間價格，數量，開關房的開始日至停止日.
-                    設定旅館業者可以新增房型,編輯房型的開始日至停止日.
+                    設定旅館業者可以編輯房型資料的開始日至停止日.
                 </article>
             </div>
 
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                             }
-                            
+
                         </div>
                     </div>
                 </div>
@@ -83,12 +83,12 @@
 <script type="text/javascript">
 
     jQuery(function () {
-       
+
             $('#Begin').datetimepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true,
                 minView: 2,
-                pickerPosition: 'bottom-left',               
+                pickerPosition: 'bottom-left',
             });
 
             $('#End').datetimepicker({
@@ -98,7 +98,7 @@
                 pickerPosition: 'bottom-left',
             });
 
-       
+
     })
 
 </script>
