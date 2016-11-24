@@ -30,8 +30,8 @@ namespace WGHotel.Areas.Backend.Controllers
                 SearchString = string.Empty;
                 Page = 1;
             }
-            var model = (from h in _db.Hotel
-                         join c in _db.City on h.City equals c.ID
+            var model = (from h in _dbzh.Hotel
+                         join c in _dbzh.City on h.City equals c.ID
                          where string.IsNullOrEmpty(SearchString) || h.Name.Contains(SearchString)
                          select new HotelListViewModel
                          {
@@ -247,7 +247,10 @@ namespace WGHotel.Areas.Backend.Controllers
         public ActionResult MyHotel(int id)
         {
             var ZHmodel = _dbzh.Hotel.Find(id);
-
+            if (ZHmodel == null)
+            {
+                return RedirectToAction("", "Hotel");
+            }
             if (CurrentUser.Id != ZHmodel.UserId)
             {
                 return RedirectToAction("","Hotel");

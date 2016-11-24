@@ -173,6 +173,7 @@
                 let $self = $(this);
                 let mylang = $self.attr('id');
                 $.cookie("lang", mylang);
+                console.log($.cookie("lang"));
                 if (mylang != lang) {
                     $('main').css({ 'opacity': '0.2' });
                     $("[data-localize]").localize("/Content/lang/language", { language: mylang });

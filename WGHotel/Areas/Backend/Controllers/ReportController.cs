@@ -105,7 +105,7 @@ namespace WGHotel.Areas.Backend.Controllers
                 
                 //var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
                 ViewBag.RoomId = new SelectList(Rooms, "ID", "Name",model.RoomID);
-                var Country = _basedb.Country.ToList();
+                var Country = _basedb.Country.OrderBy(o=>o.Name).ToList();
                 ViewBag.Country = new SelectList(Country, "ID", "Name",model.CountryID);
                 ViewBag.UserType = model.UserType;
                 return View(model);
@@ -115,7 +115,7 @@ namespace WGHotel.Areas.Backend.Controllers
                 var Hotel = _dbzh.Hotel.Where(o => o.UserId == CurrentUser.Id).FirstOrDefault();
                 var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
                 ViewBag.RoomId = new SelectList(Rooms, "ID", "Name");
-                var Country = _basedb.Country.ToList();
+                var Country = _basedb.Country.OrderBy(o => o.Name).ToList();
                 ViewBag.Country = new SelectList(Country, "ID", "Name");
                 
 
@@ -188,7 +188,7 @@ namespace WGHotel.Areas.Backend.Controllers
                 var Hotel = _dbzh.Hotel.Where(o => o.UserId == CurrentUser.Id).FirstOrDefault();
                 var Rooms = Hotel == null ? new List<Room>() : Hotel.Room;
                 ViewBag.RoomId = new SelectList(Rooms, "ID", "Name");
-                var Country = _basedb.Country.ToList();
+                var Country = _basedb.Country.OrderBy(o => o.Name).ToList();
                 ViewBag.Country = new SelectList(Country, "ID", "Name");
                 ModelState.AddModelError("","編輯未完成，請檢查資料");
                 return View();
@@ -200,7 +200,7 @@ namespace WGHotel.Areas.Backend.Controllers
         {
             var key = Guid.NewGuid().GetHashCode().ToString("x");
             ViewBag.key = key;
-            var Country = _basedb.Country.ToList();
+            var Country = _basedb.Country.OrderBy(o => o.Name).ToList();
             ViewBag.Nation = new SelectList(Country, "ID", "Name");
             var ReportModel = new ReportModel();
             if(search==null || (search.Nation==0 &&

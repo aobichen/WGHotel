@@ -41,21 +41,23 @@ namespace WGHotel.Helpers
 
             var Beds = Code.Select(o => o.ItemDescription).ToList();
             Bed = string.Join(",",Beds);
-
-            if (HttpContext.Current.Request.Cookies["lang"] != null && HttpContext.Current.Request.Cookies["lang"].ToString().ToLower()!="zh")
+            var lang = HttpContext.Current.Request.Cookies["lang"].Value;
+            if (HttpContext.Current.Request.Cookies["lang"] != null && HttpContext.Current.Request.Cookies["lang"].Value.ToString().ToLower()!="zh")
             {
-                using(var db = new WGHotelUSEntities()){
+                using(var ENdb = new WGHotelUSEntities()){
                     var ENBeds = Code.Select(o => o.ID).ToList();
-                    var Code1 = db.CodeFile.Where(o => ENBeds.Contains(o.ParentId.Value) && o.ItemType == "Bed" && o.Deleted == false).ToList();
+                    var Code1 = ENdb.CodeFile.Where(o => ENBeds.Contains(o.ParentId.Value) && o.ItemType == "Bed" && o.Deleted == false).ToList();
                     if (Code1 == null|| Code1.Count()<=0)
                     {
                         return string.Empty;
                     }
-                    Beds = Code.Select(o => o.ItemDescription).ToList();
-                    Bed = string.Join(",", Bed);
+                    Beds = Code1.Select(o => o.ItemDescription).ToList();
+                    Bed = string.Join(",", Beds);
                 }
             }
             return Bed;
         }
+
+        
     }
 }

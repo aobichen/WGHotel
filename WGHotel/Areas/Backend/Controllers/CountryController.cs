@@ -18,7 +18,7 @@ namespace WGHotel.Areas.Backend.Controllers
             var currentPage = Page < 1 ? 1 : Page;
             var PageSize = 15;
             currentPage = !string.IsNullOrEmpty(SearchString) ? 1 : currentPage;
-            var model = _basedb.Country.Where(o => string.IsNullOrEmpty(SearchString) || o.Name.Contains(SearchString)).ToList();
+            var model = _basedb.Country.Where(o => string.IsNullOrEmpty(SearchString) || o.Name.Contains(SearchString)).OrderBy(o=>o.Name).ToList();
             
             var PageModel = model.ToPagedList(currentPage, PageSize);
             //ViewBag.GameList = new GameSiteListModel().List();
