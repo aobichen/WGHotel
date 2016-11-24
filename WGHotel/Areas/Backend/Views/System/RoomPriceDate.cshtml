@@ -29,9 +29,13 @@
 
             <div class="row">
                 <article class="well">
-                    設定旅館業者可以設定房間價格，數量，開關房的開始日至停止日.
-                    設定旅館業者可以新增房型,編輯房型的開始日至停止日.
+                    房型價格設定起訖區間
+                    <ul>
+                        <li>結束日期為房型價格設定最大日期</li>
+                       
+                    </ul>
                 </article>
+               
             </div>
 
             <div class="row">
@@ -46,7 +50,7 @@
                             {
                                 <div class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">開始日期</label>
+                                        <label class="col-sm-2 control-label">日期</label>
                                         <div class="col-sm-10 col-lg-5">
                                             @Html.EditorFor(model => model.Begin, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.Begin, "", new { @class = "text-danger" })

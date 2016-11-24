@@ -85,6 +85,8 @@ transition: all 2s;
 <p class="message">已儲存!</p>
 <div class="panel panel-default">
    <input id="roomid" type="hidden" value="@ViewBag.RoomId" />
+    <input id="Begin" type="hidden" value="@ViewBag.Begin" />
+    <input id="End" type="hidden" value="@ViewBag.End" />
                 <div class="panel-heading">
                     <h2><strong>Calendar</strong></h2>
                     <div class="panel-actions">
@@ -95,14 +97,26 @@ transition: all 2s;
 
                 </div>
     <div class="panel-body">
+        @if (((bool)ViewBag.IsCanEdit)) {
         <div class="col-lg-12">
             <button type="button" class="btn btn-primary" id="save">
                 儲存
             </button>
         </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="well-sm">
+                    <div class="alert alert-warning">
+                        目前不開放編輯
+                    </div>
+                </div>
+            </div>
+        }
     </div>
                 <div class="panel-body">
-                    <!-- Widget content -->
+                    <input type="hidden" id="canedit" value="@ViewBag.IsCanEdit.ToString()"><!-- Widget content -->
                     <!-- Below line produces calendar. I am using FullCalendar plugin. -->
                     <div class="col-lg-12">
                         <div id="calendar"></div>
@@ -120,12 +134,33 @@ transition: all 2s;
         let id ='1';
         let tridx = 0;
         let currentMonth = "0";
+        let currentYear = "0";
         let saved = true;
         let roomid = $('#roomid').val();
+        let canedit = $('#canedit');
+
+        let Begin = $('#Begin').val();
+        let End = $('#End').val();
+        
+        var EndDate = new Date(End);
        
+        var EndMonth = EndDate.getMonth() + 1;
+        var EndDay = EndDate.getDate();
+        let limitEndMonth = EndDay >= 30 ? EndMonth : EndMonth + 1;
+        let limitEndYear = EndDate.getFullYear();
+        console.log(limitEndYear);
         $('#calendar').fullCalendar({
             eventRender: function (event, element, view) {
                 $('.message').removeClass('active');
+                let MM = event.start.format("MM");
+                if (parseInt(currentYear) >= limitEndYear && parseInt(currentMonth) >= limitEndMonth) {
+                    $('.fc-next-button').prop('disabled', true);
+                    $('.fc-next-button').addClass('fc-state-disabled');
+                } else {
+                    $('.fc-next-button').prop('disabled', false);
+                    $('.fc-next-button').removeClass('fc-state-disabled');
+                }
+              
                 if (event.start.format("MM") != currentMonth) { return false;}
                 
                 var start = moment(event.start).format('YYYY-MM-DD');
@@ -159,6 +194,7 @@ transition: all 2s;
                 }).addClass('price').appendTo($fcheader);
                 var date = $("#calendar").fullCalendar('getDate');
                 currentMonth = date.format("MM");
+                currentYear = date.format("YYYY");
                
             },
             eventAfterAllRender:function(view){
@@ -193,7 +229,7 @@ transition: all 2s;
 
                     let $self = $(this);
                     let val = $self.val();
-                    console.log(val);
+                    
                     let idx = $self.closest('th').index();
                     let fcContent = $('.fc-content-skeleton');
 
@@ -202,6 +238,11 @@ transition: all 2s;
                         input.find('.fc-quantity').val(val);
                     }
                 });
+
+                if (canedit.val().toLowerCase() != 'true') {
+                    $('.fc-view-container').find('*').attr('disabled', true);
+                    $("input.switch").bootstrapSwitch('disabled', true);
+                }
             },
             events: function (start, end, timezone, callback) {
                 tridx = 0;
@@ -233,10 +274,15 @@ transition: all 2s;
             }
         });
 
-        $('#save').on('click', function ()
-            {
-                Save();            
+        
+        if (canedit.val().toLowerCase() == 'true') {
+            
+            $('#save').on('click', function () {
+                Save();
             });
+        } 
+
+       
 
         function Save() {
             let elements = $('.fc-date').not('[data-date=""]');

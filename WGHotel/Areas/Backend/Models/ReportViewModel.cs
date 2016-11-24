@@ -15,6 +15,8 @@ namespace WGHotel.Areas.Backend.Models
         public string Country { get; set; }
         public int CountryID { get; set; }
         public int HotelID { get; set; }
+
+        public string HotelName { get; set; }
         public string Room { get; set; }
        // public int RoomID { get; set; }
         public int Creator { get; set; }

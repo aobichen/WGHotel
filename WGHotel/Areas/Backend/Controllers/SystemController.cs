@@ -62,12 +62,12 @@ namespace WGHotel.Areas.Backend.Controllers
                 return View();
             }
 
-            var EndIsDate = IsDate(model.End);
-            if (!EndIsDate)
-            {
-                ModelState.AddModelError("End", "日期格式錯誤");
-                return View();
-            }
+            //var EndIsDate = IsDate(model.End);
+            //if (!EndIsDate)
+            //{
+            //    ModelState.AddModelError("End", "日期格式錯誤");
+            //    return View();
+            //}
             model.Edit();
             return View();
         }

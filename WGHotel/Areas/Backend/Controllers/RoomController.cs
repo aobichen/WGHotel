@@ -22,11 +22,11 @@ namespace WGHotel.Areas.Backend.Controllers
         private bool IsCanEdit { get; set; }
 
         public RoomController() {
-            var EditDate = new PRDate();
+            var EditDate = new RoomCanEditDate();
             var Begin = DateTime.Parse(EditDate.Begin);
-            var End = DateTime.Parse(EditDate.End).AddDays(1);
+            //var End = DateTime.Parse(EditDate.End).AddDays(1);
             var Now = DateTime.Now;
-            if (Now > Begin && Now <= End)
+            if (Now < Begin)
             {
                 IsCanEdit = true;
             }
@@ -226,8 +226,14 @@ namespace WGHotel.Areas.Backend.Controllers
 
         public ActionResult Price(int id)
         {
+            var IsAdminUser = (User.IsInRole("Admin") || User.IsInRole("System")) ? true : false;
+            var RoomIsCanEdit = IsAdminUser ? true : IsCanEdit;
+            ViewBag.IsCanEdit = IsAdminUser ? true : IsCanEdit;
             ViewBag.RoomId = id;
             ViewBag.Name = _dbzh.Room.Find(id).Name;
+            var PRDate = new PRDate();
+            ViewBag.Begin = PRDate.Begin;
+            ViewBag.End = PRDate.End;
             return View();
         }
     }

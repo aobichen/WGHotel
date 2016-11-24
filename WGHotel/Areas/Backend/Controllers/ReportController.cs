@@ -34,8 +34,16 @@ namespace WGHotel.Areas.Backend.Controllers
                                  Country = report.Country,
                                  ID = report.ID,
                                  NumOfPeople = report.NumOfPeople,
-                                Room = report.Room
+                                Room = report.Room,                                
+                                HotelID = report.HotelID
                              }).OrderByDescending(o=>o.CheckInDate).ToList();
+
+            foreach (var m in model)
+            {
+                var hotel = _dbzh.Hotel.Where(o => o.ID == m.HotelID).FirstOrDefault();
+                m.HotelName = hotel == null ? string.Empty : hotel.Name;
+                //var room = _dbzh.Room.Where(o => o.ID == m.HotelID).FirstOrDefault();
+            }
 
             var currentPage = Page < 1 ? 1 : Page;
             var PageSize = 15;
@@ -109,6 +117,8 @@ namespace WGHotel.Areas.Backend.Controllers
                 ViewBag.RoomId = new SelectList(Rooms, "ID", "Name");
                 var Country = _basedb.Country.ToList();
                 ViewBag.Country = new SelectList(Country, "ID", "Name");
+                
+
                 var model = new ReportViewModel();
                 model.CheckInDate = DateTime.Now;
                 model.HotelID = Hotel.ID;
